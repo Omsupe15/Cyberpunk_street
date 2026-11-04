@@ -3,7 +3,11 @@ import { Canvas } from '@react-three/fiber';
 import { CameraRig } from './CameraRig';
 import { StreetEnvironment } from './StreetEnvironment';
 import { CharacterBoy } from './CharacterBoy';
-import { LandmarkProxies } from './LandmarkProxies';
+import { SpaceshipCafe } from './landmarks/SpaceshipCafe';
+import { StarClothing } from './landmarks/StarClothing';
+import { DebrisPawn } from './landmarks/DebrisPawn';
+import { NovaMotel } from './landmarks/NovaMotel';
+import { StreetLamps } from './landmarks/StreetLamps';
 import { Suspense } from 'react';
 
 export function SceneCanvas() {
@@ -23,7 +27,11 @@ export function SceneCanvas() {
           <CameraRig />
           <StreetEnvironment />
           <CharacterBoy />
-          <LandmarkProxies />
+          <SpaceshipCafe />
+          <StarClothing />
+          <DebrisPawn />
+          <NovaMotel />
+          <StreetLamps />
         </Suspense>
       </Canvas>
     </div>
