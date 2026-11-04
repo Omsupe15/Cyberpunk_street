@@ -8,6 +8,7 @@ import { StarClothing } from './landmarks/StarClothing';
 import { DebrisPawn } from './landmarks/DebrisPawn';
 import { NovaMotel } from './landmarks/NovaMotel';
 import { StreetLamps } from './landmarks/StreetLamps';
+import { PostEffects } from './PostEffects';
 import { Suspense } from 'react';
 
 export function SceneCanvas() {
@@ -32,6 +33,7 @@ export function SceneCanvas() {
           <DebrisPawn />
           <NovaMotel />
           <StreetLamps />
+          <PostEffects />
         </Suspense>
       </Canvas>
     </div>
