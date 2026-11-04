@@ -2,6 +2,7 @@
 import { Canvas } from '@react-three/fiber';
 import { CameraRig } from './CameraRig';
 import { StreetEnvironment } from './StreetEnvironment';
+import { CharacterBoy } from './CharacterBoy';
 import { LandmarkProxies } from './LandmarkProxies';
 import { Suspense } from 'react';
 
@@ -21,6 +22,7 @@ export function SceneCanvas() {
         <Suspense fallback={null}>
           <CameraRig />
           <StreetEnvironment />
+          <CharacterBoy />
           <LandmarkProxies />
         </Suspense>
       </Canvas>

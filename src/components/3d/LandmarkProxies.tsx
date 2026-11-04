@@ -1,49 +1,9 @@
 'use client';
-import { useRef } from 'react';
-import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
-import { useCyberpunkStore } from '@/store/useCyberpunkStore';
-import { STREET_LENGTH, LANDMARKS } from '@/lib/constants';
+import { LANDMARKS } from '@/lib/constants';
 
 export function LandmarkProxies() {
-  const protagonistRef = useRef<THREE.Group>(null);
-  const progress = useCyberpunkStore((s) => s.scrollProgress);
-
-  useFrame((state) => {
-    const t = THREE.MathUtils.clamp(progress, 0, 1);
-    const boyZ = -t * STREET_LENGTH;
-
-    if (protagonistRef.current) {
-      protagonistRef.current.position.z = boyZ;
-      // Gentle walking bob
-      protagonistRef.current.position.y = 0.9 + Math.sin(boyZ * 3) * 0.04;
-    }
-  });
-
   return (
     <group>
-      {/* 1. Protagonist Proxy Avatar (Moving with Scroll) */}
-      <group ref={protagonistRef} position={[0, 0.9, 0]}>
-        {/* Torso */}
-        <mesh position={[0, 0, 0]}>
-          <capsuleGeometry args={[0.28, 0.7, 8, 16]} />
-          <meshStandardMaterial color="#15161e" roughness={0.6} />
-        </mesh>
-        {/* Glowing Head Visor */}
-        <mesh position={[0, 0.55, -0.1]}>
-          <boxGeometry args={[0.3, 0.1, 0.18]} />
-          <meshBasicMaterial color="#00F3FF" />
-        </mesh>
-        {/* Neon Sneaker Bases */}
-        <mesh position={[-0.15, -0.75, 0]}>
-          <boxGeometry args={[0.12, 0.1, 0.28]} />
-          <meshBasicMaterial color="#00F3FF" />
-        </mesh>
-        <mesh position={[0.15, -0.75, 0]}>
-          <boxGeometry args={[0.12, 0.1, 0.28]} />
-          <meshBasicMaterial color="#00F3FF" />
-        </mesh>
-      </group>
 
       {/* 3. Landmark 1: Spaceship Cafe Proxy (Right, Z: -32) */}
       <group position={[7.5, 0, LANDMARKS.CAFE.z]}>
