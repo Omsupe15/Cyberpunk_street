@@ -22,29 +22,7 @@ export function LandmarkProxies() {
 
   return (
     <group>
-      {/* 1. Roadway Runway (Z: 0 to -170) */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, -85]} receiveShadow>
-        <planeGeometry args={[10, 180]} />
-        <meshStandardMaterial color="#111218" roughness={0.2} metalness={0.4} />
-      </mesh>
-
-      {/* Sidewalks */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[-6.5, 0.05, -85]}>
-        <planeGeometry args={[3, 180]} />
-        <meshStandardMaterial color="#1a1c24" roughness={0.8} metalness={0.1} />
-      </mesh>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[6.5, 0.05, -85]}>
-        <planeGeometry args={[3, 180]} />
-        <meshStandardMaterial color="#1a1c24" roughness={0.8} metalness={0.1} />
-      </mesh>
-
-      {/* Glowing Cyan Centerline */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, -85]}>
-        <planeGeometry args={[0.2, 175]} />
-        <meshBasicMaterial color="#00F3FF" />
-      </mesh>
-
-      {/* 2. Protagonist Proxy Avatar */}
+      {/* 1. Protagonist Proxy Avatar (Moving with Scroll) */}
       <group ref={protagonistRef} position={[0, 0.9, 0]}>
         {/* Torso */}
         <mesh position={[0, 0, 0]}>

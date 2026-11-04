@@ -1,6 +1,7 @@
 'use client';
 import { Canvas } from '@react-three/fiber';
 import { CameraRig } from './CameraRig';
+import { StreetEnvironment } from './StreetEnvironment';
 import { LandmarkProxies } from './LandmarkProxies';
 import { Suspense } from 'react';
 
@@ -13,12 +14,13 @@ export function SceneCanvas() {
         gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
       >
         <color attach="background" args={['#05050A']} />
-        <fog attach="fog" args={['#05050A', 15, 110]} />
+        <fog attach="fog" args={['#05050A', 15, 120]} />
         <ambientLight intensity={0.4} />
         <directionalLight position={[10, 20, 10]} intensity={0.8} color="#88aaff" />
 
         <Suspense fallback={null}>
           <CameraRig />
+          <StreetEnvironment />
           <LandmarkProxies />
         </Suspense>
       </Canvas>
