@@ -23,25 +23,21 @@ export function SceneCanvas() {
           alpha: false,
           powerPreference: 'high-performance',
           toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 0.95,
+          toneMappingExposure: 1.05,
         }}
       >
-        {/* Luminous Celestial Cyberpunk Night Sky (Deep Royal Indigo Gradient) */}
-        <color attach="background" args={['#060c1c']} />
+        {/* Luminous Neon Cyber-Blue Night Sky (No Black in Background) */}
+        <color attach="background" args={['#0c2c62']} />
         
-        {/* Clear Atmospheric Fog (Starts at 80m, preserving razor-sharp landmark & street clarity) */}
-        <fog attach="fog" args={['#070e20', 80, 280]} />
+        {/* Atmospheric Luminous Cyber-Blue Night Fog */}
+        <fog attach="fog" args={['#0f356e', 90, 320]} />
 
-        {/* Natural Night Sky Illumination (Provides rich ambient visibility without washed-out blacks) */}
-        <ambientLight intensity={0.65} color="#40587c" />
-        <hemisphereLight args={['#324a72', '#121624', 0.45]} />
+        {/* Rich Ambient Skylight - Vibrant Cobalt Blue & Electric Cyan Tone */}
+        <ambientLight intensity={1.05} color="#2b6cb0" />
+        <hemisphereLight args={['#4299e1', '#1a4e8a', 0.85]} />
         
-        {/* Cool Celestial Moonlight Key Light - crisp rim lighting on architectural crowns & rooftops */}
-        <directionalLight position={[30, 55, 20]} intensity={1.2} color="#a8c8ff" />
-        
-        {/* Soft Cyber Canyon Horizontal Fill Accents */}
-        <directionalLight position={[-30, 35, -40]} intensity={0.35} color="#ff2277" />
-        <directionalLight position={[30, 25, -90]} intensity={0.28} color="#00d8f0" />
+        {/* Downward moonlight wash for clear blue surface visibility */}
+        <directionalLight position={[20, 80, 10]} intensity={0.70} color="#a0d8ff" />
 
         <Suspense fallback={null}>
           <CameraRig />

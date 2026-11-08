@@ -41,7 +41,7 @@ export function DebrisPawn() {
     const strobe2 = (Math.cos(time * 10) + 1) / 2 > 0.65 ? 1 : 0.08;
 
     if (strobeLightRef.current) {
-      strobeLightRef.current.intensity = strobe1 * 2.5;
+      strobeLightRef.current.intensity = strobe1 * 0.8;
     }
     if (beaconMeshRef.current) {
       const mat = beaconMeshRef.current.material as THREE.MeshBasicMaterial;
@@ -49,7 +49,7 @@ export function DebrisPawn() {
     }
 
     if (strobeLight2Ref.current) {
-      strobeLight2Ref.current.intensity = strobe2 * 2.2;
+      strobeLight2Ref.current.intensity = strobe2 * 0.7;
     }
     if (beaconMesh2Ref.current) {
       const mat = beaconMesh2Ref.current.material as THREE.MeshBasicMaterial;
@@ -77,16 +77,16 @@ export function DebrisPawn() {
 
   return (
     <group position={[LANDMARKS.PAWN.x, 0, LANDMARKS.PAWN.z]}>
-      {/* 1. Grungy Salvage Den Facade (Weathered Concrete & Cast-Iron) */}
+      {/* 1. Grungy Salvage Den Facade (Vibrant Cyber-Navy & Neon Sapphire) */}
       <mesh position={[0, 2.7, 0]} receiveShadow>
         <boxGeometry args={[4.8, 5.4, 11.5]} />
-        <meshStandardMaterial color="#141612" roughness={0.92} metalness={0.4} />
+        <meshStandardMaterial color="#1a5494" roughness={0.65} metalness={0.5} />
       </mesh>
 
-      {/* Industrial Roof Parapet */}
+      {/* Industrial Roof Parapet (Vibrant Neon Blue Steel) */}
       <mesh position={[2.3, 5.3, 0]}>
         <boxGeometry args={[0.35, 0.45, 11.6]} />
-        <meshStandardMaterial color="#1c1e19" roughness={0.8} metalness={0.6} />
+        <meshStandardMaterial color="#2064aa" roughness={0.6} metalness={0.7} />
       </mesh>
 
       {/* Weathered Corrugated Security Shutter with Procedural Ribbed Texture */}
@@ -94,8 +94,8 @@ export function DebrisPawn() {
         <planeGeometry args={[8.0, 2.4]} />
         <meshStandardMaterial
           map={metalTex || undefined}
-          color="#262b22"
-          roughness={0.85}
+          color="#1c5ea4"
+          roughness={0.75}
           metalness={0.65}
         />
       </mesh>
@@ -103,7 +103,7 @@ export function DebrisPawn() {
       {/* Heavy Steel Shutter Roller Drum & Manual Chain Hoist */}
       <mesh position={[2.25, 4.35, 0]} rotation={[0, 0, Math.PI / 2]}>
         <cylinderGeometry args={[0.26, 0.26, 8.2, 16]} />
-        <meshStandardMaterial color="#181a15" metalness={0.85} roughness={0.4} />
+        <meshStandardMaterial color="#185090" metalness={0.85} roughness={0.4} />
       </mesh>
       {/* Heavy Master Padlock on Shutter Base */}
       <group position={[2.34, 1.95, -1.5]}>
@@ -113,26 +113,26 @@ export function DebrisPawn() {
         </mesh>
         <mesh position={[0, 0.06, 0]}>
           <torusGeometry args={[0.035, 0.008, 6, 12, Math.PI]} />
-          <meshStandardMaterial color="#999" metalness={0.95} />
+          <meshStandardMaterial color="#00F0FF" metalness={0.95} />
         </mesh>
       </group>
 
-      {/* Dark Salvage Interior Void */}
+      {/* Deep Cyber-Blue Salvage Interior Void (No Black Void) */}
       <mesh position={[2.28, 1.1, 0]}>
         <planeGeometry args={[7.8, 2.1]} />
-        <meshBasicMaterial color="#050704" />
+        <meshBasicMaterial color="#144276" />
       </mesh>
 
-      {/* Interior Clutter Ambient Point Lights */}
-      <pointLight position={[0.5, 1.4, 0]} color="#FFAA00" intensity={1.6} distance={7} decay={2} />
-      <pointLight position={[0.5, 1.4, -2.5]} color="#05FFA1" intensity={1.4} distance={7} decay={2} />
+      {/* Interior Clutter Ambient Point Lights (Soft, localized) */}
+      <pointLight position={[0.5, 1.4, 0]} color="#FFAA00" intensity={0.8} distance={4} decay={2} />
+      <pointLight position={[0.5, 1.4, -2.5]} color="#05FFA1" intensity={0.6} distance={4} decay={2} />
 
       {/* Tangled Cable Bundles with Yellow Zip-Ties Spilling Out from Under Shutter */}
       {[-2.2, -1.0, 0.8, 2.2].map((zPos, idx) => (
         <group key={`cables-${idx}`} position={[2.4 + idx * 0.1, 0.04, zPos]} rotation={[0, (idx - 1.5) * 0.3, 0]}>
           <mesh>
             <cylinderGeometry args={[0.032, 0.032, 2.2, 8]} />
-            <meshStandardMaterial color="#0c0e0c" roughness={0.9} />
+            <meshStandardMaterial color="#1a528e" roughness={0.7} />
           </mesh>
           <mesh position={[0.05, 0, 0]}>
             <cylinderGeometry args={[0.02, 0.02, 2.0, 8]} />
@@ -157,12 +157,12 @@ export function DebrisPawn() {
         </mesh>
         <mesh position={[0, -0.7, 0]}>
           <boxGeometry args={[1.45, 0.1, 1.45]} />
-          <meshStandardMaterial color="#141612" metalness={0.8} />
+          <meshStandardMaterial color="#1c5698" metalness={0.8} />
         </mesh>
         {/* Robot Torso */}
         <mesh position={[0, 0.15, 0]} rotation={[0.2, 0.4, 0]}>
           <boxGeometry args={[0.55, 0.7, 0.35]} />
-          <meshStandardMaterial color="#242b23" metalness={0.85} roughness={0.3} />
+          <meshStandardMaterial color="#246eb8" metalness={0.85} roughness={0.3} />
         </mesh>
         {/* Chrome Robot Skull Endoskeleton */}
         <group position={[-0.2, 0.6, 0.1]} rotation={[0.1, 0.5, 0]}>
@@ -179,7 +179,7 @@ export function DebrisPawn() {
         {/* Prosthetic Chrome Arm Hanging Out */}
         <mesh position={[0.45, 0.0, 0.2]} rotation={[0, 0, -0.6]}>
           <cylinderGeometry args={[0.055, 0.045, 0.7, 8]} />
-          <meshStandardMaterial color="#778" metalness={0.95} roughness={0.15} />
+          <meshStandardMaterial color="#00F0FF" metalness={0.95} roughness={0.15} />
         </mesh>
       </group>
 
@@ -191,16 +191,16 @@ export function DebrisPawn() {
         </mesh>
         <mesh position={[0, -0.7, 0]}>
           <boxGeometry args={[1.45, 0.1, 1.45]} />
-          <meshStandardMaterial color="#141612" metalness={0.8} />
+          <meshStandardMaterial color="#1c5698" metalness={0.8} />
         </mesh>
         {/* Fusion Power Canister */}
         <mesh position={[-0.2, 0.05, 0]} rotation={[0, 0, 0.35]}>
           <cylinderGeometry args={[0.22, 0.22, 0.85, 14]} />
-          <meshStandardMaterial color="#262218" metalness={0.8} roughness={0.35} />
+          <meshStandardMaterial color="#1a5494" metalness={0.8} roughness={0.35} />
         </mesh>
         <mesh position={[-0.2, 0.25, 0]}>
           <cylinderGeometry args={[0.24, 0.24, 0.07, 14]} />
-          <meshBasicMaterial color="#FFAA00" />
+          <meshBasicMaterial color="#00F0FF" />
         </mesh>
       </group>
 
@@ -208,14 +208,14 @@ export function DebrisPawn() {
       <group position={[1.65, 0, 0]}>
         <mesh position={[0, 0.07, 0]}>
           <boxGeometry args={[1.3, 0.14, 2.6]} />
-          <meshStandardMaterial color="#1d1b16" roughness={0.9} metalness={0.2} />
+          <meshStandardMaterial color="#1c5aa0" roughness={0.7} metalness={0.3} />
         </mesh>
 
         {/* Monitor 1: Bottom Left (Green Phosphor Terminal Text) */}
         <group position={[0, 0.58, -0.7]}>
           <mesh>
             <boxGeometry args={[0.68, 0.58, 0.68]} />
-            <meshStandardMaterial color="#141612" roughness={0.6} />
+            <meshStandardMaterial color="#1e5ea4" roughness={0.6} />
           </mesh>
           {/* Screen with Bezel */}
           <mesh position={[0.35, 0, 0]}>
@@ -232,7 +232,7 @@ export function DebrisPawn() {
           {/* Power Switch & Contrast Dial */}
           <mesh position={[0.35, -0.22, 0.18]} rotation={[0, 0, Math.PI / 2]}>
             <cylinderGeometry args={[0.015, 0.015, 0.02, 8]} />
-            <meshBasicMaterial color="#05FFA1" />
+            <meshBasicMaterial color="#00F0FF" />
           </mesh>
         </group>
 
@@ -240,7 +240,7 @@ export function DebrisPawn() {
         <group position={[0, 0.58, 0.7]}>
           <mesh>
             <boxGeometry args={[0.68, 0.58, 0.68]} />
-            <meshStandardMaterial color="#141612" roughness={0.6} />
+            <meshStandardMaterial color="#1e5ea4" roughness={0.6} />
           </mesh>
           <mesh position={[0.35, 0, 0]}>
             <planeGeometry args={[0.48, 0.38]} />
@@ -259,7 +259,7 @@ export function DebrisPawn() {
         <group position={[0, 1.12, -0.15]} rotation={[0, 0.08, -0.04]}>
           <mesh>
             <boxGeometry args={[0.64, 0.54, 0.64]} />
-            <meshStandardMaterial color="#141612" roughness={0.6} />
+            <meshStandardMaterial color="#1e5ea4" roughness={0.6} />
           </mesh>
           <mesh position={[0.33, 0, 0]}>
             <planeGeometry args={[0.44, 0.34]} />
@@ -279,32 +279,32 @@ export function DebrisPawn() {
       <group position={[2.35, 5.2, -4.6]}>
         <mesh>
           <cylinderGeometry args={[0.12, 0.16, 0.28, 12]} />
-          <meshStandardMaterial color="#161616" metalness={0.9} />
+          <meshStandardMaterial color="#2064aa" metalness={0.9} />
         </mesh>
         <mesh ref={beaconMeshRef} position={[0, 0.2, 0]}>
           <sphereGeometry args={[0.16, 12, 12]} />
           <meshBasicMaterial color="#FFAA00" transparent opacity={1} />
         </mesh>
-        <pointLight ref={strobeLightRef} position={[0, 0.25, 0]} color="#FFAA00" intensity={2.5} distance={12} decay={2} />
+        <pointLight ref={strobeLightRef} position={[0, 0.25, 0]} color="#FFAA00" intensity={0.8} distance={5} decay={2} />
       </group>
 
       <group position={[2.35, 5.2, 4.6]}>
         <mesh>
           <cylinderGeometry args={[0.12, 0.16, 0.28, 12]} />
-          <meshStandardMaterial color="#161616" metalness={0.9} />
+          <meshStandardMaterial color="#2064aa" metalness={0.9} />
         </mesh>
         <mesh ref={beaconMesh2Ref} position={[0, 0.2, 0]}>
           <sphereGeometry args={[0.16, 12, 12]} />
           <meshBasicMaterial color="#FFAA00" transparent opacity={1} />
         </mesh>
-        <pointLight ref={strobeLight2Ref} position={[0, 0.25, 0]} color="#FFAA00" intensity={2.2} distance={12} decay={2} />
+        <pointLight ref={strobeLight2Ref} position={[0, 0.25, 0]} color="#FFAA00" intensity={0.7} distance={5} decay={2} />
       </group>
 
       {/* 5. Bilingual Industrial Neon Marquee Sign: English First + Asian Subtext */}
       <group position={[2.38, 4.4, 0]}>
         <mesh position={[-0.04, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
           <planeGeometry args={[6.8, 1.3]} />
-          <meshStandardMaterial color="#10120e" roughness={0.7} metalness={0.6} />
+          <meshStandardMaterial color="#164e8c" roughness={0.7} metalness={0.6} />
         </mesh>
         <mesh position={[-0.02, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
           <planeGeometry args={[6.95, 1.45]} />
@@ -320,7 +320,7 @@ export function DebrisPawn() {
             roughness={0.2}
           />
         </mesh>
-        <pointLight ref={sparkFlashRef} position={[0.2, 0, 0]} color="#00F3FF" intensity={0} distance={8} decay={2} />
+        <pointLight ref={sparkFlashRef} position={[0.2, 0, 0]} color="#00F3FF" intensity={0} distance={5} decay={2} />
       </group>
 
       {/* 6. Floating Holographic Salvage Biohazard Crest */}
@@ -335,11 +335,11 @@ export function DebrisPawn() {
         </mesh>
       </group>
 
-      {/* 7. Dedicated Architectural Facade Floodlights (Decay = 2) */}
-      {/* Front Salvage Shutter Floodlight */}
-      <pointLight position={[3.6, 4.0, 0]} color="#05FFA1" intensity={3.2} distance={15} decay={2} />
-      {/* CRT Display & Wire Cages Warm Wash */}
-      <pointLight position={[3.2, 1.8, 0]} color="#FFAA00" intensity={2.8} distance={13} decay={2} />
+      {/* 7. Localized Architectural Accent Lights (Zero Camera Glare, Decay = 2) */}
+      {/* Front Salvage Shutter Accent */}
+      <pointLight position={[2.4, 4.0, 0]} color="#05FFA1" intensity={0.9} distance={6} decay={2} />
+      {/* CRT Display & Wire Cages Warm Accent */}
+      <pointLight position={[2.0, 1.8, 0]} color="#FFAA00" intensity={0.8} distance={5} decay={2} />
     </group>
   );
 }

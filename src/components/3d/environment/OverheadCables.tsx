@@ -41,9 +41,9 @@ export function OverheadCables() {
     <group>
       {cableGeometries.map((c, idx) => (
         <group key={idx}>
-          {/* Main Sagging Cable Tube */}
+          {/* Main Sagging Cable Tube (Vibrant Cyber Cyan-Blue Cable) */}
           <mesh geometry={c.geom}>
-            <meshStandardMaterial color="#0c0e14" roughness={0.8} metalness={0.2} />
+            <meshStandardMaterial color="#1c5ea4" roughness={0.5} metalness={0.5} />
           </mesh>
 
           {/* Hanging Electrical Transformer Box */}
@@ -51,12 +51,12 @@ export function OverheadCables() {
             <group position={[c.mid[0] + 0.8, c.mid[1] - 0.25, c.mid[2]]}>
               <mesh>
                 <boxGeometry args={[0.35, 0.5, 0.35]} />
-                <meshStandardMaterial color="#1a1c22" roughness={0.6} metalness={0.7} />
+                <meshStandardMaterial color="#2064aa" roughness={0.4} metalness={0.8} />
               </mesh>
               {/* Blinking Power Indicator */}
               <mesh position={[0, -0.15, 0.18]}>
                 <sphereGeometry args={[0.035, 8, 8]} />
-                <meshBasicMaterial color="#FFAA00" />
+                <meshBasicMaterial color="#00F0FF" />
               </mesh>
             </group>
           )}

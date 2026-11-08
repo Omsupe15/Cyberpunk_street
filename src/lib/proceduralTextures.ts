@@ -18,30 +18,30 @@ export function getAsphaltTexture(): THREE.CanvasTexture {
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    // Base dark wet slate asphalt
-    ctx.fillStyle = '#1c202a';
+    // Base vibrant cyber-blue asphalt road (No black)
+    ctx.fillStyle = '#164882';
     ctx.fillRect(0, 0, 1024, 1024);
 
-    // Fine asphalt aggregate noise
+    // Fine asphalt aggregate noise with cyan tint
     const imgData = ctx.getImageData(0, 0, 1024, 1024);
     const data = imgData.data;
     for (let i = 0; i < data.length; i += 4) {
-      const noise = (Math.random() - 0.5) * 18;
-      data[i] = Math.min(255, Math.max(0, data[i] + noise));
-      data[i + 1] = Math.min(255, Math.max(0, data[i + 1] + noise));
-      data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + noise + 2));
+      const noise = (Math.random() - 0.5) * 16;
+      data[i] = Math.min(255, Math.max(0, data[i] + noise + 10));
+      data[i + 1] = Math.min(255, Math.max(0, data[i + 1] + noise + 20));
+      data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + noise + 35));
     }
     ctx.putImageData(imgData, 0, 0);
 
-    // 4 Traffic Lane Tire Wear Strips (Subtle dark sheen)
-    ctx.fillStyle = 'rgba(12, 14, 20, 0.4)';
+    // 4 Traffic Lane Tire Wear Strips (Subtle cyber cyan-blue sheen)
+    ctx.fillStyle = 'rgba(28, 85, 150, 0.45)';
     ctx.fillRect(110, 0, 140, 1024); // Lane 1
     ctx.fillRect(330, 0, 140, 1024); // Lane 2
     ctx.fillRect(554, 0, 140, 1024); // Lane 3
     ctx.fillRect(774, 0, 140, 1024); // Lane 4
 
-    // Center Double Solid Yellow Median Lines
-    ctx.strokeStyle = '#FFAA00';
+    // Center Double Solid Amber/Cyan Median Lines
+    ctx.strokeStyle = '#00F0FF';
     ctx.lineWidth = 6;
     ctx.beginPath();
     ctx.moveTo(506, 0);
@@ -53,9 +53,9 @@ export function getAsphaltTexture(): THREE.CanvasTexture {
     ctx.lineTo(518, 1024);
     ctx.stroke();
 
-    // Dashed White Lane Divider Lines (Lanes 1-2 and Lanes 3-4)
-    ctx.strokeStyle = '#e2f0ff';
-    ctx.lineWidth = 4;
+    // Dashed Cyan-White Lane Divider Lines (Lanes 1-2 and Lanes 3-4)
+    ctx.strokeStyle = '#c8f5ff';
+    ctx.lineWidth = 5;
     ctx.setLineDash([48, 48]);
 
     ctx.beginPath();
@@ -68,10 +68,10 @@ export function getAsphaltTexture(): THREE.CanvasTexture {
     ctx.lineTo(768, 1024);
     ctx.stroke();
 
-    // Solid White Outer Curb Shoulder Lines
+    // Solid Neon Cyan Outer Curb Shoulder Lines
     ctx.setLineDash([]);
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 4;
+    ctx.strokeStyle = '#00F0FF';
+    ctx.lineWidth = 6;
     ctx.beginPath();
     ctx.moveTo(32, 0);
     ctx.lineTo(32, 1024);
@@ -104,7 +104,7 @@ export function getSidewalkTexture(): THREE.CanvasTexture {
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    ctx.fillStyle = '#222632';
+    ctx.fillStyle = '#1d5c9e';
     ctx.fillRect(0, 0, 512, 512);
 
     // Grain
@@ -112,23 +112,23 @@ export function getSidewalkTexture(): THREE.CanvasTexture {
     const data = imgData.data;
     for (let i = 0; i < data.length; i += 4) {
       const noise = (Math.random() - 0.5) * 16;
-      data[i] = Math.min(255, Math.max(0, data[i] + noise));
-      data[i + 1] = Math.min(255, Math.max(0, data[i + 1] + noise));
-      data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + noise + 2));
+      data[i] = Math.min(255, Math.max(0, data[i] + noise + 10));
+      data[i + 1] = Math.min(255, Math.max(0, data[i + 1] + noise + 20));
+      data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + noise + 35));
     }
     ctx.putImageData(imgData, 0, 0);
 
     // Paving slab grid joints
-    ctx.strokeStyle = '#10131a';
+    ctx.strokeStyle = '#15457a';
     ctx.lineWidth = 3;
     ctx.strokeRect(0, 0, 256, 256);
     ctx.strokeRect(256, 0, 256, 256);
     ctx.strokeRect(0, 256, 256, 256);
     ctx.strokeRect(256, 256, 256, 256);
 
-    // Bevel highlights on paving joints
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
-    ctx.lineWidth = 1;
+    // Cyan glowing bevel highlights on paving joints
+    ctx.strokeStyle = 'rgba(0, 240, 255, 0.45)';
+    ctx.lineWidth = 2;
     ctx.strokeRect(2, 2, 252, 252);
     ctx.strokeRect(258, 2, 252, 252);
     ctx.strokeRect(2, 258, 252, 252);
@@ -166,12 +166,12 @@ export function getSkyscraperFacadeTexture(typeIndex = 0): THREE.CanvasTexture {
   const headerInfo = headers[typeIndex % headers.length];
 
   if (ctx) {
-    // Structural curtain wall (dark graphite / obsidian)
-    ctx.fillStyle = '#0c0f18';
+    // Structural curtain wall (Vibrant royal cyber-blue / neon sapphire)
+    ctx.fillStyle = '#14467c';
     ctx.fillRect(0, 0, 1024, 2048);
 
     // Prominent Crown Marquee Signboard on Top Floors
-    ctx.fillStyle = '#080a12';
+    ctx.fillStyle = '#1b5696';
     ctx.fillRect(60, 40, 904, 160);
     ctx.strokeStyle = headerInfo.color;
     ctx.lineWidth = 6;
@@ -188,54 +188,61 @@ export function getSkyscraperFacadeTexture(typeIndex = 0): THREE.CanvasTexture {
     ctx.font = 'bold 26px sans-serif';
     ctx.fillText(headerInfo.sub, 512, 165);
 
-    // Office Window Matrix across 40 floors
-    const cols = 16;
-    const rows = 40;
-    const startY = 240;
-    const padX = 12;
-    const padY = 8;
+    // Front facade vertical accent neon light strips on building edges
+    ctx.fillStyle = '#00F0FF';
+    ctx.fillRect(16, 220, 12, 1800);
+    ctx.fillRect(996, 220, 12, 1800);
+
+    // Office Window Matrix across 40 floors (Dense, vibrant illuminated night city windows)
+    const cols = 18;
+    const rows = 42;
+    const startY = 230;
+    const padX = 10;
+    const padY = 7;
     const cellW = (1024 - padX * (cols + 1)) / cols;
     const cellH = (2048 - startY - padY * (rows + 1)) / rows;
 
     for (let r = 0; r < rows; r++) {
-      // Horizontal structural spandrel beam
-      ctx.fillStyle = '#060810';
+      // Horizontal structural spandrel beam (Cyan-accented cyber blue)
+      ctx.fillStyle = '#1a5494';
       ctx.fillRect(0, startY + r * (cellH + padY), 1024, padY);
 
-      // Aluminum spandrel highlight
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
-      ctx.fillRect(0, startY + r * (cellH + padY) + 1, 1024, 1.5);
+      // Neon cyan spandrel highlight
+      ctx.fillStyle = 'rgba(0, 240, 255, 0.5)';
+      ctx.fillRect(0, startY + r * (cellH + padY) + 1, 1024, 2.0);
 
       for (let c = 0; c < cols; c++) {
         const x = padX + c * (cellW + padX);
         const y = startY + padY + r * (cellH + padY);
 
-        ctx.fillStyle = '#04060a';
+        ctx.fillStyle = '#123e70';
         ctx.fillRect(x - 1, y - 1, cellW + 2, cellH + 2);
 
-        // Deterministic room lighting pattern
+        // Deterministic room lighting pattern (~75% lit windows matching photo)
         const hash = Math.sin(r * 47.3 + c * 19.1 + typeIndex * 89.7) * 10000;
         const rand = hash - Math.floor(hash);
 
-        if (rand > 0.44) {
-          if (rand > 0.88) {
-            ctx.fillStyle = '#e6f4ff'; // Cool corporate LED
-          } else if (rand > 0.70) {
-            ctx.fillStyle = '#ffdba0'; // Warm late-night desk lamp
-          } else if (rand > 0.58) {
-            ctx.fillStyle = '#00f3ff'; // Cyber cyan lab terminal
+        if (rand > 0.25) {
+          if (rand > 0.85) {
+            ctx.fillStyle = '#ffffff'; // Pure brilliant white LED
+          } else if (rand > 0.65) {
+            ctx.fillStyle = '#00F0FF'; // Vibrant electric cyan city window
+          } else if (rand > 0.45) {
+            ctx.fillStyle = '#38bdf8'; // Sky blue window
+          } else if (rand > 0.35) {
+            ctx.fillStyle = '#ffea75'; // Warm amber-yellow city window
           } else {
-            ctx.fillStyle = '#ff60aa'; // Neon magenta accent
+            ctx.fillStyle = '#818cf8'; // Neon violet-blue window
           }
           ctx.fillRect(x, y, cellW, cellH);
 
-          // Horizontal window blinds
-          ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
-          for (let b = 5; b < cellH; b += 5) {
-            ctx.fillRect(x, y + b, cellW, 1.5);
+          // Horizontal window blinds / louvers
+          ctx.fillStyle = 'rgba(20, 70, 130, 0.35)';
+          for (let b = 4; b < cellH; b += 4) {
+            ctx.fillRect(x, y + b, cellW, 1.2);
           }
         } else {
-          ctx.fillStyle = '#0d111c';
+          ctx.fillStyle = '#184e8a';
           ctx.fillRect(x, y, cellW, cellH);
         }
       }
@@ -250,7 +257,7 @@ export function getSkyscraperFacadeTexture(typeIndex = 0): THREE.CanvasTexture {
 }
 
 /**
- * Corrugated Rusted Industrial Metal Siding
+ * Corrugated Industrial Metal Siding (Vibrant Cyber Blue)
  */
 export function getCorrugatedMetalTexture(): THREE.CanvasTexture {
   const key = 'corrugated_metal';
@@ -262,24 +269,24 @@ export function getCorrugatedMetalTexture(): THREE.CanvasTexture {
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    ctx.fillStyle = '#1c1f1b';
+    ctx.fillStyle = '#1a528e';
     ctx.fillRect(0, 0, 512, 512);
 
     for (let x = 0; x < 512; x += 32) {
       const grad = ctx.createLinearGradient(x, 0, x + 32, 0);
-      grad.addColorStop(0, '#111410');
-      grad.addColorStop(0.5, '#30352e');
-      grad.addColorStop(1, '#111410');
+      grad.addColorStop(0, '#164880');
+      grad.addColorStop(0.5, '#256eb8');
+      grad.addColorStop(1, '#164880');
       ctx.fillStyle = grad;
       ctx.fillRect(x, 0, 32, 512);
     }
 
-    ctx.fillStyle = 'rgba(85, 42, 18, 0.4)';
+    ctx.fillStyle = 'rgba(0, 240, 255, 0.35)';
     for (let i = 0; i < 30; i++) {
       const rx = Math.random() * 512;
       const ry = Math.random() * 512;
       ctx.beginPath();
-      ctx.arc(rx, ry, 8 + Math.random() * 16, 0, Math.PI * 2);
+      ctx.arc(rx, ry, 6 + Math.random() * 12, 0, Math.PI * 2);
       ctx.fill();
     }
   }
@@ -305,7 +312,7 @@ export function getCrtTerminalTexture(type: 'green' | 'amber' = 'green'): THREE.
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    ctx.fillStyle = type === 'green' ? '#031008' : '#120a03';
+    ctx.fillStyle = type === 'green' ? '#0b3520' : '#143862';
     ctx.fillRect(0, 0, 512, 512);
 
     ctx.fillStyle = type === 'green' ? '#05ffa1' : '#ffaa00';
@@ -372,8 +379,8 @@ export function getNeonBladeSignTexture(
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    // Dark metal housing
-    ctx.fillStyle = '#060810';
+    // Vibrant cyber-blue metal housing
+    ctx.fillStyle = '#164e8c';
     ctx.fillRect(0, 0, 256, 512);
 
     // Glowing outer neon border
@@ -382,7 +389,7 @@ export function getNeonBladeSignTexture(
     ctx.strokeRect(12, 12, 232, 488);
 
     // Inner accent line
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+    ctx.strokeStyle = 'rgba(0, 240, 255, 0.4)';
     ctx.lineWidth = 2;
     ctx.strokeRect(20, 20, 216, 472);
 
@@ -439,8 +446,8 @@ export function getHorizontalMarqueeTexture(
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    // Dark metallic chassis
-    ctx.fillStyle = '#080a12';
+    // Vibrant cyber-blue metallic chassis
+    ctx.fillStyle = '#185090';
     ctx.fillRect(0, 0, 1024, 256);
 
     // Outer glowing neon border
@@ -449,7 +456,7 @@ export function getHorizontalMarqueeTexture(
     ctx.strokeRect(10, 10, 1004, 236);
 
     // Inner subtle border
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+    ctx.strokeStyle = 'rgba(0, 240, 255, 0.4)';
     ctx.lineWidth = 2;
     ctx.strokeRect(18, 18, 988, 220);
 
@@ -496,14 +503,14 @@ export function getVerticalSignTexture(
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    ctx.fillStyle = '#0a0812';
+    ctx.fillStyle = '#185090';
     ctx.fillRect(0, 0, 256, 1024);
 
     ctx.strokeStyle = primaryColor;
     ctx.lineWidth = 10;
     ctx.strokeRect(10, 10, 236, 1004);
 
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+    ctx.strokeStyle = 'rgba(0, 240, 255, 0.4)';
     ctx.lineWidth = 2;
     ctx.strokeRect(18, 18, 220, 988);
 

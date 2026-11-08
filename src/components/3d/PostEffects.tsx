@@ -13,9 +13,9 @@ const CyberpunkLensShader = {
   name: 'CyberpunkLensShader',
   uniforms: {
     tDiffuse: { value: null },
-    offset: { value: 0.0012 },
-    darkness: { value: 0.38 },
-    vignetteOffset: { value: 0.38 },
+    offset: { value: 0.0008 },
+    darkness: { value: 0.22 },
+    vignetteOffset: { value: 0.42 },
   },
   vertexShader: `
     varying vec2 vUv;
@@ -67,13 +67,13 @@ export function PostEffects() {
     const renderPass = new RenderPass(scene, camera);
     composer.addPass(renderPass);
 
-    // 3. Realistic Selective Unreal Bloom Pass:
-    // Threshold 0.86 ensures ONLY actual emissive neon filament and signs bloom, NOT diffuse road/walls
+    // 3. Selective Clean Unreal Bloom Pass:
+    // Threshold 0.90 ensures ONLY true emissive neon and lit windows bloom, never diffuse road or walls
     const bloomPass = new UnrealBloomPass(
       new THREE.Vector2(size.width, size.height),
-      1.15, // strength (refined glow, avoids overexposed blowout)
-      0.45, // radius
-      0.86  // threshold (isolates true neon emitters)
+      0.55, // strength (clean, refined glow matching reference photo)
+      0.35, // radius
+      0.90  // threshold (isolates true neon emitters, eliminating blinding blowout)
     );
     composer.addPass(bloomPass);
 

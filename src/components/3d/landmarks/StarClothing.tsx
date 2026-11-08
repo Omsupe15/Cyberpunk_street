@@ -83,43 +83,43 @@ export function StarClothing() {
       });
     }
 
-    // 5. Sign glow subtle breath
+    // 5. Sign glow subtle breath (Soft, facade-hugging glow)
     if (signGlowRef.current) {
-      signGlowRef.current.intensity = 3.5 + Math.sin(time * 2.5) * 0.45;
+      signGlowRef.current.intensity = 1.0 + Math.sin(time * 2.5) * 0.2;
     }
   });
 
   return (
     <group position={[LANDMARKS.STAR.x, 0, LANDMARKS.STAR.z]}>
-      {/* 1. Main Boutique Architecture (Honed Black Basalt & Dark Bronze Profiles) */}
+      {/* 1. Main Boutique Architecture (Vibrant Cyber-Navy & Neon Sapphire Profiles) */}
       <mesh position={[0, 3.2, 0]} receiveShadow>
         <boxGeometry args={[4.8, 6.4, 13.5]} />
-        <meshStandardMaterial color="#0f0e16" roughness={0.35} metalness={0.7} />
+        <meshStandardMaterial color="#185090" roughness={0.35} metalness={0.7} />
       </mesh>
 
-      {/* Vertical Violet Neon Architectural Pilasters */}
+      {/* Vertical Electric Cyan Neon Architectural Pilasters */}
       {[-6.6, 6.6].map((zEdge, idx) => (
         <mesh key={`pilaster-${idx}`} position={[2.42, 3.2, zEdge]}>
           <boxGeometry args={[0.06, 6.4, 0.12]} />
-          <meshBasicMaterial color="#8A2BE2" />
+          <meshBasicMaterial color="#00F0FF" />
         </mesh>
       ))}
 
-      {/* Recessed Interior Showroom Cavity */}
+      {/* Recessed Interior Showroom Cavity (Vibrant Neon Cyber Blue) */}
       <mesh position={[0.4, 2.5, 0]}>
         <boxGeometry args={[4.0, 4.8, 12]} />
-        <meshStandardMaterial color="#14111d" roughness={0.5} metalness={0.4} />
+        <meshStandardMaterial color="#1e5ca2" roughness={0.5} metalness={0.4} />
       </mesh>
 
-      {/* Interior Polished Marble Runway Floor */}
+      {/* Interior Polished Cyber-Marble Runway Floor */}
       <mesh position={[0.4, 0.12, 0]}>
         <boxGeometry args={[3.8, 0.05, 11.8]} />
-        <meshStandardMaterial color="#08070d" roughness={0.12} metalness={0.9} />
+        <meshStandardMaterial color="#1c5698" roughness={0.12} metalness={0.9} />
       </mesh>
-      {/* Glowing Violet Runway Center Slat */}
+      {/* Glowing Cyan/Violet Runway Center Slat */}
       <mesh position={[1.4, 0.15, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[0.25, 11]} />
-        <meshBasicMaterial color="#8A2BE2" />
+        <meshBasicMaterial color="#00F0FF" />
       </mesh>
 
       {/* Interior Brushed Titanium Clothing Racks with Hanging Techwear Jackets */}
@@ -128,28 +128,28 @@ export function StarClothing() {
           {/* Horizontal Titanium Hanging Rail */}
           <mesh position={[0, 0.6, 0]}>
             <cylinderGeometry args={[0.02, 0.02, 2.4, 8]} />
-            <meshStandardMaterial color="#aaa" metalness={0.95} />
+            <meshStandardMaterial color="#00F0FF" metalness={0.95} />
           </mesh>
           {/* Side Floor Supports */}
           <mesh position={[0, 0, -1.15]}>
             <cylinderGeometry args={[0.025, 0.025, 1.3, 8]} />
-            <meshStandardMaterial color="#333" metalness={0.9} />
+            <meshStandardMaterial color="#1e60a6" metalness={0.9} />
           </mesh>
           <mesh position={[0, 0, 1.15]}>
             <cylinderGeometry args={[0.025, 0.025, 1.3, 8]} />
-            <meshStandardMaterial color="#333" metalness={0.9} />
+            <meshStandardMaterial color="#1e60a6" metalness={0.9} />
           </mesh>
           {/* Sculpted Coats on Hangers */}
           {[-0.8, -0.4, 0, 0.4, 0.8].map((hPos, hIdx) => (
             <group key={`coat-${hIdx}`} position={[0, 0.2, hPos]}>
               <mesh position={[0, 0.35, 0]}>
                 <torusGeometry args={[0.06, 0.008, 6, 8, Math.PI]} />
-                <meshStandardMaterial color="#888" metalness={0.9} />
+                <meshStandardMaterial color="#00F0FF" metalness={0.9} />
               </mesh>
               <mesh position={[0, 0, 0]}>
                 <boxGeometry args={[0.28, 0.55, 0.12]} />
                 <meshStandardMaterial
-                  color={hIdx % 2 === 0 ? '#1a1c26' : '#261b30'}
+                  color={hIdx % 2 === 0 ? '#1e62a8' : '#236cb8'}
                   roughness={0.6}
                 />
               </mesh>
@@ -162,7 +162,7 @@ export function StarClothing() {
       {[-4, -2, 0, 2, 4].map((zSpot, sIdx) => (
         <mesh key={`spot-${sIdx}`} position={[1.5, 4.6, zSpot]}>
           <cylinderGeometry args={[0.06, 0.06, 0.12, 12]} />
-          <meshStandardMaterial color="#222" metalness={0.9} />
+          <meshStandardMaterial color="#2064aa" metalness={0.9} />
         </mesh>
       ))}
 
@@ -193,15 +193,15 @@ export function StarClothing() {
         </group>
       ))}
 
-      {/* 3. Overhanging Constellation Canopy */}
+      {/* 3. Overhanging Constellation Canopy (Deep Cyber Blue) */}
       <group position={[1.6, 5.0, 0]} rotation={[0, 0, 0.08]}>
         <mesh position={[0, 0, 0]}>
           <boxGeometry args={[3.6, 0.28, 13.0]} />
-          <meshStandardMaterial color="#0b0a12" roughness={0.5} metalness={0.8} />
+          <meshStandardMaterial color="#1c589a" roughness={0.5} metalness={0.8} />
         </mesh>
         <mesh position={[1.81, 0, 0]}>
           <boxGeometry args={[0.04, 0.1, 13.0]} />
-          <meshBasicMaterial color="#8A2BE2" />
+          <meshBasicMaterial color="#00F0FF" />
         </mesh>
 
         {/* Constellation Star Matrix */}
@@ -220,11 +220,11 @@ export function StarClothing() {
       <group ref={mannequin1Ref} position={[1.4, 1.4, -2.6]}>
         <mesh position={[0, -0.1, 0]}>
           <cylinderGeometry args={[0.5, 0.55, 0.1, 20]} />
-          <meshStandardMaterial color="#161220" metalness={0.8} roughness={0.2} />
+          <meshStandardMaterial color="#2064aa" metalness={0.8} roughness={0.2} />
         </mesh>
         <mesh position={[0, -0.04, 0]}>
           <ringGeometry args={[0.38, 0.48, 20]} />
-          <meshBasicMaterial color="#8A2BE2" />
+          <meshBasicMaterial color="#00F0FF" />
         </mesh>
         <mesh position={[0, 0.45, 0]}>
           <coneGeometry args={[0.36, 0.92, 10]} />
@@ -250,7 +250,7 @@ export function StarClothing() {
       <group ref={mannequin2Ref} position={[1.4, 1.4, 2.6]}>
         <mesh position={[0, -0.1, 0]}>
           <cylinderGeometry args={[0.5, 0.55, 0.1, 20]} />
-          <meshStandardMaterial color="#0e1a20" metalness={0.8} roughness={0.2} />
+          <meshStandardMaterial color="#2064aa" metalness={0.8} roughness={0.2} />
         </mesh>
         <mesh position={[0, -0.04, 0]}>
           <ringGeometry args={[0.38, 0.48, 20]} />
@@ -284,11 +284,11 @@ export function StarClothing() {
         </mesh>
         <mesh position={[-0.05, -0.5, 0]} rotation={[0, Math.PI / 2, 0]}>
           <planeGeometry args={[7.2, 1.3]} />
-          <meshStandardMaterial color="#08060f" metalness={0.9} roughness={0.2} />
+          <meshStandardMaterial color="#164e8c" metalness={0.9} roughness={0.2} />
         </mesh>
         <mesh position={[-0.03, -0.5, 0]} rotation={[0, Math.PI / 2, 0]}>
           <planeGeometry args={[7.35, 1.45]} />
-          <meshBasicMaterial color="#8A2BE2" wireframe />
+          <meshBasicMaterial color="#00F0FF" wireframe />
         </mesh>
         <mesh position={[0, -0.5, 0]} rotation={[0, Math.PI / 2, 0]}>
           <planeGeometry args={[7.0, 1.15]} />
@@ -310,20 +310,20 @@ export function StarClothing() {
         </mesh>
       </group>
 
-      {/* 7. Dedicated Architectural Facade Floodlights (Decay = 2) */}
+      {/* 7. Localized Architectural Accent Lights (Zero Camera Glare, Decay = 2) */}
       <pointLight
         ref={signGlowRef}
-        position={[3.6, 5.5, 0]}
+        position={[2.6, 5.5, 0]}
         color="#8A2BE2"
-        intensity={3.5}
-        distance={16}
+        intensity={1.0}
+        distance={6}
         decay={2}
       />
       {/* Canopy Downlight */}
-      <pointLight position={[2.8, 4.2, 0]} color="#00F3FF" intensity={2.8} distance={14} decay={2} />
+      <pointLight position={[2.4, 4.2, 0]} color="#00F3FF" intensity={0.8} distance={5} decay={2} />
       {/* Showroom Display Lights */}
-      <pointLight position={[2.2, 2.8, -2.6]} color="#8A2BE2" intensity={2.0} distance={11} decay={2} />
-      <pointLight position={[2.2, 2.8, 2.6]} color="#00F3FF" intensity={2.0} distance={11} decay={2} />
+      <pointLight position={[2.0, 2.8, -2.6]} color="#8A2BE2" intensity={0.7} distance={5} decay={2} />
+      <pointLight position={[2.0, 2.8, 2.6]} color="#00F3FF" intensity={0.7} distance={5} decay={2} />
     </group>
   );
 }
