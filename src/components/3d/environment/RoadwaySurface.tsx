@@ -1,38 +1,48 @@
 'use client';
 import { useMemo, useEffect, useState } from 'react';
 import * as THREE from 'three';
-import { getAsphaltTexture, getSidewalkTexture } from '@/lib/proceduralTextures';
+import { getAsphaltTexture, getSidewalkTexture, getNeonBladeSignTexture } from '@/lib/proceduralTextures';
+import { ROAD_WIDTH, SIDEWALK_WIDTH } from '@/lib/constants';
 
 export function RoadwaySurface() {
   const [asphaltTex, setAsphaltTex] = useState<THREE.CanvasTexture | null>(null);
   const [sidewalkTex, setSidewalkTex] = useState<THREE.CanvasTexture | null>(null);
+  const [bladeSigns, setBladeSigns] = useState<Record<string, THREE.CanvasTexture>>({});
 
   useEffect(() => {
     setAsphaltTex(getAsphaltTexture());
     setSidewalkTex(getSidewalkTexture());
+    setBladeSigns({
+      noodle: getNeonBladeSignTexture('NOODLE BAR', 'ラーメン', '#FFAA00'),
+      clinic: getNeonBladeSignTexture('CYBER CLINIC', '診療所', '#00F3FF'),
+      lounge: getNeonBladeSignTexture('NEON LOUNGE', '酒場', '#FF0055'),
+      data: getNeonBladeSignTexture('DATA NET', '通信', '#05FFA1'),
+      casino: getNeonBladeSignTexture('CASINO ROYALE', '娯楽場', '#FFAA00'),
+      hotel: getNeonBladeSignTexture('HOTEL SUITES', '客室', '#8A2BE2'),
+    });
   }, []);
 
-  // Dashed center lines along the 190m street
-  const centerDashes = useMemo(() => {
-    const dashes: number[] = [];
-    for (let z = 8; z > -175; z -= 4.8) {
-      dashes.push(z);
-    }
-    return dashes;
-  }, []);
-
-  // Specular puddle locations reflecting ambient neon
+  // Specular puddle locations reflecting ambient neon across 14m wide avenue
   const puddles = useMemo(() => {
     return [
-      { x: -1.2, z: -18, rx: 1.5, rz: 3.4, rot: 0.18 },
-      { x: 1.5, z: -34, rx: 1.8, rz: 4.2, rot: -0.15 },
-      { x: -0.8, z: -52, rx: 1.3, rz: 2.8, rot: 0.25 },
-      { x: 1.2, z: -72, rx: 2.1, rz: 4.6, rot: 0.1 },
-      { x: -1.5, z: -92, rx: 1.6, rz: 3.2, rot: -0.22 },
-      { x: 0.6, z: -112, rx: 2.0, rz: 4.4, rot: 0.16 },
-      { x: -1.1, z: -136, rx: 1.7, rz: 3.6, rot: -0.12 },
-      { x: 1.3, z: -154, rx: 2.2, rz: 5.0, rot: 0.18 },
+      { x: -2.8, z: -18, rx: 2.2, rz: 4.2, rot: 0.18 },
+      { x: 3.2, z: -34, rx: 2.6, rz: 5.0, rot: -0.15 },
+      { x: -1.8, z: -52, rx: 2.0, rz: 3.8, rot: 0.25 },
+      { x: 2.4, z: -72, rx: 2.8, rz: 5.4, rot: 0.1 },
+      { x: -3.4, z: -92, rx: 2.4, rz: 4.4, rot: -0.22 },
+      { x: 1.6, z: -112, rx: 2.5, rz: 4.8, rot: 0.16 },
+      { x: -2.2, z: -136, rx: 2.3, rz: 4.2, rot: -0.12 },
+      { x: 3.0, z: -154, rx: 2.9, rz: 5.6, rot: 0.18 },
     ];
+  }, []);
+
+  // Cat-eye solar road studs along lane dividing lines (X = -3.5m, 0m, +3.5m)
+  const catEyeZs = useMemo(() => {
+    const list: number[] = [];
+    for (let z = 8; z > -175; z -= 4.0) {
+      list.push(z);
+    }
+    return list;
   }, []);
 
   // Sidewalk bollards along the curb
@@ -44,46 +54,69 @@ export function RoadwaySurface() {
     return list;
   }, []);
 
+  // Embedded Sidewalk Curb LED Puck Lights
+  const curbPuckZs = useMemo(() => {
+    const list: number[] = [];
+    for (let z = 8; z > -175; z -= 6.0) {
+      list.push(z);
+    }
+    return list;
+  }, []);
+
   // Sewer drainage grates along gutters
   const drainZs = useMemo(() => [-10, -28, -50, -78, -100, -122, -148, -168], []);
 
   // Street furniture locations: Trash bins, Data Terminals, Fire Hydrants, Transformers
   const streetProps = useMemo(() => {
     return [
-      { type: 'kiosk', x: -5.4, z: -14, rot: 0.2 },
-      { type: 'hydrant', x: 4.8, z: -22, rot: -Math.PI / 2 },
-      { type: 'transformer', x: -5.6, z: -44, rot: 0 },
-      { type: 'bin', x: 5.2, z: -58, rot: Math.PI / 2 },
-      { type: 'kiosk', x: 5.3, z: -84, rot: -0.3 },
-      { type: 'hydrant', x: -4.8, z: -98, rot: Math.PI / 2 },
-      { type: 'bin', x: -5.2, z: -118, rot: -Math.PI / 2 },
-      { type: 'transformer', x: 5.6, z: -138, rot: Math.PI },
-      { type: 'kiosk', x: -5.3, z: -158, rot: 0.15 },
+      { type: 'kiosk', x: -8.8, z: -14, rot: 0.2 },
+      { type: 'hydrant', x: 8.2, z: -22, rot: -Math.PI / 2 },
+      { type: 'transformer', x: -9.0, z: -44, rot: 0 },
+      { type: 'bin', x: 8.4, z: -58, rot: Math.PI / 2 },
+      { type: 'kiosk', x: 8.6, z: -84, rot: -0.3 },
+      { type: 'hydrant', x: -8.2, z: -98, rot: Math.PI / 2 },
+      { type: 'bin', x: -8.4, z: -118, rot: -Math.PI / 2 },
+      { type: 'transformer', x: 9.0, z: -138, rot: Math.PI },
+      { type: 'kiosk', x: -8.6, z: -158, rot: 0.15 },
     ];
   }, []);
 
+  // Perpendicular Neon Blade Signs mounted along building facades (English-First with Asian Subtitles)
+  const wallBladeSigns = useMemo(() => {
+    return [
+      { x: -11.6, y: 4.8, z: -18, side: 'left', key: 'noodle' },
+      { x: 11.6, y: 5.0, z: -48, side: 'right', key: 'clinic' },
+      { x: -11.6, y: 4.8, z: -88, side: 'left', key: 'data' },
+      { x: 11.6, y: 5.2, z: -126, side: 'right', key: 'lounge' },
+      { x: -11.6, y: 5.0, z: -142, side: 'left', key: 'casino' },
+      { x: 11.6, y: 4.8, z: -160, side: 'right', key: 'hotel' },
+    ];
+  }, []);
+
+  const halfRoad = ROAD_WIDTH / 2; // 7.0m
+  const sidewalkCenterLeft = -(halfRoad + SIDEWALK_WIDTH / 2); // -9.25m
+  const sidewalkCenterRight = halfRoad + SIDEWALK_WIDTH / 2; // +9.25m
+
   return (
     <group>
-      {/* 1. Main Asphalt Roadway with Procedural Texture & Rain-slick PBR */}
+      {/* 1. Main 14m 4-Lane Grand Avenue Asphalt Surface */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, -85]} receiveShadow>
-        <planeGeometry args={[8.4, 195]} />
+        <planeGeometry args={[ROAD_WIDTH, 195]} />
         <meshStandardMaterial
           map={asphaltTex || undefined}
-          color="#222630"
-          roughness={0.28}
+          color="#222632"
+          roughness={0.25}
           metalness={0.35}
         />
       </mesh>
 
-      {/* 2. Specular Water Puddles with Organic Soft Wet Edges */}
+      {/* 2. Specular Water Puddles with Organic Soft Damp Edges */}
       {puddles.map((p, idx) => (
         <group key={`puddle-${idx}`} position={[p.x, 0.006, p.z]} rotation={[-Math.PI / 2, 0, p.rot]}>
-          {/* Damp Dark Ring around puddle */}
           <mesh position={[0, 0, -0.001]}>
             <circleGeometry args={[p.rx * 0.65, 20]} />
             <meshBasicMaterial color="#0c1018" transparent opacity={0.65} />
           </mesh>
-          {/* Glossy High-Reflective Center */}
           <mesh>
             <circleGeometry args={[p.rx * 0.52, 20]} />
             <meshStandardMaterial
@@ -97,161 +130,203 @@ export function RoadwaySurface() {
         </group>
       ))}
 
-      {/* 3. Glowing Broken Cyan Centerline */}
-      {centerDashes.map((zPos, idx) => (
-        <mesh key={`dash-${idx}`} rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.012, zPos]}>
-          <planeGeometry args={[0.22, 2.5]} />
-          <meshBasicMaterial color="#00F3FF" />
-        </mesh>
-      ))}
-
-      {/* 4. Glowing Roadway Chevrons / Waypoint Navigation Arrows */}
-      {[-24, -64, -104, -144].map((zPos, idx) => (
-        <group key={`chevron-${idx}`} position={[0, 0.012, zPos]}>
-          <mesh rotation={[-Math.PI / 2, 0, 0]} position={[-0.85, 0, 0]}>
-            <planeGeometry args={[0.16, 1.4]} />
+      {/* 3. Embedded Glowing Cat-Eye Solar Road Studs along Lane Dividers */}
+      {catEyeZs.map((zPos, idx) => (
+        <group key={`cateye-${idx}`} position={[0, 0.015, zPos]}>
+          {/* Left Lane Divider Stud (White) */}
+          <mesh position={[-3.5, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+            <circleGeometry args={[0.035, 8]} />
+            <meshBasicMaterial color="#ffffff" />
+          </mesh>
+          {/* Center Median Double Amber Studs */}
+          <mesh position={[-0.1, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+            <circleGeometry args={[0.038, 8]} />
             <meshBasicMaterial color="#FFAA00" />
           </mesh>
-          <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0.85, 0, 0]}>
-            <planeGeometry args={[0.16, 1.4]} />
+          <mesh position={[0.1, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+            <circleGeometry args={[0.038, 8]} />
             <meshBasicMaterial color="#FFAA00" />
+          </mesh>
+          {/* Right Lane Divider Stud (White) */}
+          <mesh position={[3.5, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+            <circleGeometry args={[0.035, 8]} />
+            <meshBasicMaterial color="#ffffff" />
           </mesh>
         </group>
       ))}
 
-      {/* 5. Gutter Storm Sewer Drainage Grates */}
+      {/* 4. Gutter Storm Sewer Drainage Grates */}
       {drainZs.map((zPos, idx) => (
         <group key={`drain-${idx}`}>
-          {/* Left Drain */}
-          <mesh position={[-4.05, 0.008, zPos]} rotation={[-Math.PI / 2, 0, 0]}>
-            <planeGeometry args={[0.3, 0.8]} />
+          <mesh position={[-(halfRoad - 0.2), 0.008, zPos]} rotation={[-Math.PI / 2, 0, 0]}>
+            <planeGeometry args={[0.35, 0.9]} />
             <meshStandardMaterial color="#0a0c10" roughness={0.8} metalness={0.9} />
           </mesh>
-          {/* Right Drain */}
-          <mesh position={[4.05, 0.008, zPos]} rotation={[-Math.PI / 2, 0, 0]}>
-            <planeGeometry args={[0.3, 0.8]} />
+          <mesh position={[halfRoad - 0.2, 0.008, zPos]} rotation={[-Math.PI / 2, 0, 0]}>
+            <planeGeometry args={[0.35, 0.9]} />
             <meshStandardMaterial color="#0a0c10" roughness={0.8} metalness={0.9} />
           </mesh>
         </group>
       ))}
 
-      {/* 6. Left Sidewalk (Width: 3.6m, Elevation: 0.14m) */}
-      <mesh position={[-6.0, 0.07, -85]} receiveShadow>
-        <boxGeometry args={[3.6, 0.14, 195]} />
+      {/* 5. Left Pedestrian Sidewalk (Width: 4.5m, Elevation: 0.16m) */}
+      <mesh position={[sidewalkCenterLeft, 0.08, -85]} receiveShadow>
+        <boxGeometry args={[SIDEWALK_WIDTH, 0.16, 195]} />
         <meshStandardMaterial
           map={sidewalkTex || undefined}
-          color="#20242e"
+          color="#222632"
           roughness={0.65}
           metalness={0.15}
         />
       </mesh>
       {/* Left Chamfered Granite Curb Stone */}
-      <mesh position={[-4.24, 0.08, -85]}>
-        <boxGeometry args={[0.12, 0.16, 195]} />
-        <meshStandardMaterial color="#2d323f" roughness={0.5} metalness={0.2} />
+      <mesh position={[-halfRoad, 0.09, -85]}>
+        <boxGeometry args={[0.16, 0.18, 195]} />
+        <meshStandardMaterial color="#2c303e" roughness={0.5} metalness={0.2} />
       </mesh>
       {/* Left Neon Curb Light Strip (Cyber Cyan) */}
-      <mesh position={[-4.18, 0.142, -85]}>
-        <boxGeometry args={[0.04, 0.02, 195]} />
+      <mesh position={[-(halfRoad - 0.04), 0.162, -85]}>
+        <boxGeometry args={[0.05, 0.02, 195]} />
         <meshBasicMaterial color="#00F3FF" />
       </mesh>
 
-      {/* 7. Right Sidewalk (Width: 3.6m, Elevation: 0.14m) */}
-      <mesh position={[6.0, 0.07, -85]} receiveShadow>
-        <boxGeometry args={[3.6, 0.14, 195]} />
+      {/* 6. Right Pedestrian Sidewalk (Width: 4.5m, Elevation: 0.16m) */}
+      <mesh position={[sidewalkCenterRight, 0.08, -85]} receiveShadow>
+        <boxGeometry args={[SIDEWALK_WIDTH, 0.16, 195]} />
         <meshStandardMaterial
           map={sidewalkTex || undefined}
-          color="#20242e"
+          color="#222632"
           roughness={0.65}
           metalness={0.15}
         />
       </mesh>
       {/* Right Chamfered Granite Curb Stone */}
-      <mesh position={[4.24, 0.08, -85]}>
-        <boxGeometry args={[0.12, 0.16, 195]} />
-        <meshStandardMaterial color="#2d323f" roughness={0.5} metalness={0.2} />
+      <mesh position={[halfRoad, 0.09, -85]}>
+        <boxGeometry args={[0.16, 0.18, 195]} />
+        <meshStandardMaterial color="#2c303e" roughness={0.5} metalness={0.2} />
       </mesh>
       {/* Right Neon Curb Light Strip (Neon Magenta) */}
-      <mesh position={[4.18, 0.142, -85]}>
-        <boxGeometry args={[0.04, 0.02, 195]} />
+      <mesh position={[halfRoad - 0.04, 0.162, -85]}>
+        <boxGeometry args={[0.05, 0.02, 195]} />
         <meshBasicMaterial color="#FF0055" />
       </mesh>
+
+      {/* 7. Embedded Sidewalk Curb LED Puck Lights */}
+      {curbPuckZs.map((zPos, idx) => (
+        <group key={`puck-${idx}`}>
+          <mesh position={[-halfRoad, 0.165, zPos]} rotation={[-Math.PI / 2, 0, 0]}>
+            <circleGeometry args={[0.05, 12]} />
+            <meshBasicMaterial color="#00F3FF" />
+          </mesh>
+          <mesh position={[halfRoad, 0.165, zPos]} rotation={[-Math.PI / 2, 0, 0]}>
+            <circleGeometry args={[0.05, 12]} />
+            <meshBasicMaterial color="#FF0055" />
+          </mesh>
+        </group>
+      ))}
 
       {/* 8. Tactical Pedestrian Bollards along Curb Edges */}
       {bollardZs.map((zPos, idx) => (
         <group key={`bollard-${idx}`}>
-          {/* Left Bollard */}
-          <group position={[-4.42, 0.14, zPos]}>
-            <mesh position={[0, 0.35, 0]}>
-              <cylinderGeometry args={[0.075, 0.085, 0.7, 12]} />
-              <meshStandardMaterial color="#1c202a" metalness={0.85} roughness={0.25} />
+          <group position={[-(halfRoad + 0.35), 0.16, zPos]}>
+            <mesh position={[0, 0.38, 0]}>
+              <cylinderGeometry args={[0.08, 0.09, 0.76, 12]} />
+              <meshStandardMaterial color="#1a1e28" metalness={0.85} roughness={0.25} />
             </mesh>
-            <mesh position={[0, 0.58, 0]}>
-              <cylinderGeometry args={[0.082, 0.082, 0.04, 12]} />
+            <mesh position={[0, 0.62, 0]}>
+              <cylinderGeometry args={[0.088, 0.088, 0.04, 12]} />
               <meshBasicMaterial color="#00F3FF" />
             </mesh>
-            <mesh position={[0, 0.72, 0]}>
-              <sphereGeometry args={[0.07, 8, 8]} />
-              <meshStandardMaterial color="#2a3040" metalness={0.9} />
+            <mesh position={[0, 0.78, 0]}>
+              <sphereGeometry args={[0.075, 8, 8]} />
+              <meshStandardMaterial color="#262c3a" metalness={0.9} />
             </mesh>
           </group>
 
-          {/* Right Bollard */}
-          <group position={[4.42, 0.14, zPos]}>
-            <mesh position={[0, 0.35, 0]}>
-              <cylinderGeometry args={[0.075, 0.085, 0.7, 12]} />
-              <meshStandardMaterial color="#1c202a" metalness={0.85} roughness={0.25} />
+          <group position={[halfRoad + 0.35, 0.16, zPos]}>
+            <mesh position={[0, 0.38, 0]}>
+              <cylinderGeometry args={[0.08, 0.09, 0.76, 12]} />
+              <meshStandardMaterial color="#1a1e28" metalness={0.85} roughness={0.25} />
             </mesh>
-            <mesh position={[0, 0.58, 0]}>
-              <cylinderGeometry args={[0.082, 0.082, 0.04, 12]} />
+            <mesh position={[0, 0.62, 0]}>
+              <cylinderGeometry args={[0.088, 0.088, 0.04, 12]} />
               <meshBasicMaterial color="#FF0055" />
             </mesh>
-            <mesh position={[0, 0.72, 0]}>
-              <sphereGeometry args={[0.07, 8, 8]} />
-              <meshStandardMaterial color="#2a3040" metalness={0.9} />
+            <mesh position={[0, 0.78, 0]}>
+              <sphereGeometry args={[0.075, 8, 8]} />
+              <meshStandardMaterial color="#262c3a" metalness={0.9} />
             </mesh>
           </group>
         </group>
       ))}
 
-      {/* 9. Detailed Street Furniture Assets */}
+      {/* 9. Perpendicular Double-Sided Neon Blade Signs along Building Facades */}
+      {wallBladeSigns.map((sign, idx) => {
+        const tex = bladeSigns[sign.key] || undefined;
+        const isLeft = sign.side === 'left';
+
+        return (
+          <group key={`blade-${idx}`} position={[sign.x, sign.y, sign.z]}>
+            <mesh position={[isLeft ? -0.4 : 0.4, 0.7, 0]}>
+              <cylinderGeometry args={[0.03, 0.03, 0.8, 8]} />
+              <meshStandardMaterial color="#333" metalness={0.9} />
+            </mesh>
+            <mesh position={[isLeft ? -0.4 : 0.4, -0.7, 0]}>
+              <cylinderGeometry args={[0.03, 0.03, 0.8, 8]} />
+              <meshStandardMaterial color="#333" metalness={0.9} />
+            </mesh>
+
+            {/* Neon Blade Housing */}
+            <mesh position={[0, 0, 0]}>
+              <boxGeometry args={[0.09, 2.0, 1.0]} />
+              <meshStandardMaterial color="#0e1017" metalness={0.8} roughness={0.3} />
+            </mesh>
+            {/* Front & Back Glowing Faces */}
+            <mesh position={[isLeft ? 0.05 : -0.05, 0, 0]} rotation={[0, isLeft ? Math.PI / 2 : -Math.PI / 2, 0]}>
+              <planeGeometry args={[0.92, 1.9]} />
+              <meshStandardMaterial
+                map={tex}
+                color="#ffffff"
+                emissive="#ffffff"
+                emissiveMap={tex}
+                emissiveIntensity={0.9}
+                roughness={0.2}
+              />
+            </mesh>
+          </group>
+        );
+      })}
+
+      {/* 10. Detailed Street Furniture Assets */}
       {streetProps.map((prop, idx) => {
         if (prop.type === 'kiosk') {
-          // Holographic City Information / Data Terminal
           return (
-            <group key={`prop-${idx}`} position={[prop.x, 0.14, prop.z]} rotation={[0, prop.rot, 0]}>
-              {/* Pillar Base */}
+            <group key={`prop-${idx}`} position={[prop.x, 0.16, prop.z]} rotation={[0, prop.rot, 0]}>
               <mesh position={[0, 0.9, 0]}>
-                <boxGeometry args={[0.45, 1.8, 0.28]} />
-                <meshStandardMaterial color="#151922" metalness={0.8} roughness={0.2} />
+                <boxGeometry args={[0.48, 1.8, 0.3]} />
+                <meshStandardMaterial color="#141720" metalness={0.8} roughness={0.2} />
               </mesh>
-              {/* Holographic Interactive Glass Display */}
-              <mesh position={[0, 1.1, 0.15]}>
-                <planeGeometry args={[0.38, 0.75]} />
+              <mesh position={[0, 1.1, 0.16]}>
+                <planeGeometry args={[0.4, 0.75]} />
                 <meshBasicMaterial color="#00F3FF" transparent opacity={0.85} />
               </mesh>
-              {/* Status Header Light */}
-              <mesh position={[0, 1.72, 0.15]}>
-                <planeGeometry args={[0.36, 0.05]} />
+              <mesh position={[0, 1.72, 0.16]}>
+                <planeGeometry args={[0.38, 0.06]} />
                 <meshBasicMaterial color="#FFAA00" />
               </mesh>
             </group>
           );
         } else if (prop.type === 'hydrant') {
-          // Cyber Fire Hydrant
           return (
-            <group key={`prop-${idx}`} position={[prop.x, 0.14, prop.z]} rotation={[0, prop.rot, 0]}>
-              {/* Base Flange */}
+            <group key={`prop-${idx}`} position={[prop.x, 0.16, prop.z]} rotation={[0, prop.rot, 0]}>
               <mesh position={[0, 0.06, 0]}>
                 <cylinderGeometry args={[0.18, 0.22, 0.12, 12]} />
                 <meshStandardMaterial color="#222" metalness={0.8} />
               </mesh>
-              {/* Hydrant Body */}
               <mesh position={[0, 0.38, 0]}>
                 <cylinderGeometry args={[0.14, 0.15, 0.55, 12]} />
-                <meshStandardMaterial color="#c22" roughness={0.4} metalness={0.6} />
+                <meshStandardMaterial color="#b22" roughness={0.4} metalness={0.6} />
               </mesh>
-              {/* Brass Hose Nozzles */}
               <mesh position={[0.16, 0.42, 0]} rotation={[0, 0, Math.PI / 2]}>
                 <cylinderGeometry args={[0.06, 0.06, 0.12, 8]} />
                 <meshStandardMaterial color="#d4af37" metalness={0.9} roughness={0.2} />
@@ -263,19 +338,16 @@ export function RoadwaySurface() {
             </group>
           );
         } else if (prop.type === 'transformer') {
-          // Heavy Ground Electrical Utility Transformer
           return (
-            <group key={`prop-${idx}`} position={[prop.x, 0.14, prop.z]} rotation={[0, prop.rot, 0]}>
+            <group key={`prop-${idx}`} position={[prop.x, 0.16, prop.z]} rotation={[0, prop.rot, 0]}>
               <mesh position={[0, 0.65, 0]}>
                 <boxGeometry args={[0.9, 1.3, 0.7]} />
-                <meshStandardMaterial color="#1c201d" metalness={0.7} roughness={0.6} />
+                <meshStandardMaterial color="#1a1d1b" metalness={0.7} roughness={0.6} />
               </mesh>
-              {/* Cooling Louvers */}
               <mesh position={[0, 0.8, 0.36]}>
                 <planeGeometry args={[0.7, 0.4]} />
-                <meshStandardMaterial color="#0e100e" roughness={0.8} />
+                <meshStandardMaterial color="#0c0e0c" roughness={0.8} />
               </mesh>
-              {/* High Voltage Hazard Decal */}
               <mesh position={[0, 0.35, 0.36]}>
                 <planeGeometry args={[0.25, 0.25]} />
                 <meshBasicMaterial color="#FFAA00" />
@@ -283,14 +355,12 @@ export function RoadwaySurface() {
             </group>
           );
         } else {
-          // Modern Dual Cyber-Recycling Bin
           return (
-            <group key={`prop-${idx}`} position={[prop.x, 0.14, prop.z]} rotation={[0, prop.rot, 0]}>
+            <group key={`prop-${idx}`} position={[prop.x, 0.16, prop.z]} rotation={[0, prop.rot, 0]}>
               <mesh position={[0, 0.5, 0]}>
                 <boxGeometry args={[0.65, 1.0, 0.4]} />
-                <meshStandardMaterial color="#1a1e28" metalness={0.75} roughness={0.3} />
+                <meshStandardMaterial color="#181c24" metalness={0.75} roughness={0.3} />
               </mesh>
-              {/* Sorting Slots */}
               <mesh position={[-0.16, 0.75, 0.21]}>
                 <planeGeometry args={[0.18, 0.08]} />
                 <meshBasicMaterial color="#05FFA1" />
@@ -304,42 +374,44 @@ export function RoadwaySurface() {
         }
       })}
 
-      {/* 10. Cast-Iron Utility Manholes with Concentric Tread Rings */}
-      {[-12, -40, -82, -125, -162].map((zPos, idx) => (
-        <group key={`manhole-${idx}`} position={[-6.2, 0.142, zPos]}>
-          <mesh rotation={[-Math.PI / 2, 0, 0]}>
-            <circleGeometry args={[0.48, 20]} />
-            <meshStandardMaterial color="#141822" roughness={0.7} metalness={0.85} />
-          </mesh>
-          <mesh rotation={[-Math.PI / 2, 0, 0]}>
-            <ringGeometry args={[0.35, 0.38, 20]} />
-            <meshStandardMaterial color="#283040" metalness={0.9} />
-          </mesh>
-          <mesh rotation={[-Math.PI / 2, 0, 0]}>
-            <ringGeometry args={[0.44, 0.48, 20]} />
-            <meshBasicMaterial color="#FFAA00" />
-          </mesh>
-        </group>
-      ))}
-
-      {/* 11. Pedestrian Zebra Crosswalks */}
+      {/* 11. Pedestrian Crosswalks with Traffic Signal Posts */}
       {[-48, -128].map((crossZ, cIdx) => (
         <group key={`crosswalk-${cIdx}`}>
-          {[-2.8, -1.8, -0.8, 0.2, 1.2, 2.2, 3.2].map((xOffset, stripeIdx) => (
+          {[-6.0, -4.5, -3.0, -1.5, 0, 1.5, 3.0, 4.5, 6.0].map((xOffset, stripeIdx) => (
             <mesh
               key={stripeIdx}
               rotation={[-Math.PI / 2, 0, 0]}
               position={[xOffset, 0.012, crossZ]}
             >
-              <planeGeometry args={[0.55, 3.2]} />
+              <planeGeometry args={[0.7, 3.6]} />
               <meshStandardMaterial
-                color="#3d4658"
+                color="#384254"
                 roughness={0.5}
                 emissive="#00F3FF"
-                emissiveIntensity={0.15}
+                emissiveIntensity={0.14}
               />
             </mesh>
           ))}
+
+          {/* Traffic Signal Posts at Curb Edges */}
+          <group position={[-(halfRoad + 0.5), 0.16, crossZ + 2.0]}>
+            <mesh position={[0, 1.3, 0]}>
+              <cylinderGeometry args={[0.045, 0.055, 2.6, 8]} />
+              <meshStandardMaterial color="#111" metalness={0.9} />
+            </mesh>
+            <mesh position={[0, 2.3, 0]}>
+              <boxGeometry args={[0.22, 0.46, 0.22]} />
+              <meshStandardMaterial color="#181818" />
+            </mesh>
+            <mesh position={[0.12, 2.4, 0]} rotation={[0, Math.PI / 2, 0]}>
+              <circleGeometry args={[0.065, 12]} />
+              <meshBasicMaterial color="#00F3FF" />
+            </mesh>
+            <mesh position={[0.12, 2.2, 0]} rotation={[0, Math.PI / 2, 0]}>
+              <circleGeometry args={[0.065, 12]} />
+              <meshBasicMaterial color="#FF0055" />
+            </mesh>
+          </group>
         </group>
       ))}
     </group>

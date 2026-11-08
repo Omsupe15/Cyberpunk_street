@@ -10,6 +10,7 @@ interface Skyscraper {
   width: number;
   height: number;
   depth: number;
+  archetype: 'pagoda' | 'curved' | 'pyramid' | 'truss';
   seed: number;
   hasBeacon?: boolean;
   beaconColor?: string;
@@ -28,59 +29,83 @@ export function MegastructureSkyline() {
 
   useEffect(() => {
     const list = [];
-    for (let i = 0; i < 6; i++) {
-      list.push(getSkyscraperFacadeTexture(i + 1));
+    for (let i = 0; i < 5; i++) {
+      list.push(getSkyscraperFacadeTexture(i));
     }
     setFacadeTextures(list);
   }, []);
 
-  // Generate building placement along both street flanks
+  // Distinct Skyscraper Archetypes pushed back into the midground (X = -28 to -34 and +28 to +34)
   const buildings: Skyscraper[] = useMemo(() => {
     const list: Skyscraper[] = [];
-    const zStops = [12, -10, -32, -54, -76, -98, -120, -142, -164, -186];
+    const zStops = [14, -12, -36, -60, -84, -108, -132, -156, -180];
 
-    // Left Flank Towers (X: -21 to -25)
+    // Left Flank Supertowers (X: -28m to -33m)
     zStops.forEach((z, idx) => {
-      const height = 50 + (idx * 7) % 35;
+      const height = 58 + (idx * 9) % 40;
+      const archetypes: ('pagoda' | 'curved' | 'pyramid' | 'truss')[] = [
+        'pagoda',
+        'curved',
+        'truss',
+        'pyramid',
+        'curved',
+        'pagoda',
+        'truss',
+        'pyramid',
+        'curved',
+      ];
       list.push({
-        x: -22 - (idx % 2) * 3,
+        x: -29 - (idx % 2) * 4,
         z: z,
-        width: 16 + (idx % 3) * 2,
+        width: 18 + (idx % 3) * 2,
         height,
-        depth: 18,
+        depth: 20,
+        archetype: archetypes[idx % archetypes.length],
         seed: idx % 5,
         hasBeacon: true,
         beaconColor: idx % 2 === 0 ? '#FF0055' : '#00F3FF',
         billboard:
           idx === 1
-            ? { text: 'CYBER-NETICS', sub: '生体サイバー // V9', color: '#00F3FF', y: 28 }
+            ? { text: 'NEO SHANGHAI FINANCIAL', sub: '新上海金融 // HQ 01', color: '#00F3FF', y: 32 }
             : idx === 4
-            ? { text: 'ASTRA LUX', sub: '高級アパレル // SECTOR 7', color: '#8A2BE2', y: 32 }
+            ? { text: 'VEGAS HORIZON RESORT', sub: 'CASINO & SUITES // 娯楽', color: '#FFAA00', y: 36 }
             : idx === 7
-            ? { text: 'SYNTH-CORP', sub: '電脳ブレイン // 01', color: '#05FFA1', y: 26 }
+            ? { text: 'QUANTUM DYNAMICS INC', sub: 'NEURAL LABS // 量子', color: '#FF0055', y: 30 }
             : undefined,
       });
     });
 
-    // Right Flank Towers (X: 21 to 25)
+    // Right Flank Supertowers (X: +28m to +33m)
     zStops.forEach((z, idx) => {
-      const height = 48 + ((idx + 2) * 6) % 38;
+      const height = 56 + ((idx + 2) * 8) % 42;
+      const archetypes: ('pagoda' | 'curved' | 'pyramid' | 'truss')[] = [
+        'curved',
+        'pyramid',
+        'pagoda',
+        'truss',
+        'pyramid',
+        'curved',
+        'pagoda',
+        'truss',
+        'pyramid',
+      ];
       list.push({
-        x: 22 + (idx % 2) * 3,
+        x: 29 + (idx % 2) * 4,
         z: z,
-        width: 16 + ((idx + 1) % 3) * 2,
+        width: 18 + ((idx + 1) % 3) * 2,
         height,
-        depth: 18,
-        seed: (idx + 3) % 5,
+        depth: 20,
+        archetype: archetypes[idx % archetypes.length],
+        seed: (idx + 2) % 5,
         hasBeacon: true,
         beaconColor: idx % 2 === 0 ? '#FFAA00' : '#FF0055',
         billboard:
           idx === 2
-            ? { text: 'ORBIT RECHARGE', sub: '宇宙カフェ // STN 01', color: '#FFAA00', y: 24 }
+            ? { text: 'ORBITAL RECHARGE CORP', sub: 'STATION 07 // 軌道', color: '#05FFA1', y: 28 }
             : idx === 5
-            ? { text: 'OFF-WORLD EXP', sub: '植民地移住 // AD-2077', color: '#00F3FF', y: 34 }
+            ? { text: 'ASTRA LUXURY TOWER', sub: 'PENTHOUSE RESIDENCES', color: '#8A2BE2', y: 38 }
             : idx === 8
-            ? { text: 'NOVA STASIS', sub: 'スリープポッド // 予約受付中', color: '#FF0055', y: 30 }
+            ? { text: 'CYBERNETIC LIFE CORP', sub: 'BIOMECH RESEARCH', color: '#00F3FF', y: 34 }
             : undefined,
       });
     });
@@ -91,9 +116,9 @@ export function MegastructureSkyline() {
   // Skybridges connecting skyscrapers high above the street
   const skybridges = useMemo(() => {
     return [
-      { z: -20, y: 34 },
-      { z: -86, y: 38 },
-      { z: -148, y: 32 },
+      { z: -20, y: 38 },
+      { z: -86, y: 44 },
+      { z: -148, y: 36 },
     ];
   }, []);
 
@@ -114,7 +139,7 @@ export function MegastructureSkyline() {
         const mesh = child as THREE.Mesh;
         const mat = mesh.material as THREE.MeshBasicMaterial;
         if (mat) {
-          mat.opacity = 0.85 + Math.sin(time * 3 + i) * 0.15;
+          mat.opacity = 0.88 + Math.sin(time * 3 + i) * 0.12;
         }
       });
     }
@@ -122,7 +147,7 @@ export function MegastructureSkyline() {
 
   return (
     <group>
-      {/* 1. Skyscraper Towers with Procedural PBR Office Facades & Realistic Rooftop Mechanicals */}
+      {/* 1. Skyscraper Towers with Distinct Architectural Archetypes */}
       {buildings.map((b, idx) => {
         const facingInward = b.x < 0 ? 1 : -1;
         const frontFaceX = facingInward * (b.width / 2 + 0.05);
@@ -134,7 +159,7 @@ export function MegastructureSkyline() {
             <mesh position={[0, b.height / 2, 0]} receiveShadow>
               <boxGeometry args={[b.width, b.height, b.depth]} />
               <meshStandardMaterial
-                color="#141720"
+                color="#10131c"
                 roughness={0.65}
                 metalness={0.5}
               />
@@ -153,45 +178,80 @@ export function MegastructureSkyline() {
                 metalness={0.8}
                 emissive="#ffffff"
                 emissiveMap={tex}
-                emissiveIntensity={0.35}
+                emissiveIntensity={0.45}
               />
             </mesh>
 
-            {/* Stepped Architectural Crown / Setback Penthouse Roof */}
-            <mesh position={[0, b.height + 2.5, 0]}>
-              <boxGeometry args={[b.width * 0.75, 5, b.depth * 0.75]} />
-              <meshStandardMaterial color="#0e1017" roughness={0.75} metalness={0.6} />
-            </mesh>
+            {/* Distinct Architectural Crowns based on Archetype */}
+            {b.archetype === 'pagoda' && (
+              // Jin Mao Stepped Pagoda Tower Crown
+              <group position={[0, b.height, 0]}>
+                {[0, 3, 6, 9].map((yStep, sIdx) => {
+                  const scale = 1.0 - sIdx * 0.18;
+                  return (
+                    <group key={`step-${sIdx}`} position={[0, yStep + 1.2, 0]}>
+                      <mesh>
+                        <boxGeometry args={[b.width * scale, 2.2, b.depth * scale]} />
+                        <meshStandardMaterial color="#1a1e2a" metalness={0.8} />
+                      </mesh>
+                      {/* Illuminated Golden Eaves Slat */}
+                      <mesh position={[0, 1.15, 0]}>
+                        <boxGeometry args={[b.width * (scale + 0.08), 0.1, b.depth * (scale + 0.08)]} />
+                        <meshBasicMaterial color="#FFAA00" />
+                      </mesh>
+                    </group>
+                  );
+                })}
+              </group>
+            )}
 
-            {/* Vertical Glowing Structural Corner Fin */}
-            <mesh position={[facingInward * (b.width / 2 + 0.08), b.height / 2, -b.depth * 0.45]}>
-              <boxGeometry args={[0.12, b.height * 0.98, 0.2]} />
-              <meshBasicMaterial color={b.x < 0 ? '#00F3FF' : '#FF0055'} />
-            </mesh>
+            {b.archetype === 'curved' && (
+              // Shanghai Tower Curved Aerodynamic Crown
+              <group position={[0, b.height + 4, 0]}>
+                <mesh>
+                  <cylinderGeometry args={[b.width * 0.25, b.width * 0.45, 8, 20]} />
+                  <meshStandardMaterial color="#00F3FF" transparent opacity={0.6} metalness={0.9} />
+                </mesh>
+                <mesh position={[0, 4.2, 0]}>
+                  <torusGeometry args={[b.width * 0.26, 0.08, 8, 24]} />
+                  <meshBasicMaterial color="#00F3FF" />
+                </mesh>
+              </group>
+            )}
 
-            {/* Rooftop Industrial HVAC Cooling Towers & Chillers */}
-            <group position={[0, b.height + 5.2, 0]}>
-              {/* Chiller Box */}
-              <mesh position={[-2, 0.8, -2]}>
-                <boxGeometry args={[3.2, 1.6, 2.4]} />
-                <meshStandardMaterial color="#22252a" roughness={0.7} metalness={0.5} />
-              </mesh>
-              {/* Cylindrical Cooling Towers */}
-              <mesh position={[2, 0.9, 1]}>
-                <cylinderGeometry args={[1.2, 1.2, 1.8, 16]} />
-                <meshStandardMaterial color="#1a1c22" roughness={0.6} metalness={0.6} />
-              </mesh>
-              {/* Ductwork Conduit Pipe */}
-              <mesh position={[0, 0.4, 0]} rotation={[0, 0, Math.PI / 2]}>
-                <cylinderGeometry args={[0.3, 0.3, 4, 8]} />
-                <meshStandardMaterial color="#333" metalness={0.9} />
-              </mesh>
-            </group>
+            {b.archetype === 'pyramid' && (
+              // Vegas Resort & Casino Pyramid Crown with Diamond Crest
+              <group position={[0, b.height + 4.5, 0]}>
+                <mesh rotation={[0, Math.PI / 4, 0]}>
+                  <coneGeometry args={[b.width * 0.55, 9, 4]} />
+                  <meshStandardMaterial color="#1f182c" metalness={0.85} roughness={0.2} />
+                </mesh>
+                {/* Glowing Diamond Tip */}
+                <mesh position={[0, 4.8, 0]}>
+                  <octahedronGeometry args={[0.9, 0]} />
+                  <meshBasicMaterial color="#FFAA00" />
+                </mesh>
+              </group>
+            )}
+
+            {b.archetype === 'truss' && (
+              // Monolith Structural Cross-Braced Truss Crown
+              <group position={[0, b.height + 4, 0]}>
+                <mesh>
+                  <boxGeometry args={[b.width * 0.7, 7, b.depth * 0.7]} />
+                  <meshBasicMaterial color="#FF0055" wireframe />
+                </mesh>
+                <mesh position={[0, 3.8, 0]}>
+                  <boxGeometry args={[b.width * 0.72, 0.2, b.depth * 0.72]} />
+                  <meshBasicMaterial color="#FF0055" />
+                </mesh>
+              </group>
+            )}
 
             {/* Rooftop Telecommunications Antenna Spire */}
-            <mesh position={[0, b.height + 10.5, 0]}>
-              <cylinderGeometry args={[0.06, 0.18, 11, 8]} />
-              <meshStandardMaterial color="#888" metalness={0.9} />
+            <mesh position={[0, b.height + 15.5, 0]}>
+              <cylinderGeometry args={[0.06, 0.2, 14, 8]} />
+              <meshStandardMaterial color="#777" metalness={0.9} />
             </mesh>
           </group>
         );
@@ -213,30 +273,30 @@ export function MegastructureSkyline() {
               >
                 {/* Structural Steel Truss Mounting Frame */}
                 <mesh position={[0, 0, -0.1]}>
-                  <boxGeometry args={[9.8, 4.8, 0.2]} />
-                  <meshStandardMaterial color="#161820" metalness={0.9} roughness={0.3} />
+                  <boxGeometry args={[11.2, 5.2, 0.2]} />
+                  <meshStandardMaterial color="#14161e" metalness={0.9} roughness={0.3} />
                 </mesh>
                 {/* Outer Hologram Support Cage */}
                 <mesh position={[0, 0, -0.04]}>
-                  <planeGeometry args={[9.5, 4.5]} />
+                  <planeGeometry args={[10.8, 4.8]} />
                   <meshBasicMaterial color={b.billboard!.color} wireframe />
                 </mesh>
                 {/* High-Resolution Emissive Billboard Face */}
                 <mesh>
-                  <planeGeometry args={[9.2, 4.2]} />
+                  <planeGeometry args={[10.5, 4.5]} />
                   <meshStandardMaterial
-                    color="#090c14"
+                    color="#080a12"
                     emissive={b.billboard!.color}
-                    emissiveIntensity={0.65}
+                    emissiveIntensity={0.7}
                     roughness={0.2}
                   />
                 </mesh>
-                {/* Realistic Controlled Point Light casting soft billboard color */}
+                {/* Controlled Point Light casting soft billboard color */}
                 <pointLight
-                  position={[0, 0, 1.2]}
+                  position={[0, 0, 1.5]}
                   color={b.billboard!.color}
                   intensity={1.8}
-                  distance={14}
+                  distance={16}
                   decay={2}
                 />
               </group>
@@ -247,23 +307,20 @@ export function MegastructureSkyline() {
       {/* 3. Illuminated Skybridges with Structural Trusses */}
       {skybridges.map((sb, sbIdx) => (
         <group key={`skybridge-${sbIdx}`} position={[0, sb.y, sb.z]}>
-          {/* Main Enclosed Bridge Truss */}
           <mesh>
-            <boxGeometry args={[38, 3.4, 4.4]} />
-            <meshStandardMaterial color="#121520" roughness={0.5} metalness={0.8} />
+            <boxGeometry args={[56, 3.8, 4.6]} />
+            <meshStandardMaterial color="#10131d" roughness={0.5} metalness={0.8} />
           </mesh>
-          {/* Continuous Window Galleries with Interior Warm Glow */}
-          <mesh position={[0, 0, 2.22]}>
-            <planeGeometry args={[36, 1.5]} />
+          <mesh position={[0, 0, 2.32]}>
+            <planeGeometry args={[54, 1.6]} />
             <meshBasicMaterial color="#00F3FF" transparent opacity={0.6} />
           </mesh>
-          <mesh position={[0, 0, -2.22]} rotation={[0, Math.PI, 0]}>
-            <planeGeometry args={[36, 1.5]} />
+          <mesh position={[0, 0, -2.32]} rotation={[0, Math.PI, 0]}>
+            <planeGeometry args={[54, 1.6]} />
             <meshBasicMaterial color="#00F3FF" transparent opacity={0.6} />
           </mesh>
-          {/* Underbridge Magenta Safety Rail Light */}
-          <mesh position={[0, -1.72, 0]}>
-            <boxGeometry args={[36, 0.06, 4.4]} />
+          <mesh position={[0, -1.92, 0]}>
+            <boxGeometry args={[54, 0.08, 4.6]} />
             <meshBasicMaterial color="#FF0055" />
           </mesh>
         </group>
@@ -272,8 +329,8 @@ export function MegastructureSkyline() {
       {/* 4. Rooftop Aviation Hazard Strobes */}
       <group ref={beaconLightsRef}>
         {buildings.map((b, idx) => (
-          <mesh key={`beacon-${idx}`} position={[b.x, b.height + 16.2, b.z]}>
-            <sphereGeometry args={[0.35, 8, 8]} />
+          <mesh key={`beacon-${idx}`} position={[b.x, b.height + 22.5, b.z]}>
+            <sphereGeometry args={[0.4, 8, 8]} />
             <meshBasicMaterial color={b.beaconColor || '#FF0055'} transparent opacity={1} />
           </mesh>
         ))}

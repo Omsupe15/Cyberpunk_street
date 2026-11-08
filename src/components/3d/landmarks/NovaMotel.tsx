@@ -1,8 +1,9 @@
 'use client';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import { LANDMARKS } from '@/lib/constants';
+import { getVerticalSignTexture } from '@/lib/proceduralTextures';
 
 export function NovaMotel() {
   const elevatorRef = useRef<THREE.Group>(null);
@@ -10,6 +11,19 @@ export function NovaMotel() {
   const vacancySignRef = useRef<THREE.Mesh>(null);
   const radarDishRef = useRef<THREE.Group>(null);
   const elevatorLightRef = useRef<THREE.PointLight>(null);
+
+  const [vertSignTex, setVertSignTex] = useState<THREE.CanvasTexture | null>(null);
+
+  useEffect(() => {
+    setVertSignTex(
+      getVerticalSignTexture(
+        ['NOVA', 'STASIS', 'MOTEL'],
+        '新星ホテル // 24H',
+        '#FF0055',
+        '#FFAA00'
+      )
+    );
+  }, []);
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
@@ -23,12 +37,12 @@ export function NovaMotel() {
 
     // Elevator interior subtle light
     if (elevatorLightRef.current) {
-      elevatorLightRef.current.intensity = 1.2 + Math.sin(time * 6) * 0.2;
+      elevatorLightRef.current.intensity = 1.4 + Math.sin(time * 6) * 0.2;
     }
 
     // 2. Pulse vertical magenta neon sign
     if (neonSignPulseRef.current) {
-      neonSignPulseRef.current.intensity = 2.8 + Math.sin(time * 3.0) * 0.5;
+      neonSignPulseRef.current.intensity = 3.8 + Math.sin(time * 3.0) * 0.5;
     }
 
     // 3. Intermittently flicker the "NO VACANCY" neon sign
@@ -45,28 +59,36 @@ export function NovaMotel() {
   });
 
   return (
-    <group position={[8.0, 0, LANDMARKS.MOTEL.z]}>
+    <group position={[LANDMARKS.MOTEL.x, 0, LANDMARKS.MOTEL.z]}>
       {/* 1. Towering Brutalist Stasis Motel Tower (Height: 16.5m) */}
       <mesh position={[0, 8.25, 0]} receiveShadow>
         <boxGeometry args={[5.4, 16.5, 12.5]} />
-        <meshStandardMaterial color="#121018" roughness={0.45} metalness={0.7} />
+        <meshStandardMaterial color="#100e16" roughness={0.45} metalness={0.7} />
       </mesh>
+
+      {/* Vertical Cyan Neon Edge Ribbons on Tower Corners */}
+      {[-6.2, 6.2].map((zEdge, idx) => (
+        <mesh key={`ribbon-${idx}`} position={[-2.72, 8.25, zEdge]}>
+          <boxGeometry args={[0.06, 16.5, 0.08]} />
+          <meshBasicMaterial color="#00F3FF" />
+        </mesh>
+      ))}
 
       {/* Stepped Art-Deco Roof Crown */}
       <mesh position={[0, 16.8, 0]}>
         <boxGeometry args={[4.4, 0.6, 11.5]} />
-        <meshStandardMaterial color="#1c1826" metalness={0.8} roughness={0.3} />
+        <meshStandardMaterial color="#1a1624" metalness={0.8} roughness={0.3} />
       </mesh>
       <mesh position={[0, 17.3, 0]}>
         <boxGeometry args={[3.4, 0.4, 10.0]} />
-        <meshStandardMaterial color="#252030" metalness={0.8} roughness={0.3} />
+        <meshStandardMaterial color="#221e2c" metalness={0.8} roughness={0.3} />
       </mesh>
 
       {/* Rooftop Communications Radar Dish & Antennas */}
       <group ref={radarDishRef} position={[0.5, 17.8, -3.0]}>
         <mesh rotation={[0.4, 0, 0]}>
           <cylinderGeometry args={[0.85, 0.1, 0.28, 16]} />
-          <meshStandardMaterial color="#2e283a" metalness={0.9} roughness={0.2} />
+          <meshStandardMaterial color="#2a2436" metalness={0.9} roughness={0.2} />
         </mesh>
         <mesh position={[0, 0.28, 0.2]} rotation={[0.4, 0, 0]}>
           <cylinderGeometry args={[0.035, 0.035, 0.75, 8]} />
@@ -75,14 +97,14 @@ export function NovaMotel() {
       </group>
       <mesh position={[0.5, 18.5, 3.5]}>
         <cylinderGeometry args={[0.05, 0.1, 2.5, 8]} />
-        <meshStandardMaterial color="#888" metalness={0.9} />
+        <meshStandardMaterial color="#777" metalness={0.9} />
       </mesh>
       <mesh position={[0.5, 19.8, 3.5]}>
         <sphereGeometry args={[0.14, 8, 8]} />
         <meshBasicMaterial color="#FF0055" />
       </mesh>
 
-      {/* 2. Grid of 16 Modular Hexagonal Stasis Sleep Pods */}
+      {/* 2. Grid of 16 Modular Hexagonal Stasis Sleep Pods with Locking Pins & Telemetry */}
       {[-4.0, -1.35, 1.35, 4.0].map((zOffset, colIdx) =>
         [3.8, 6.8, 9.8, 12.8].map((yOffset, rowIdx) => {
           const stateType = (colIdx * 2 + rowIdx) % 4;
@@ -95,14 +117,27 @@ export function NovaMotel() {
               {/* Pod Outer Hex Metal Bezel */}
               <mesh rotation={[0, Math.PI / 2, 0]}>
                 <ringGeometry args={[0.56, 0.76, 6]} />
-                <meshStandardMaterial color="#1e1a26" metalness={0.85} roughness={0.25} />
+                <meshStandardMaterial color="#1a1722" metalness={0.85} roughness={0.25} />
               </mesh>
+
+              {/* 3 Radial Hatch Locking Pins */}
+              {[0, (Math.PI * 2) / 3, (Math.PI * 4) / 3].map((angle, pinIdx) => (
+                <mesh
+                  key={`pin-${pinIdx}`}
+                  position={[-0.01, Math.sin(angle) * 0.65, Math.cos(angle) * 0.65]}
+                  rotation={[angle, 0, 0]}
+                >
+                  <boxGeometry args={[0.04, 0.06, 0.08]} />
+                  <meshStandardMaterial color="#555" metalness={0.95} />
+                </mesh>
+              ))}
+
               {/* Recessed Capsule Chamber */}
               <mesh position={[-0.03, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
                 <circleGeometry args={[0.54, 6]} />
                 <meshBasicMaterial color={podColor} transparent opacity={isOccupied ? 0.35 : 0.8} />
               </mesh>
-              {/* Internal Biometric Ring */}
+              {/* Internal Biometric Vitals Pulse Ring */}
               <mesh position={[-0.04, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
                 <ringGeometry args={[0.24, 0.36, 16]} />
                 <meshBasicMaterial color="#FFFFFF" transparent opacity={isOccupied ? 0.38 : 0.12} />
@@ -112,44 +147,50 @@ export function NovaMotel() {
                 <sphereGeometry args={[0.04, 6, 6]} />
                 <meshBasicMaterial color={isOccupied ? '#FF0055' : '#05FFA1'} />
               </mesh>
+              {/* Vitals Telemetry Display Strip */}
+              <mesh position={[-0.01, -0.65, 0]} rotation={[0, Math.PI / 2, 0]}>
+                <planeGeometry args={[0.3, 0.06]} />
+                <meshBasicMaterial color={podColor} />
+              </mesh>
             </group>
           );
         })
       )}
 
-      {/* 3. Massive 12-Meter Vertical Neon Sign: "NOVA MOTEL // 新星" */}
+      {/* 3. Massive 12-Meter Vertical Bilingual Neon Tower Sign */}
       <group position={[-2.85, 9.4, 0]}>
-        <mesh position={[-0.08, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
-          <planeGeometry args={[1.8, 12.8]} />
-          <meshStandardMaterial color="#0a0810" metalness={0.95} roughness={0.2} />
-        </mesh>
-        <mesh position={[-0.03, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
-          <planeGeometry args={[1.95, 13.0]} />
-          <meshBasicMaterial color="#00F3FF" wireframe />
-        </mesh>
-        <mesh position={[0, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
-          <planeGeometry args={[1.6, 12.4]} />
-          <meshBasicMaterial color="#FF0055" />
-        </mesh>
-        <mesh position={[0.02, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
-          <planeGeometry args={[0.16, 12.0]} />
-          <meshBasicMaterial color="#FFAA00" />
+        {/* Steel Lattice Mast */}
+        <mesh position={[-0.12, 0, 0]}>
+          <boxGeometry args={[0.1, 13.0, 0.4]} />
+          <meshStandardMaterial color="#222" metalness={0.95} />
         </mesh>
 
-        {/* Horizontal Neon Floor Dividers */}
-        {[-4.5, -1.5, 1.5, 4.5].map((yPos, idx) => (
-          <mesh key={`seg-${idx}`} position={[0.03, yPos, 0]} rotation={[0, -Math.PI / 2, 0]}>
-            <planeGeometry args={[1.5, 0.06]} />
-            <meshBasicMaterial color="#00F3FF" />
-          </mesh>
-        ))}
+        <mesh position={[-0.08, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
+          <planeGeometry args={[2.0, 12.8]} />
+          <meshStandardMaterial color="#08060d" metalness={0.95} roughness={0.2} />
+        </mesh>
+        <mesh position={[-0.03, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
+          <planeGeometry args={[2.15, 13.0]} />
+          <meshBasicMaterial color="#00F3FF" wireframe />
+        </mesh>
+        {/* Faceplate with Vertical Bilingual Neon Canvas Texture */}
+        <mesh position={[0, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
+          <planeGeometry args={[1.8, 12.4]} />
+          <meshStandardMaterial
+            map={vertSignTex || undefined}
+            emissive="#FF0055"
+            emissiveMap={vertSignTex || undefined}
+            emissiveIntensity={0.95}
+            roughness={0.2}
+          />
+        </mesh>
       </group>
 
       {/* 4. Art-Deco Cantilevered Entrance Canopy & Ground Lobby */}
       <group position={[-2.85, 3.2, 0]}>
         <mesh position={[-0.5, 0, 0]} receiveShadow>
           <boxGeometry args={[2.4, 0.35, 8.0]} />
-          <meshStandardMaterial color="#251b14" metalness={0.8} roughness={0.25} />
+          <meshStandardMaterial color="#221812" metalness={0.8} roughness={0.25} />
         </mesh>
         {/* Recessed Warm Tungsten Slabs */}
         <mesh position={[-0.5, -0.19, 0]}>
@@ -166,25 +207,38 @@ export function NovaMotel() {
         {/* Ground Floor Recessed Lobby Glass Windows */}
         <mesh position={[0.1, -1.7, 0]} rotation={[0, -Math.PI / 2, 0]}>
           <planeGeometry args={[7.6, 2.6]} />
-          <meshStandardMaterial color="#FFAA00" roughness={0.1} metalness={0.8} transparent opacity={0.3} />
+          <meshStandardMaterial color="#FFAA00" roughness={0.1} metalness={0.8} transparent opacity={0.28} />
         </mesh>
-        {/* Lobby Interior Reception Counter Glow */}
+        {/* Lobby Interior Reception Counter Glow & Automated Terminal */}
         <mesh position={[0.8, -2.4, 0]}>
           <boxGeometry args={[1.2, 0.9, 3.5]} />
-          <meshStandardMaterial color="#14111a" roughness={0.4} />
+          <meshStandardMaterial color="#120f18" roughness={0.4} />
         </mesh>
         <mesh position={[0.8, -1.9, 0]}>
           <boxGeometry args={[1.3, 0.06, 3.6]} />
           <meshBasicMaterial color="#FFAA00" />
         </mesh>
+        {/* Holographic Check-In Kiosk */}
+        <mesh position={[0.4, -2.1, 1.2]} rotation={[0, -Math.PI / 2, 0]}>
+          <planeGeometry args={[0.4, 0.6]} />
+          <meshBasicMaterial color="#00F3FF" transparent opacity={0.8} />
+        </mesh>
       </group>
 
-      {/* 5. Exterior Glass Elevator Shaft with Moving Cabin */}
+      {/* 5. Exterior Glass Elevator Shaft with Moving Cabin & Pulley Rig */}
       <group position={[-2.4, 0, -5.2]}>
+        {/* Vertical Steel I-Beam Guide Rails */}
         <mesh position={[0, 8.2, 0]}>
           <cylinderGeometry args={[0.06, 0.06, 16.5, 8]} />
           <meshStandardMaterial color="#555" metalness={0.95} roughness={0.2} />
         </mesh>
+        {/* Top Cable Hoist Pulley Drum */}
+        <mesh position={[0, 16.5, 0]} rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[0.3, 0.3, 0.2, 16]} />
+          <meshStandardMaterial color="#222" metalness={0.95} />
+        </mesh>
+
+        {/* Transparent Cylindrical Glass Shaft */}
         <mesh position={[0, 8.2, 0]}>
           <cylinderGeometry args={[0.72, 0.72, 16.5, 12]} />
           <meshStandardMaterial
@@ -192,7 +246,7 @@ export function NovaMotel() {
             roughness={0.1}
             metalness={0.8}
             transparent
-            opacity={0.25}
+            opacity={0.22}
             wireframe
           />
         </mesh>
@@ -201,16 +255,16 @@ export function NovaMotel() {
         <group ref={elevatorRef} position={[0, 2.0, 0]}>
           <mesh>
             <cylinderGeometry args={[0.64, 0.64, 1.4, 16]} />
-            <meshStandardMaterial color="#14161c" roughness={0.3} metalness={0.85} />
+            <meshStandardMaterial color="#12141a" roughness={0.3} metalness={0.85} />
           </mesh>
           <mesh position={[0, 0.1, 0]}>
             <cylinderGeometry args={[0.66, 0.66, 0.85, 16, 1, true, 0, Math.PI]} />
-            <meshStandardMaterial color="#00F3FF" roughness={0.05} transparent opacity={0.45} />
+            <meshStandardMaterial color="#00F3FF" roughness={0.05} transparent opacity={0.4} />
           </mesh>
           {/* Passenger Silhouette Inside Elevator */}
           <mesh position={[0, 0.05, 0]}>
             <cylinderGeometry args={[0.15, 0.2, 0.75, 8]} />
-            <meshBasicMaterial color="#06080d" />
+            <meshBasicMaterial color="#04060a" />
           </mesh>
           <mesh position={[0, -0.58, 0]}>
             <cylinderGeometry args={[0.58, 0.58, 0.08, 16]} />
@@ -220,21 +274,24 @@ export function NovaMotel() {
             <torusGeometry args={[0.6, 0.03, 8, 18]} />
             <meshBasicMaterial color="#00F3FF" />
           </mesh>
-          <pointLight ref={elevatorLightRef} position={[0, 0, 0]} color="#FFAA00" intensity={1.2} distance={6} decay={2} />
+          <pointLight ref={elevatorLightRef} position={[0, 0, 0]} color="#FFAA00" intensity={1.4} distance={6} decay={2} />
         </group>
       </group>
 
-      {/* 6. Realistic Controlled Lighting (Decay = 2, prevents scene blowout) */}
+      {/* 6. Dedicated Architectural Facade Floodlights (Decay = 2) */}
+      {/* 12m Vertical Sign & Upper Tower Wash */}
       <pointLight
         ref={neonSignPulseRef}
-        position={[-3.4, 9.4, 0]}
+        position={[-3.8, 10.0, 0]}
         color="#FF0055"
-        intensity={2.8}
-        distance={18}
+        intensity={3.8}
+        distance={20}
         decay={2}
       />
-      <pointLight position={[-3.2, 3.0, 0]} color="#FFAA00" intensity={2.0} distance={12} decay={2} />
-      <pointLight position={[-2.8, 13.0, 3.5]} color="#00F3FF" intensity={1.5} distance={10} decay={2} />
+      {/* Ground Lobby & Sleep Pods Ambient Wash */}
+      <pointLight position={[-3.6, 3.2, 0]} color="#FFAA00" intensity={3.0} distance={15} decay={2} />
+      {/* Stasis Pod Upper Flood */}
+      <pointLight position={[-3.6, 8.5, 2.0]} color="#00F3FF" intensity={2.6} distance={14} decay={2} />
     </group>
   );
 }

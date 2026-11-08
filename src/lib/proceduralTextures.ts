@@ -5,10 +5,11 @@ import * as THREE from 'three';
 const textureCache = new Map<string, THREE.CanvasTexture>();
 
 /**
- * Procedural Wet Asphalt Texture with aggregate noise and lane wear
+ * Procedural 14m 4-Lane Grand Boulevard Asphalt Texture
+ * Features double yellow centerline, dashed white lane lines, and road wear
  */
 export function getAsphaltTexture(): THREE.CanvasTexture {
-  const key = 'asphalt_road';
+  const key = 'asphalt_road_14m';
   if (textureCache.has(key)) return textureCache.get(key)!;
 
   const canvas = document.createElement('canvas');
@@ -17,39 +18,75 @@ export function getAsphaltTexture(): THREE.CanvasTexture {
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    // Base dark wet asphalt tone
-    ctx.fillStyle = '#181b22';
+    // Base dark wet slate asphalt
+    ctx.fillStyle = '#1c202a';
     ctx.fillRect(0, 0, 1024, 1024);
 
-    // Fine aggregate noise
+    // Fine asphalt aggregate noise
     const imgData = ctx.getImageData(0, 0, 1024, 1024);
     const data = imgData.data;
     for (let i = 0; i < data.length; i += 4) {
-      const noise = (Math.random() - 0.5) * 22;
+      const noise = (Math.random() - 0.5) * 18;
       data[i] = Math.min(255, Math.max(0, data[i] + noise));
       data[i + 1] = Math.min(255, Math.max(0, data[i + 1] + noise));
-      data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + noise + 2)); // slight cool blue tint
+      data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + noise + 2));
     }
     ctx.putImageData(imgData, 0, 0);
 
-    // Subtle tire wear lanes (darker, smoother strips)
-    ctx.fillStyle = 'rgba(12, 14, 18, 0.4)';
-    ctx.fillRect(200, 0, 160, 1024);
-    ctx.fillRect(664, 0, 160, 1024);
+    // 4 Traffic Lane Tire Wear Strips (Subtle dark sheen)
+    ctx.fillStyle = 'rgba(12, 14, 20, 0.4)';
+    ctx.fillRect(110, 0, 140, 1024); // Lane 1
+    ctx.fillRect(330, 0, 140, 1024); // Lane 2
+    ctx.fillRect(554, 0, 140, 1024); // Lane 3
+    ctx.fillRect(774, 0, 140, 1024); // Lane 4
 
-    // Subtle asphalt seam cracks
-    ctx.strokeStyle = 'rgba(8, 10, 14, 0.7)';
-    ctx.lineWidth = 1.5;
+    // Center Double Solid Yellow Median Lines
+    ctx.strokeStyle = '#FFAA00';
+    ctx.lineWidth = 6;
     ctx.beginPath();
-    ctx.moveTo(512, 0);
-    ctx.lineTo(512, 1024);
+    ctx.moveTo(506, 0);
+    ctx.lineTo(506, 1024);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(518, 0);
+    ctx.lineTo(518, 1024);
+    ctx.stroke();
+
+    // Dashed White Lane Divider Lines (Lanes 1-2 and Lanes 3-4)
+    ctx.strokeStyle = '#e2f0ff';
+    ctx.lineWidth = 4;
+    ctx.setLineDash([48, 48]);
+
+    ctx.beginPath();
+    ctx.moveTo(256, 0);
+    ctx.lineTo(256, 1024);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(768, 0);
+    ctx.lineTo(768, 1024);
+    ctx.stroke();
+
+    // Solid White Outer Curb Shoulder Lines
+    ctx.setLineDash([]);
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(32, 0);
+    ctx.lineTo(32, 1024);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(992, 0);
+    ctx.lineTo(992, 1024);
     ctx.stroke();
   }
 
   const texture = new THREE.CanvasTexture(canvas);
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(2, 24);
+  texture.repeat.set(1, 24);
   textureCache.set(key, texture);
   return texture;
 }
@@ -58,7 +95,7 @@ export function getAsphaltTexture(): THREE.CanvasTexture {
  * Concrete Sidewalk Paving Slabs Texture
  */
 export function getSidewalkTexture(): THREE.CanvasTexture {
-  const key = 'sidewalk_paving';
+  const key = 'sidewalk_paving_4_5m';
   if (textureCache.has(key)) return textureCache.get(key)!;
 
   const canvas = document.createElement('canvas');
@@ -67,7 +104,7 @@ export function getSidewalkTexture(): THREE.CanvasTexture {
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    ctx.fillStyle = '#222630';
+    ctx.fillStyle = '#222632';
     ctx.fillRect(0, 0, 512, 512);
 
     // Grain
@@ -77,12 +114,12 @@ export function getSidewalkTexture(): THREE.CanvasTexture {
       const noise = (Math.random() - 0.5) * 16;
       data[i] = Math.min(255, Math.max(0, data[i] + noise));
       data[i + 1] = Math.min(255, Math.max(0, data[i + 1] + noise));
-      data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + noise + 3));
+      data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + noise + 2));
     }
     ctx.putImageData(imgData, 0, 0);
 
     // Paving slab grid joints
-    ctx.strokeStyle = '#12141a';
+    ctx.strokeStyle = '#10131a';
     ctx.lineWidth = 3;
     ctx.strokeRect(0, 0, 256, 256);
     ctx.strokeRect(256, 0, 256, 256);
@@ -101,73 +138,104 @@ export function getSidewalkTexture(): THREE.CanvasTexture {
   const texture = new THREE.CanvasTexture(canvas);
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(3, 40);
+  texture.repeat.set(4, 36);
   textureCache.set(key, texture);
   return texture;
 }
 
 /**
- * Realistic Skyscraper Office Window Matrix with randomized illuminated rooms
+ * High-Definition Skyscraper Facade Texture with English Header & Lit Office Windows
  */
-export function getSkyscraperFacadeTexture(seed = 1): THREE.CanvasTexture {
-  const key = `facade_${seed}`;
+export function getSkyscraperFacadeTexture(typeIndex = 0): THREE.CanvasTexture {
+  const key = `facade_archetype_${typeIndex}`;
   if (textureCache.has(key)) return textureCache.get(key)!;
 
   const canvas = document.createElement('canvas');
-  canvas.width = 512;
-  canvas.height = 1024;
+  canvas.width = 1024;
+  canvas.height = 2048;
   const ctx = canvas.getContext('2d');
 
-  if (ctx) {
-    // Structural curtain wall panels (dark obsidian/gunmetal)
-    ctx.fillStyle = '#10131b';
-    ctx.fillRect(0, 0, 512, 1024);
+  const headers = [
+    { eng: 'NEO SHANGHAI FINANCIAL', sub: '新上海金融 // HQ 01', color: '#00F3FF' },
+    { eng: 'VEGAS HORIZON RESORT', sub: 'CASINO & HOTEL // 娯楽', color: '#FFAA00' },
+    { eng: 'ORBITAL RECHARGE CORP', sub: 'STATION 07 // 軌道', color: '#05FFA1' },
+    { eng: 'QUANTUM DYNAMICS INC', sub: 'NEURAL LABS // 量子', color: '#FF0055' },
+    { eng: 'ASTRA LUXURY TOWER', sub: 'PENTHOUSE RESIDENCES', color: '#8A2BE2' },
+  ];
 
-    const cols = 12;
-    const rows = 32;
-    const padX = 8;
-    const padY = 6;
-    const cellW = (512 - padX * (cols + 1)) / cols;
-    const cellH = (1024 - padY * (rows + 1)) / rows;
+  const headerInfo = headers[typeIndex % headers.length];
+
+  if (ctx) {
+    // Structural curtain wall (dark graphite / obsidian)
+    ctx.fillStyle = '#0c0f18';
+    ctx.fillRect(0, 0, 1024, 2048);
+
+    // Prominent Crown Marquee Signboard on Top Floors
+    ctx.fillStyle = '#080a12';
+    ctx.fillRect(60, 40, 904, 160);
+    ctx.strokeStyle = headerInfo.color;
+    ctx.lineWidth = 6;
+    ctx.strokeRect(60, 40, 904, 160);
+
+    // English Corporate Marquee Text
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '900 48px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(headerInfo.eng, 512, 115);
+
+    // Asian Subtext
+    ctx.fillStyle = headerInfo.color;
+    ctx.font = 'bold 26px sans-serif';
+    ctx.fillText(headerInfo.sub, 512, 165);
+
+    // Office Window Matrix across 40 floors
+    const cols = 16;
+    const rows = 40;
+    const startY = 240;
+    const padX = 12;
+    const padY = 8;
+    const cellW = (1024 - padX * (cols + 1)) / cols;
+    const cellH = (2048 - startY - padY * (rows + 1)) / rows;
 
     for (let r = 0; r < rows; r++) {
-      // Spandrel beam horizontal line
-      ctx.fillStyle = '#0a0c12';
-      ctx.fillRect(0, r * (cellH + padY), 512, padY);
+      // Horizontal structural spandrel beam
+      ctx.fillStyle = '#060810';
+      ctx.fillRect(0, startY + r * (cellH + padY), 1024, padY);
+
+      // Aluminum spandrel highlight
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+      ctx.fillRect(0, startY + r * (cellH + padY) + 1, 1024, 1.5);
 
       for (let c = 0; c < cols; c++) {
         const x = padX + c * (cellW + padX);
-        const y = padY + r * (cellH + padY);
+        const y = startY + padY + r * (cellH + padY);
 
-        // Window frame
-        ctx.fillStyle = '#080a0f';
+        ctx.fillStyle = '#04060a';
         ctx.fillRect(x - 1, y - 1, cellW + 2, cellH + 2);
 
-        // Deterministic room lighting based on coordinates and seed
-        const hash = Math.sin(r * 43.1 + c * 17.7 + seed * 91.3) * 10000;
+        // Deterministic room lighting pattern
+        const hash = Math.sin(r * 47.3 + c * 19.1 + typeIndex * 89.7) * 10000;
         const rand = hash - Math.floor(hash);
 
-        if (rand > 0.52) {
-          // Lit office room
+        if (rand > 0.44) {
           if (rand > 0.88) {
-            ctx.fillStyle = '#d8f0ff'; // Cool corporate daylight LED
-          } else if (rand > 0.74) {
-            ctx.fillStyle = '#ffdfa0'; // Warm late-night desk lamp
-          } else if (rand > 0.62) {
+            ctx.fillStyle = '#e6f4ff'; // Cool corporate LED
+          } else if (rand > 0.70) {
+            ctx.fillStyle = '#ffdba0'; // Warm late-night desk lamp
+          } else if (rand > 0.58) {
             ctx.fillStyle = '#00f3ff'; // Cyber cyan lab terminal
           } else {
-            ctx.fillStyle = '#ff66aa'; // Neon purple/magenta penthouse accent
+            ctx.fillStyle = '#ff60aa'; // Neon magenta accent
           }
           ctx.fillRect(x, y, cellW, cellH);
 
-          // Horizontal window blinds shadow
-          ctx.fillStyle = 'rgba(0, 0, 0, 0.28)';
-          for (let b = 4; b < cellH; b += 4) {
-            ctx.fillRect(x, y + b, cellW, 1.2);
+          // Horizontal window blinds
+          ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
+          for (let b = 5; b < cellH; b += 5) {
+            ctx.fillRect(x, y + b, cellW, 1.5);
           }
         } else {
-          // Dark unlit office reflecting night sky
-          ctx.fillStyle = '#121622';
+          ctx.fillStyle = '#0d111c';
           ctx.fillRect(x, y, cellW, cellH);
         }
       }
@@ -189,31 +257,29 @@ export function getCorrugatedMetalTexture(): THREE.CanvasTexture {
   if (textureCache.has(key)) return textureCache.get(key)!;
 
   const canvas = document.createElement('canvas');
-  canvas.width = 256;
-  canvas.height = 256;
+  canvas.width = 512;
+  canvas.height = 512;
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    ctx.fillStyle = '#222521';
-    ctx.fillRect(0, 0, 256, 256);
+    ctx.fillStyle = '#1c1f1b';
+    ctx.fillRect(0, 0, 512, 512);
 
-    // Vertical corrugated ridges
-    for (let x = 0; x < 256; x += 16) {
-      const grad = ctx.createLinearGradient(x, 0, x + 16, 0);
-      grad.addColorStop(0, '#161915');
-      grad.addColorStop(0.5, '#353a33');
-      grad.addColorStop(1, '#161915');
+    for (let x = 0; x < 512; x += 32) {
+      const grad = ctx.createLinearGradient(x, 0, x + 32, 0);
+      grad.addColorStop(0, '#111410');
+      grad.addColorStop(0.5, '#30352e');
+      grad.addColorStop(1, '#111410');
       ctx.fillStyle = grad;
-      ctx.fillRect(x, 0, 16, 256);
+      ctx.fillRect(x, 0, 32, 512);
     }
 
-    // Rust oxidation spots
-    ctx.fillStyle = 'rgba(90, 45, 20, 0.35)';
-    for (let i = 0; i < 20; i++) {
-      const rx = Math.random() * 256;
-      const ry = Math.random() * 256;
+    ctx.fillStyle = 'rgba(85, 42, 18, 0.4)';
+    for (let i = 0; i < 30; i++) {
+      const rx = Math.random() * 512;
+      const ry = Math.random() * 512;
       ctx.beginPath();
-      ctx.arc(rx, ry, 6 + Math.random() * 12, 0, Math.PI * 2);
+      ctx.arc(rx, ry, 8 + Math.random() * 16, 0, Math.PI * 2);
       ctx.fill();
     }
   }
@@ -227,61 +293,59 @@ export function getCorrugatedMetalTexture(): THREE.CanvasTexture {
 }
 
 /**
- * Green Phosphor CRT Terminal Scanline Screen
+ * Green/Amber Phosphor CRT Terminal Scanline Screen (English System Telemetry)
  */
 export function getCrtTerminalTexture(type: 'green' | 'amber' = 'green'): THREE.CanvasTexture {
-  const key = `crt_${type}`;
+  const key = `crt_en_${type}`;
   if (textureCache.has(key)) return textureCache.get(key)!;
 
   const canvas = document.createElement('canvas');
-  canvas.width = 256;
-  canvas.height = 256;
+  canvas.width = 512;
+  canvas.height = 512;
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    // Screen background
-    ctx.fillStyle = type === 'green' ? '#04140a' : '#140c04';
-    ctx.fillRect(0, 0, 256, 256);
+    ctx.fillStyle = type === 'green' ? '#031008' : '#120a03';
+    ctx.fillRect(0, 0, 512, 512);
 
-    // Phosphor text lines
     ctx.fillStyle = type === 'green' ? '#05ffa1' : '#ffaa00';
-    ctx.font = 'bold 11px monospace';
+    ctx.font = 'bold 20px monospace';
 
     const lines =
       type === 'green'
         ? [
-            'SYS_BOOT v9.42 [OK]',
-            'MEM_ALLOC: 0x8F9C4',
-            'CYBER_NEURAL: ONLINE',
-            'SEC_LVL: BLACK_MARKET',
-            '>> DEBRIS RECOVERY',
-            'SCANNING CHIPS... 98%',
-            'DATA: 104.2 TB LINKED',
+            'SYSTEM BOOT v9.42 [ONLINE]',
+            'MEMORY ALLOC: 0x8F9C4 [OK]',
+            'CYBER-NEURAL LINK: ESTABLISHED',
+            'SECURITY: BLACK MARKET ACTIVE',
+            '>> DEBRIS RECOVERY IN PROGRESS',
+            'SCANNING MICRO-CHIPS: 98.4%',
+            'DATA LINKED: 104.2 TB BUFFER',
             'WARNING: TRACE DETECTED',
-            'KERNEL_PANIC: NONE',
-            'ADDR: 00:1A:79:B4:EF',
+            'KERNEL INTEGRITY: VERIFIED',
+            'MAC ADDR: 00:1A:79:B4:EF',
           ]
         : [
-            'BIOS ERROR: 0x992B',
-            'FUSION CELL #4: CHARGING',
-            'VOLT: 1.21 GW [STANDBY]',
-            'TEMP: 450 K [OPTIMAL]',
-            'CRYPTO KEY REJECTED',
-            'OVERRIDE: ENGAGED',
-            'CIRCUIT TEST: PASS',
-            'PAWN VALUATION: $8,450',
-            'NO REFUNDS / ALL SALES',
-            'TERMINAL: 04-SECTOR-7',
+            'BIOS DIAGNOSTIC: ERROR 0x992B',
+            'FUSION CELL #4: CHARGING 94%',
+            'VOLTAGE: 1.21 GW [STANDBY]',
+            'CORE TEMP: 450 K [OPTIMAL]',
+            'ENCRYPTION KEY: OVERRIDDEN',
+            'CIRCUIT DIAGNOSTIC: PASS',
+            'PAWN VALUATION: $8,450.00',
+            'ALL SALES FINAL // NO REFUNDS',
+            'TERMINAL ID: SECTOR-07-MAIN',
+            'NETWORK: DEBRIS NET ACTIVE',
           ];
 
     lines.forEach((line, idx) => {
-      ctx.fillText(line, 14, 28 + idx * 22);
+      ctx.fillText(line, 24, 48 + idx * 42);
     });
 
-    // Horizontal scanline overlay
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
-    for (let y = 0; y < 256; y += 3) {
-      ctx.fillRect(0, y, 256, 1.2);
+    // Scanlines
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
+    for (let y = 0; y < 512; y += 4) {
+      ctx.fillRect(0, y, 512, 2);
     }
   }
 
@@ -290,3 +354,179 @@ export function getCrtTerminalTexture(type: 'green' | 'amber' = 'green'): THREE.
   return texture;
 }
 
+/**
+ * Perpendicular Street Neon Blade Sign Texture with English Headline + Asian Subtitle
+ */
+export function getNeonBladeSignTexture(
+  englishText: string,
+  asianSubText: string,
+  neonColor: string,
+  accentColor = '#ffffff'
+): THREE.CanvasTexture {
+  const key = `blade_sign_${englishText}`;
+  if (textureCache.has(key)) return textureCache.get(key)!;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = 256;
+  canvas.height = 512;
+  const ctx = canvas.getContext('2d');
+
+  if (ctx) {
+    // Dark metal housing
+    ctx.fillStyle = '#060810';
+    ctx.fillRect(0, 0, 256, 512);
+
+    // Glowing outer neon border
+    ctx.strokeStyle = neonColor;
+    ctx.lineWidth = 8;
+    ctx.strokeRect(12, 12, 232, 488);
+
+    // Inner accent line
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(20, 20, 216, 472);
+
+    // English Headline (Bold Vertical Stack or Large Text)
+    ctx.fillStyle = neonColor;
+    ctx.textAlign = 'center';
+
+    const words = englishText.split(' ');
+    if (words.length > 1) {
+      ctx.font = '900 36px sans-serif';
+      words.forEach((word, wIdx) => {
+        ctx.fillText(word, 128, 120 + wIdx * 54);
+      });
+    } else {
+      ctx.font = '900 42px sans-serif';
+      ctx.fillText(englishText, 128, 180);
+    }
+
+    // Horizontal Divider
+    ctx.fillStyle = accentColor;
+    ctx.fillRect(48, 290, 160, 4);
+
+    // Asian Subtitle (Authentic Shanghai / Neo-Tokyo atmospheric accent)
+    ctx.fillStyle = accentColor;
+    ctx.font = 'bold 28px sans-serif';
+    ctx.fillText(asianSubText, 128, 360);
+
+    // 24/7 Neon Badge
+    ctx.fillStyle = '#FFAA00';
+    ctx.font = 'bold 20px monospace';
+    ctx.fillText('OPEN 24H', 128, 440);
+  }
+
+  const texture = new THREE.CanvasTexture(canvas);
+  textureCache.set(key, texture);
+  return texture;
+}
+
+/**
+ * Horizontal Landmark Marquee Signboard Texture with English Title & Asian Subtext
+ */
+export function getHorizontalMarqueeTexture(
+  englishTitle: string,
+  subTitle: string,
+  primaryColor: string,
+  accentColor = '#ffffff'
+): THREE.CanvasTexture {
+  const key = `marquee_${englishTitle}`;
+  if (textureCache.has(key)) return textureCache.get(key)!;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = 1024;
+  canvas.height = 256;
+  const ctx = canvas.getContext('2d');
+
+  if (ctx) {
+    // Dark metallic chassis
+    ctx.fillStyle = '#080a12';
+    ctx.fillRect(0, 0, 1024, 256);
+
+    // Outer glowing neon border
+    ctx.strokeStyle = primaryColor;
+    ctx.lineWidth = 8;
+    ctx.strokeRect(10, 10, 1004, 236);
+
+    // Inner subtle border
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(18, 18, 988, 220);
+
+    // Prominent English Headline
+    ctx.fillStyle = accentColor;
+    ctx.textAlign = 'center';
+    ctx.font = '900 48px sans-serif';
+    ctx.fillText(englishTitle, 512, 95);
+
+    // Accent line divider
+    ctx.strokeStyle = primaryColor;
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(140, 126);
+    ctx.lineTo(884, 126);
+    ctx.stroke();
+
+    // Asian atmospheric subtext
+    ctx.fillStyle = primaryColor;
+    ctx.font = 'bold 36px sans-serif';
+    ctx.fillText(subTitle, 512, 190);
+  }
+
+  const texture = new THREE.CanvasTexture(canvas);
+  textureCache.set(key, texture);
+  return texture;
+}
+
+/**
+ * Vertical Landmark Neon Tower Signboard Texture with English Headline & Asian Subtext
+ */
+export function getVerticalSignTexture(
+  englishWords: string[],
+  subTitle: string,
+  primaryColor: string,
+  accentColor = '#ffffff'
+): THREE.CanvasTexture {
+  const key = `vert_sign_${englishWords.join('_')}`;
+  if (textureCache.has(key)) return textureCache.get(key)!;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = 256;
+  canvas.height = 1024;
+  const ctx = canvas.getContext('2d');
+
+  if (ctx) {
+    ctx.fillStyle = '#0a0812';
+    ctx.fillRect(0, 0, 256, 1024);
+
+    ctx.strokeStyle = primaryColor;
+    ctx.lineWidth = 10;
+    ctx.strokeRect(10, 10, 236, 1004);
+
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(18, 18, 220, 988);
+
+    ctx.fillStyle = accentColor;
+    ctx.textAlign = 'center';
+    ctx.font = '900 46px sans-serif';
+
+    let y = 80;
+    for (const word of englishWords) {
+      for (const char of word) {
+        ctx.fillText(char, 128, y);
+        y += 46;
+      }
+      y += 24;
+    }
+
+    // Asian Subtext
+    ctx.fillStyle = primaryColor;
+    ctx.font = 'bold 32px sans-serif';
+    ctx.fillText(subTitle, 128, 960);
+  }
+
+  const texture = new THREE.CanvasTexture(canvas);
+  textureCache.set(key, texture);
+  return texture;
+}

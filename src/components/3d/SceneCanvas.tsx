@@ -16,30 +16,32 @@ export function SceneCanvas() {
   return (
     <div className="fixed inset-0 pointer-events-none z-0">
       <Canvas
-        camera={{ position: [0, 2.2, 5.5], fov: 60, near: 0.1, far: 500 }}
+        camera={{ position: [0, 2.4, 6.0], fov: 60, near: 0.1, far: 500 }}
         dpr={[1, 2]}
         gl={{
           antialias: true,
           alpha: false,
           powerPreference: 'high-performance',
           toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 0.92,
+          toneMappingExposure: 0.95,
         }}
       >
-        {/* Deep Cyberpunk Midnight Atmosphere & Controlled Distance Fog */}
-        <color attach="background" args={['#050812']} />
-        <fog attach="fog" args={['#050812', 35, 190]} />
+        {/* Luminous Celestial Cyberpunk Night Sky (Deep Royal Indigo Gradient) */}
+        <color attach="background" args={['#060c1c']} />
+        
+        {/* Clear Atmospheric Fog (Starts at 80m, preserving razor-sharp landmark & street clarity) */}
+        <fog attach="fog" args={['#070e20', 80, 280]} />
 
-        {/* Realistic Balanced Night Lighting (Prevents Overexposure, Preserves Shadows & Neon Punch) */}
-        <ambientLight intensity={0.32} color="#2b3b55" />
-        <hemisphereLight args={['#1c2840', '#0a0912', 0.38]} />
+        {/* Natural Night Sky Illumination (Provides rich ambient visibility without washed-out blacks) */}
+        <ambientLight intensity={0.65} color="#40587c" />
+        <hemisphereLight args={['#324a72', '#121624', 0.45]} />
         
-        {/* Cool Midnight Moonlight - casts crisp rim highlights along shoulders & roofs */}
-        <directionalLight position={[25, 45, 15]} intensity={0.75} color="#80a5d5" />
+        {/* Cool Celestial Moonlight Key Light - crisp rim lighting on architectural crowns & rooftops */}
+        <directionalLight position={[30, 55, 20]} intensity={1.2} color="#a8c8ff" />
         
-        {/* Soft Cyber Canyon Rim Accents (Subtle, non-destructive fill) */}
-        <directionalLight position={[-25, 30, -40]} intensity={0.28} color="#ff2277" />
-        <directionalLight position={[0, 15, -100]} intensity={0.22} color="#00d5ff" />
+        {/* Soft Cyber Canyon Horizontal Fill Accents */}
+        <directionalLight position={[-30, 35, -40]} intensity={0.35} color="#ff2277" />
+        <directionalLight position={[30, 25, -90]} intensity={0.28} color="#00d8f0" />
 
         <Suspense fallback={null}>
           <CameraRig />
