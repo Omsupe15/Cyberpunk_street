@@ -91,30 +91,30 @@ export function StarClothing() {
 
   return (
     <group position={[LANDMARKS.STAR.x, 0, LANDMARKS.STAR.z]}>
-      {/* 1. Main Boutique Architecture (Polished Obsidian Black & Champagne Gold) */}
+      {/* 1. Main Boutique Architecture (Matte Twilight Slate & Champagne Gold) */}
       <mesh position={[0, 3.2, 0]} receiveShadow>
         <boxGeometry args={[4.8, 6.4, 13.5]} />
-        <meshStandardMaterial color="#0a0b10" roughness={0.3} metalness={0.8} />
+        <meshStandardMaterial color="#222638" roughness={0.75} metalness={0.3} />
       </mesh>
 
       {/* Vertical Champagne Gold Architectural Pilasters */}
       {[-6.6, 6.6].map((zEdge, idx) => (
         <mesh key={`pilaster-${idx}`} position={[2.42, 3.2, zEdge]}>
           <boxGeometry args={[0.06, 6.4, 0.12]} />
-          <meshStandardMaterial color="#d4af37" metalness={0.9} roughness={0.2} />
+          <meshStandardMaterial color="#d4af37" metalness={0.6} roughness={0.4} />
         </mesh>
       ))}
 
-      {/* Recessed Interior Showroom Cavity (Velvet Black Cavity) */}
+      {/* Recessed Interior Showroom Cavity (Matte Slate Interior) */}
       <mesh position={[0.4, 2.5, 0]}>
         <boxGeometry args={[4.0, 4.8, 12]} />
-        <meshStandardMaterial color="#10121a" roughness={0.6} metalness={0.3} />
+        <meshStandardMaterial color="#24283a" roughness={0.8} metalness={0.2} />
       </mesh>
 
-      {/* Interior Polished Cyber-Marble Runway Floor */}
+      {/* Interior Matte Cyber Runway Floor */}
       <mesh position={[0.4, 0.12, 0]}>
         <boxGeometry args={[3.8, 0.05, 11.8]} />
-        <meshStandardMaterial color="#181a24" roughness={0.12} metalness={0.85} />
+        <meshStandardMaterial color="#2e3448" roughness={0.7} metalness={0.25} />
       </mesh>
       {/* Glowing Violet/Cyan Runway Center Slat */}
       <mesh position={[1.4, 0.15, 0]} rotation={[-Math.PI / 2, 0, 0]}>
@@ -122,35 +122,35 @@ export function StarClothing() {
         <meshBasicMaterial color="#8A2BE2" />
       </mesh>
 
-      {/* Interior Brushed Titanium Clothing Racks with Hanging Techwear Jackets */}
+      {/* Interior Titanium Clothing Racks with Hanging Techwear Jackets */}
       {[-3.6, 0, 3.6].map((zPos, idx) => (
         <group key={`rack-${idx}`} position={[-1.2, 1.8, zPos]}>
           {/* Horizontal Titanium Hanging Rail */}
           <mesh position={[0, 0.6, 0]}>
             <cylinderGeometry args={[0.02, 0.02, 2.4, 8]} />
-            <meshStandardMaterial color="#d4d4d8" metalness={0.95} />
+            <meshStandardMaterial color="#d4d4d8" metalness={0.6} roughness={0.4} />
           </mesh>
           {/* Side Floor Supports */}
           <mesh position={[0, 0, -1.15]}>
             <cylinderGeometry args={[0.025, 0.025, 1.3, 8]} />
-            <meshStandardMaterial color="#d4af37" metalness={0.9} roughness={0.2} />
+            <meshStandardMaterial color="#d4af37" metalness={0.6} roughness={0.4} />
           </mesh>
           <mesh position={[0, 0, 1.15]}>
             <cylinderGeometry args={[0.025, 0.025, 1.3, 8]} />
-            <meshStandardMaterial color="#d4af37" metalness={0.9} roughness={0.2} />
+            <meshStandardMaterial color="#d4af37" metalness={0.6} roughness={0.4} />
           </mesh>
-          {/* Sculpted Techwear Coats on Hangers */}
+          {/* Sculpted Techwear Coats on Hangers (Matte Technical Fabric) */}
           {[-0.8, -0.4, 0, 0.4, 0.8].map((hPos, hIdx) => (
             <group key={`coat-${hIdx}`} position={[0, 0.2, hPos]}>
               <mesh position={[0, 0.35, 0]}>
                 <torusGeometry args={[0.06, 0.008, 6, 8, Math.PI]} />
-                <meshStandardMaterial color="#d4d4d8" metalness={0.9} />
+                <meshStandardMaterial color="#d4d4d8" metalness={0.7} />
               </mesh>
               <mesh position={[0, 0, 0]}>
                 <boxGeometry args={[0.28, 0.55, 0.12]} />
                 <meshStandardMaterial
-                  color={hIdx % 2 === 0 ? '#181b26' : '#222634'}
-                  roughness={0.5}
+                  color={hIdx % 2 === 0 ? '#2e3448' : '#3a425a'}
+                  roughness={0.8}
                 />
               </mesh>
               {/* Glowing Accent Seam on Coat */}
@@ -167,7 +167,7 @@ export function StarClothing() {
       {[-4, -2, 0, 2, 4].map((zSpot, sIdx) => (
         <mesh key={`spot-${sIdx}`} position={[1.5, 4.6, zSpot]}>
           <cylinderGeometry args={[0.06, 0.06, 0.12, 12]} />
-          <meshStandardMaterial color="#222530" metalness={0.9} />
+          <meshStandardMaterial color="#343c50" metalness={0.5} roughness={0.6} />
         </mesh>
       ))}
 
@@ -176,33 +176,33 @@ export function StarClothing() {
         <planeGeometry args={[12.2, 4.6]} />
         <meshStandardMaterial
           color="#a855f7"
-          roughness={0.04}
-          metalness={0.95}
+          roughness={0.4}
+          metalness={0.3}
           transparent
           opacity={0.16}
         />
       </mesh>
 
-      {/* Chrome Mullions & 4-Way Spider Glass Brackets */}
+      {/* Mullions & 4-Way Spider Glass Brackets */}
       {[-5.6, -3.2, 0, 3.2, 5.6].map((zPos, idx) => (
         <group key={idx}>
           <mesh position={[2.44, 2.5, zPos]}>
             <boxGeometry args={[0.08, 4.8, 0.08]} />
-            <meshStandardMaterial color="#2a2e3d" metalness={0.95} roughness={0.15} />
+            <meshStandardMaterial color="#343c50" metalness={0.5} roughness={0.6} />
           </mesh>
           {/* Spider Fitting Cross at Mid-Height */}
           <mesh position={[2.46, 2.5, zPos]}>
             <sphereGeometry args={[0.04, 8, 8]} />
-            <meshStandardMaterial color="#d4af37" metalness={0.98} />
+            <meshStandardMaterial color="#d4af37" metalness={0.7} roughness={0.3} />
           </mesh>
         </group>
       ))}
 
-      {/* 3. Overhanging Constellation Canopy (Deep Obsidian with Gold Trim) */}
+      {/* 3. Overhanging Constellation Canopy (Matte Slate with Violet Trim) */}
       <group position={[1.6, 5.0, 0]} rotation={[0, 0, 0.08]}>
         <mesh position={[0, 0, 0]}>
           <boxGeometry args={[3.6, 0.28, 13.0]} />
-          <meshStandardMaterial color="#12141c" roughness={0.5} metalness={0.8} />
+          <meshStandardMaterial color="#242838" roughness={0.75} metalness={0.25} />
         </mesh>
         <mesh position={[1.81, 0, 0]}>
           <boxGeometry args={[0.04, 0.1, 13.0]} />
@@ -225,7 +225,7 @@ export function StarClothing() {
       <group ref={mannequin1Ref} position={[1.4, 1.4, -2.6]}>
         <mesh position={[0, -0.1, 0]}>
           <cylinderGeometry args={[0.5, 0.55, 0.1, 20]} />
-          <meshStandardMaterial color="#181a24" metalness={0.8} roughness={0.2} />
+          <meshStandardMaterial color="#282e40" metalness={0.3} roughness={0.75} />
         </mesh>
         <mesh position={[0, -0.04, 0]}>
           <ringGeometry args={[0.38, 0.48, 20]} />
@@ -255,7 +255,7 @@ export function StarClothing() {
       <group ref={mannequin2Ref} position={[1.4, 1.4, 2.6]}>
         <mesh position={[0, -0.1, 0]}>
           <cylinderGeometry args={[0.5, 0.55, 0.1, 20]} />
-          <meshStandardMaterial color="#181a24" metalness={0.8} roughness={0.2} />
+          <meshStandardMaterial color="#282e40" metalness={0.3} roughness={0.75} />
         </mesh>
         <mesh position={[0, -0.04, 0]}>
           <ringGeometry args={[0.38, 0.48, 20]} />
@@ -289,7 +289,7 @@ export function StarClothing() {
         </mesh>
         <mesh position={[-0.05, -0.5, 0]} rotation={[0, Math.PI / 2, 0]}>
           <planeGeometry args={[7.2, 1.3]} />
-          <meshStandardMaterial color="#12141c" metalness={0.9} roughness={0.2} />
+          <meshStandardMaterial color="#252c3e" metalness={0.25} roughness={0.75} />
         </mesh>
         <mesh position={[-0.03, -0.5, 0]} rotation={[0, Math.PI / 2, 0]}>
           <planeGeometry args={[7.35, 1.45]} />
@@ -302,7 +302,7 @@ export function StarClothing() {
             emissive="#8A2BE2"
             emissiveMap={marqueeTex || undefined}
             emissiveIntensity={0.95}
-            roughness={0.2}
+            roughness={0.6}
           />
         </mesh>
       </group>

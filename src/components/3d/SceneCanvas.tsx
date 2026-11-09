@@ -27,14 +27,14 @@ export function SceneCanvas() {
         }}
       >
         {/* 1. Sky background: Deep Midnight Slate (Atmospheric City Twilight) */}
-        <color attach="background" args={['#0e1422']} />
+        <color attach="background" args={['#162034']} />
         
         {/* 2. Atmospheric City Fog: Soft glowing smog that catches neon */}
-        <fog attach="fog" args={['#12192a', 30, 190]} />
+        <fog attach="fog" args={['#182236', 35, 200]} />
 
-        {/* 3. Balanced Ambient Light: Lifts shadows so textures and grain are visible */}
-        <ambientLight intensity={0.80} color="#2a334a" />
-        <hemisphereLight args={['#64748b', '#181e2e', 0.70]} />
+        {/* 3. Balanced Ambient Light: Lifts shadows so textures and matte materials are visible */}
+        <ambientLight intensity={0.85} color="#323d56" />
+        <hemisphereLight args={['#718096', '#222a3d', 0.75]} />
         
         {/* 4. Directional Moonlight / Sky Rim: */}
         <directionalLight position={[20, 80, 10]} intensity={0.75} color="#93c5fd" />

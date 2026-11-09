@@ -60,10 +60,10 @@ export function NovaMotel() {
 
   return (
     <group position={[LANDMARKS.MOTEL.x, 0, LANDMARKS.MOTEL.z]}>
-      {/* 1. Towering Brutalist Stasis Motel Tower (Dark Dystopian Concrete, Height: 16.5m) */}
+      {/* 1. Towering Brutalist Stasis Motel Tower (Matte Slate Architecture, Height: 16.5m) */}
       <mesh position={[0, 8.25, 0]} receiveShadow>
         <boxGeometry args={[5.4, 16.5, 12.5]} />
-        <meshStandardMaterial color="#111218" roughness={0.7} metalness={0.4} />
+        <meshStandardMaterial color="#222638" roughness={0.85} metalness={0.2} />
       </mesh>
 
       {/* Vertical Cyan Neon Edge Ribbons on Tower Corners */}
@@ -74,21 +74,21 @@ export function NovaMotel() {
         </mesh>
       ))}
 
-      {/* Stepped Art-Deco Roof Crown (Dark Steel & Titanium) */}
+      {/* Stepped Art-Deco Roof Crown (Matte Slate & Titanium) */}
       <mesh position={[0, 16.8, 0]}>
         <boxGeometry args={[4.4, 0.6, 11.5]} />
-        <meshStandardMaterial color="#181a24" metalness={0.85} roughness={0.3} />
+        <meshStandardMaterial color="#262c3e" metalness={0.25} roughness={0.75} />
       </mesh>
       <mesh position={[0, 17.3, 0]}>
         <boxGeometry args={[3.4, 0.4, 10.0]} />
-        <meshStandardMaterial color="#222532" metalness={0.85} roughness={0.3} />
+        <meshStandardMaterial color="#2e354a" metalness={0.25} roughness={0.75} />
       </mesh>
 
       {/* Rooftop Communications Radar Dish & Antennas */}
       <group ref={radarDishRef} position={[0.5, 17.8, -3.0]}>
         <mesh rotation={[0.4, 0, 0]}>
           <cylinderGeometry args={[0.85, 0.1, 0.28, 16]} />
-          <meshStandardMaterial color="#252936" metalness={0.9} roughness={0.25} />
+          <meshStandardMaterial color="#343c50" metalness={0.35} roughness={0.7} />
         </mesh>
         <mesh position={[0, 0.28, 0.2]} rotation={[0.4, 0, 0]}>
           <cylinderGeometry args={[0.035, 0.035, 0.75, 8]} />
@@ -97,7 +97,7 @@ export function NovaMotel() {
       </group>
       <mesh position={[0.5, 18.5, 3.5]}>
         <cylinderGeometry args={[0.05, 0.1, 2.5, 8]} />
-        <meshStandardMaterial color="#383d4e" metalness={0.9} />
+        <meshStandardMaterial color="#424c64" metalness={0.6} roughness={0.4} />
       </mesh>
       <mesh position={[0.5, 19.8, 3.5]}>
         <sphereGeometry args={[0.14, 8, 8]} />
@@ -114,10 +114,10 @@ export function NovaMotel() {
 
           return (
             <group key={`${colIdx}-${rowIdx}`} position={[-2.72, yOffset, zOffset]}>
-              {/* Pod Outer Hex Metal Bezel */}
+              {/* Pod Outer Hex Metal Bezel (Matte Finish) */}
               <mesh rotation={[0, Math.PI / 2, 0]}>
                 <ringGeometry args={[0.56, 0.76, 6]} />
-                <meshStandardMaterial color="#242836" metalness={0.85} roughness={0.3} />
+                <meshStandardMaterial color="#363d52" metalness={0.3} roughness={0.75} />
               </mesh>
 
               {/* 3 Radial Hatch Locking Pins */}
@@ -128,7 +128,7 @@ export function NovaMotel() {
                   rotation={[angle, 0, 0]}
                 >
                   <boxGeometry args={[0.04, 0.06, 0.08]} />
-                  <meshStandardMaterial color="#94a3b8" metalness={0.95} />
+                  <meshStandardMaterial color="#94a3b8" metalness={0.7} />
                 </mesh>
               ))}
 
@@ -162,12 +162,12 @@ export function NovaMotel() {
         {/* Steel Lattice Mast */}
         <mesh position={[-0.12, 0, 0]}>
           <boxGeometry args={[0.1, 13.0, 0.4]} />
-          <meshStandardMaterial color="#1a1c26" metalness={0.95} />
+          <meshStandardMaterial color="#2a3042" metalness={0.3} roughness={0.75} />
         </mesh>
 
         <mesh position={[-0.08, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
           <planeGeometry args={[2.0, 12.8]} />
-          <meshStandardMaterial color="#10121a" metalness={0.95} roughness={0.2} />
+          <meshStandardMaterial color="#222738" metalness={0.25} roughness={0.75} />
         </mesh>
         <mesh position={[-0.03, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
           <planeGeometry args={[2.15, 13.0]} />
@@ -181,7 +181,7 @@ export function NovaMotel() {
             emissive="#FF0055"
             emissiveMap={vertSignTex || undefined}
             emissiveIntensity={0.95}
-            roughness={0.2}
+            roughness={0.6}
           />
         </mesh>
       </group>
@@ -190,7 +190,7 @@ export function NovaMotel() {
       <group position={[-2.85, 3.2, 0]}>
         <mesh position={[-0.5, 0, 0]} receiveShadow>
           <boxGeometry args={[2.4, 0.35, 8.0]} />
-          <meshStandardMaterial color="#181a24" metalness={0.8} roughness={0.3} />
+          <meshStandardMaterial color="#262c3e" metalness={0.25} roughness={0.75} />
         </mesh>
         {/* Recessed Warm Tungsten Slabs */}
         <mesh position={[-0.5, -0.19, 0]}>
@@ -207,12 +207,12 @@ export function NovaMotel() {
         {/* Ground Floor Recessed Lobby Glass Windows */}
         <mesh position={[0.1, -1.7, 0]} rotation={[0, -Math.PI / 2, 0]}>
           <planeGeometry args={[7.6, 2.6]} />
-          <meshStandardMaterial color="#FF0055" roughness={0.08} metalness={0.8} transparent opacity={0.2} />
+          <meshStandardMaterial color="#FF0055" roughness={0.4} metalness={0.3} transparent opacity={0.2} />
         </mesh>
         {/* Lobby Interior Reception Counter Glow & Automated Terminal */}
         <mesh position={[0.8, -2.4, 0]}>
           <boxGeometry args={[1.2, 0.9, 3.5]} />
-          <meshStandardMaterial color="#141620" roughness={0.4} />
+          <meshStandardMaterial color="#242a3c" roughness={0.75} />
         </mesh>
         <mesh position={[0.8, -1.9, 0]}>
           <boxGeometry args={[1.3, 0.06, 3.6]} />
@@ -230,12 +230,12 @@ export function NovaMotel() {
         {/* Vertical Steel I-Beam Guide Rails */}
         <mesh position={[0, 8.2, 0]}>
           <cylinderGeometry args={[0.06, 0.06, 16.5, 8]} />
-          <meshStandardMaterial color="#303546" metalness={0.95} roughness={0.2} />
+          <meshStandardMaterial color="#3a4258" metalness={0.4} roughness={0.7} />
         </mesh>
         {/* Top Cable Hoist Pulley Drum */}
         <mesh position={[0, 16.5, 0]} rotation={[0, 0, Math.PI / 2]}>
           <cylinderGeometry args={[0.3, 0.3, 0.2, 16]} />
-          <meshStandardMaterial color="#222532" metalness={0.95} />
+          <meshStandardMaterial color="#343c50" metalness={0.4} roughness={0.7} />
         </mesh>
 
         {/* Transparent Cylindrical Glass Shaft */}
@@ -243,8 +243,8 @@ export function NovaMotel() {
           <cylinderGeometry args={[0.72, 0.72, 16.5, 12]} />
           <meshStandardMaterial
             color="#00F3FF"
-            roughness={0.1}
-            metalness={0.8}
+            roughness={0.4}
+            metalness={0.3}
             transparent
             opacity={0.18}
             wireframe
@@ -255,16 +255,16 @@ export function NovaMotel() {
         <group ref={elevatorRef} position={[0, 2.0, 0]}>
           <mesh>
             <cylinderGeometry args={[0.64, 0.64, 1.4, 16]} />
-            <meshStandardMaterial color="#1a1c26" roughness={0.3} metalness={0.85} />
+            <meshStandardMaterial color="#2c3246" roughness={0.75} metalness={0.3} />
           </mesh>
           <mesh position={[0, 0.1, 0]}>
             <cylinderGeometry args={[0.66, 0.66, 0.85, 16, 1, true, 0, Math.PI]} />
-            <meshStandardMaterial color="#00F3FF" roughness={0.05} transparent opacity={0.35} />
+            <meshStandardMaterial color="#00F3FF" roughness={0.4} transparent opacity={0.35} />
           </mesh>
-          {/* Passenger Silhouette Inside Elevator */}
+          {/* Passenger Silhouette Inside Elevator (Dark Indigo-Slate, Not Pitch Black) */}
           <mesh position={[0, 0.05, 0]}>
             <cylinderGeometry args={[0.15, 0.2, 0.75, 8]} />
-            <meshBasicMaterial color="#08090f" />
+            <meshBasicMaterial color="#1e2436" />
           </mesh>
           <mesh position={[0, -0.58, 0]}>
             <cylinderGeometry args={[0.58, 0.58, 0.08, 16]} />

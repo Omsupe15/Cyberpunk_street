@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #0a0e1a; /* Soft midnight navy instead of #05050a */
+  --background: #141826; /* Deep Twilight Slate (No pitch/obsidian black) */
   --foreground: #f3f4f6;
 }
 
@@ -19,7 +19,7 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0e1a;
+  background: #141826;
 }
 ::-webkit-scrollbar-thumb {
   background: #00f3ff;
@@ -27,11 +27,11 @@ body {
   box-shadow: 0 0 10px #00f3ff;
 }
 
-/* CRT Scanlines Layer */
+/* CRT Scanlines Layer (Softened slate raster lines, no pure black bars) */
 .scanlines {
   background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%,
-    rgba(0, 0, 0, 0.35) 50%
+    rgba(20, 24, 38, 0) 50%,
+    rgba(22, 28, 44, 0.18) 50%
   );
   background-size: 100% 4px;
 }

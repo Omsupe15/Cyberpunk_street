@@ -13,30 +13,30 @@ export function StreetLamps() {
     <group>
       {lampZPositions.map((zPos, index) => (
         <group key={index}>
-          {/* 1. Left Sidewalk Grand Twin-Arm Gooseneck Lamp (Cyber Cyan Luminaire) */}
+          {/* 1. Left Sidewalk Grand Twin-Arm Gooseneck Lamp (Cyber Cyan Luminaire, Matte finish) */}
           <group position={[-curbX, 0.16, zPos]}>
             <mesh position={[0, 0.25, 0]}>
               <cylinderGeometry args={[0.14, 0.19, 0.5, 10]} />
-              <meshStandardMaterial color="#181a24" metalness={0.9} roughness={0.3} />
+              <meshStandardMaterial color="#282e42" metalness={0.3} roughness={0.75} />
             </mesh>
             {/* 4 Base Anchor Bolt Caps */}
             {[-0.12, 0.12].map((bx, bIdx) =>
               [-0.12, 0.12].map((bz, bzIdx) => (
                 <mesh key={`bolt-l-${bIdx}-${bzIdx}`} position={[bx, 0.03, bz]}>
                   <cylinderGeometry args={[0.015, 0.015, 0.04, 6]} />
-                  <meshStandardMaterial color="#94a3b8" metalness={0.95} />
+                  <meshStandardMaterial color="#94a3b8" metalness={0.7} />
                 </mesh>
               ))
             )}
             <mesh position={[0.08, 0.35, 0]}>
               <boxGeometry args={[0.08, 0.22, 0.14]} />
-              <meshStandardMaterial color="#00F0FF" metalness={0.8} />
+              <meshStandardMaterial color="#00F0FF" metalness={0.4} roughness={0.6} />
             </mesh>
 
-            {/* Tapered Structural Mast Pole (Gunmetal Dark Steel) */}
+            {/* Tapered Structural Mast Pole (Matte Gunmetal Slate) */}
             <mesh position={[0, 3.4, 0]}>
               <cylinderGeometry args={[0.07, 0.09, 6.2, 10]} />
-              <meshStandardMaterial color="#20232f" metalness={0.85} roughness={0.3} />
+              <meshStandardMaterial color="#2d3348" metalness={0.25} roughness={0.8} />
             </mesh>
             <mesh position={[0.07, 3.2, 0]}>
               <boxGeometry args={[0.015, 4.6, 0.02]} />
@@ -46,11 +46,11 @@ export function StreetLamps() {
             {/* Shielded Downward Roadway Luminaire Arm */}
             <mesh position={[0.45, 6.4, 0]} rotation={[0, 0, -0.25]}>
               <boxGeometry args={[1.1, 0.12, 0.22]} />
-              <meshStandardMaterial color="#1a1c26" metalness={0.85} />
+              <meshStandardMaterial color="#282e42" metalness={0.25} roughness={0.8} />
             </mesh>
             <mesh position={[0.9, 6.26, 0]}>
               <boxGeometry args={[0.5, 0.14, 0.26]} />
-              <meshStandardMaterial color="#252936" metalness={0.9} />
+              <meshStandardMaterial color="#343c52" metalness={0.3} roughness={0.75} />
             </mesh>
             {/* Glowing Downward Lens Plate */}
             <mesh position={[0.9, 6.18, 0]} rotation={[-Math.PI / 2, 0, 0]}>
@@ -61,28 +61,28 @@ export function StreetLamps() {
             <pointLight position={[0.9, 6.0, 0]} color="#67e8f9" intensity={0.35} distance={6} decay={2} />
           </group>
 
-          {/* 2. Right Sidewalk Grand Twin-Arm Gooseneck Lamp (Plasma Amber Luminaire) */}
+          {/* 2. Right Sidewalk Grand Twin-Arm Gooseneck Lamp (Plasma Amber Luminaire, Matte finish) */}
           <group position={[curbX, 0.16, zPos]}>
             <mesh position={[0, 0.25, 0]}>
               <cylinderGeometry args={[0.14, 0.19, 0.5, 10]} />
-              <meshStandardMaterial color="#181a24" metalness={0.9} roughness={0.3} />
+              <meshStandardMaterial color="#282e42" metalness={0.3} roughness={0.75} />
             </mesh>
             {[-0.12, 0.12].map((bx, bIdx) =>
               [-0.12, 0.12].map((bz, bzIdx) => (
                 <mesh key={`bolt-r-${bIdx}-${bzIdx}`} position={[bx, 0.03, bz]}>
                   <cylinderGeometry args={[0.015, 0.015, 0.04, 6]} />
-                  <meshStandardMaterial color="#94a3b8" metalness={0.95} />
+                  <meshStandardMaterial color="#94a3b8" metalness={0.7} />
                 </mesh>
               ))
             )}
             <mesh position={[-0.08, 0.35, 0]}>
               <boxGeometry args={[0.08, 0.22, 0.14]} />
-              <meshStandardMaterial color="#FFAA00" metalness={0.8} />
+              <meshStandardMaterial color="#FFAA00" metalness={0.4} roughness={0.6} />
             </mesh>
 
             <mesh position={[0, 3.4, 0]}>
               <cylinderGeometry args={[0.07, 0.09, 6.2, 10]} />
-              <meshStandardMaterial color="#20232f" metalness={0.85} roughness={0.3} />
+              <meshStandardMaterial color="#2d3348" metalness={0.25} roughness={0.8} />
             </mesh>
             <mesh position={[-0.07, 3.2, 0]}>
               <boxGeometry args={[0.015, 4.6, 0.02]} />
@@ -92,11 +92,11 @@ export function StreetLamps() {
             {/* Shielded Downward Roadway Luminaire Arm */}
             <mesh position={[-0.45, 6.4, 0]} rotation={[0, 0, 0.25]}>
               <boxGeometry args={[1.1, 0.12, 0.22]} />
-              <meshStandardMaterial color="#1a1c26" metalness={0.85} />
+              <meshStandardMaterial color="#282e42" metalness={0.25} roughness={0.8} />
             </mesh>
             <mesh position={[-0.9, 6.26, 0]}>
               <boxGeometry args={[0.5, 0.14, 0.26]} />
-              <meshStandardMaterial color="#252936" metalness={0.9} />
+              <meshStandardMaterial color="#343c52" metalness={0.3} roughness={0.75} />
             </mesh>
             {/* Glowing Downward Lens Plate */}
             <mesh position={[-0.9, 6.18, 0]} rotation={[-Math.PI / 2, 0, 0]}>

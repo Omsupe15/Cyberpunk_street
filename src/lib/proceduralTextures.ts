@@ -5,13 +5,13 @@ import * as THREE from 'three';
 const textureCache = new Map<string, THREE.CanvasTexture>();
 
 /**
- * Procedural 14m 4-Lane Grand Boulevard Wet Asphalt Texture
- * Features deep obsidian/graphite asphalt, specular rain puddles, worn tire ruts,
+ * Procedural 14m 4-Lane Grand Boulevard Dry Matte Asphalt Texture
+ * Features rich visible slate-charcoal asphalt (#242838), dry aggregate grain, subtle tire wear,
  * double amber centerline, dashed white dividers, cyber lane stencils (MAX 50, arrows, 専),
- * and tarmac sealant seams.
+ * and tarmac sealant seams. Completely dry matte finish with no water puddles.
  */
 export function getAsphaltTexture(): THREE.CanvasTexture {
-  const key = 'asphalt_road_wet_slate_14m';
+  const key = 'asphalt_road_dry_slate_14m';
   if (textureCache.has(key)) return textureCache.get(key)!;
 
   const canvas = document.createElement('canvas');
@@ -20,23 +20,23 @@ export function getAsphaltTexture(): THREE.CanvasTexture {
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    // 1. Base wet charcoal slate asphalt (Lifting out of the void)
-    ctx.fillStyle = '#181b26';
+    // 1. Base dry matte slate asphalt (Lifted out of void darkness)
+    ctx.fillStyle = '#242838';
     ctx.fillRect(0, 0, 1024, 1024);
 
-    // 2. High-frequency asphalt aggregate noise
+    // 2. High-frequency dry asphalt aggregate noise
     const imgData = ctx.getImageData(0, 0, 1024, 1024);
     const data = imgData.data;
     for (let i = 0; i < data.length; i += 4) {
-      const noise = (Math.random() - 0.5) * 18;
-      data[i] = Math.min(255, Math.max(0, data[i] + noise + 10));
-      data[i + 1] = Math.min(255, Math.max(0, data[i + 1] + noise + 12));
-      data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + noise + 18));
+      const noise = (Math.random() - 0.5) * 16;
+      data[i] = Math.min(255, Math.max(0, data[i] + noise + 6));
+      data[i + 1] = Math.min(255, Math.max(0, data[i + 1] + noise + 8));
+      data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + noise + 12));
     }
     ctx.putImageData(imgData, 0, 0);
 
-    // 3. Smooth, darker worn tire tracks in each of the 4 lanes
-    ctx.fillStyle = 'rgba(15, 18, 26, 0.48)';
+    // 3. Smooth dry worn tire tracks in each of the 4 lanes (soft matte wear)
+    ctx.fillStyle = 'rgba(26, 30, 42, 0.40)';
     ctx.fillRect(95, 0, 70, 1024);   // Lane 1 Left Track
     ctx.fillRect(195, 0, 70, 1024);  // Lane 1 Right Track
     ctx.fillRect(315, 0, 70, 1024);  // Lane 2 Left Track
@@ -46,38 +46,8 @@ export function getAsphaltTexture(): THREE.CanvasTexture {
     ctx.fillRect(760, 0, 70, 1024);  // Lane 4 Left Track
     ctx.fillRect(860, 0, 70, 1024);  // Lane 4 Right Track
 
-    // 4. Irregular reflective water puddle pools (Deep glossy #090c14 contrast)
-    const puddleGradients = [
-      { x: 180, y: 190, rx: 75, ry: 45, angle: 0.2 },
-      { x: 420, y: 440, rx: 90, ry: 50, angle: -0.15 },
-      { x: 720, y: 280, rx: 80, ry: 40, angle: 0.3 },
-      { x: 260, y: 780, rx: 110, ry: 55, angle: -0.25 },
-      { x: 620, y: 820, rx: 95, ry: 48, angle: 0.1 },
-      { x: 840, y: 640, rx: 70, ry: 38, angle: -0.3 },
-    ];
-
-    puddleGradients.forEach((p) => {
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.angle);
-      const radGrad = ctx.createRadialGradient(0, 0, 10, 0, 0, p.rx);
-      radGrad.addColorStop(0, 'rgba(9, 12, 20, 0.88)');
-      radGrad.addColorStop(0.65, 'rgba(14, 18, 28, 0.65)');
-      radGrad.addColorStop(1, 'rgba(24, 27, 38, 0)');
-      ctx.fillStyle = radGrad;
-      ctx.beginPath();
-      ctx.ellipse(0, 0, p.rx, p.ry, 0, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Subtle cyan/violet water puddle perimeter reflection fringe
-      ctx.strokeStyle = 'rgba(0, 240, 255, 0.18)';
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
-      ctx.restore();
-    });
-
-    // 5. Tarmac sealant cracks / tar repair seams
-    ctx.strokeStyle = '#050608';
+    // 4. Dry tarmac sealant cracks / tar repair seams (no pure black)
+    ctx.strokeStyle = '#1c202e';
     ctx.lineWidth = 2.5;
     ctx.beginPath();
     ctx.moveTo(120, 120);
@@ -89,7 +59,7 @@ export function getAsphaltTexture(): THREE.CanvasTexture {
     ctx.bezierCurveTo(720, 580, 780, 560, 840, 620);
     ctx.stroke();
 
-    // 6. Center Double Solid Amber Thermoplastic Median Lines
+    // 5. Center Double Solid Amber Thermoplastic Median Lines
     ctx.shadowColor = 'rgba(245, 158, 11, 0.35)';
     ctx.shadowBlur = 8;
     ctx.strokeStyle = '#f59e0b';
@@ -105,7 +75,7 @@ export function getAsphaltTexture(): THREE.CanvasTexture {
     ctx.stroke();
     ctx.shadowBlur = 0;
 
-    // 7. Dashed Off-White Lane Dividers (Lanes 1-2 & Lanes 3-4)
+    // 6. Dashed Off-White Lane Dividers (Lanes 1-2 & Lanes 3-4)
     ctx.strokeStyle = 'rgba(226, 232, 240, 0.85)';
     ctx.lineWidth = 5;
     ctx.setLineDash([54, 42]);
@@ -120,7 +90,7 @@ export function getAsphaltTexture(): THREE.CanvasTexture {
     ctx.lineTo(768, 1024);
     ctx.stroke();
 
-    // 8. Solid Neon Cyan Outer Shoulder Edge Lines
+    // 7. Solid Neon Cyan Outer Shoulder Edge Lines
     ctx.setLineDash([]);
     ctx.strokeStyle = 'rgba(0, 240, 255, 0.75)';
     ctx.lineWidth = 5;
@@ -134,7 +104,7 @@ export function getAsphaltTexture(): THREE.CanvasTexture {
     ctx.lineTo(992, 1024);
     ctx.stroke();
 
-    // 9. Cyber Road Stencils & Directional Markings
+    // 8. Cyber Road Stencils & Directional Markings
     ctx.fillStyle = 'rgba(226, 232, 240, 0.72)';
     ctx.font = '900 28px monospace';
     ctx.textAlign = 'center';
@@ -191,8 +161,8 @@ export function getSidewalkTexture(): THREE.CanvasTexture {
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    // 1. Industrial Slate Paving base (Clearly separates from road)
-    ctx.fillStyle = '#222636';
+    // 1. Industrial Slate Paving base (Clearly separates from road with matte finish)
+    ctx.fillStyle = '#2d3346';
     ctx.fillRect(0, 0, 512, 512);
 
     // 2. Micro-stone mineral grain
@@ -206,16 +176,16 @@ export function getSidewalkTexture(): THREE.CanvasTexture {
     }
     ctx.putImageData(imgData, 0, 0);
 
-    // 3. Paving slab grid joints (Deep recessed dark lines)
-    ctx.strokeStyle = '#121520';
+    // 3. Paving slab grid joints (Recessed slate seams, no obsidian)
+    ctx.strokeStyle = '#1f2434';
     ctx.lineWidth = 4;
     ctx.strokeRect(0, 0, 256, 256);
     ctx.strokeRect(256, 0, 256, 256);
     ctx.strokeRect(0, 256, 256, 256);
     ctx.strokeRect(256, 256, 256, 256);
 
-    // 4. Subtle chamfered edge highlights with faint wet sheen
-    ctx.strokeStyle = 'rgba(148, 163, 184, 0.22)';
+    // 4. Chamfered edge highlights with matte stone tone
+    ctx.strokeStyle = 'rgba(148, 163, 184, 0.18)';
     ctx.lineWidth = 1.5;
     ctx.strokeRect(3, 3, 250, 250);
     ctx.strokeRect(259, 3, 250, 250);
@@ -223,7 +193,7 @@ export function getSidewalkTexture(): THREE.CanvasTexture {
     ctx.strokeRect(259, 259, 250, 250);
 
     // Tactile blind-guidance dots on one quadrant
-    ctx.fillStyle = 'rgba(245, 158, 11, 0.22)';
+    ctx.fillStyle = 'rgba(245, 158, 11, 0.28)';
     for (let bx = 280; bx < 490; bx += 32) {
       for (let by = 280; by < 490; by += 32) {
         ctx.beginPath();
@@ -243,10 +213,10 @@ export function getSidewalkTexture(): THREE.CanvasTexture {
 
 /**
  * High-Definition Skyscraper Facade Texture with English Header & Lit Office Windows
- * Dark obsidian titanium curtain walls with high-contrast office grids
+ * Matte titanium curtain walls with high-contrast office grids
  */
 export function getSkyscraperFacadeTexture(typeIndex = 0): THREE.CanvasTexture {
-  const key = `facade_archetype_noir_${typeIndex}`;
+  const key = `facade_archetype_matte_${typeIndex}`;
   if (textureCache.has(key)) return textureCache.get(key)!;
 
   const canvas = document.createElement('canvas');
@@ -265,12 +235,12 @@ export function getSkyscraperFacadeTexture(typeIndex = 0): THREE.CanvasTexture {
   const headerInfo = headers[typeIndex % headers.length];
 
   if (ctx) {
-    // 1. Dark obsidian titanium curtain wall
-    ctx.fillStyle = '#0b0d14';
+    // 1. Matte titanium slate curtain wall (Clear visibility against sky)
+    ctx.fillStyle = '#202538';
     ctx.fillRect(0, 0, 1024, 2048);
 
     // 2. Crown Marquee Signboard on Top Floors
-    ctx.fillStyle = '#12141c';
+    ctx.fillStyle = '#252c3e';
     ctx.fillRect(60, 40, 904, 160);
     ctx.strokeStyle = headerInfo.color;
     ctx.lineWidth = 6;
@@ -302,8 +272,8 @@ export function getSkyscraperFacadeTexture(typeIndex = 0): THREE.CanvasTexture {
     const cellH = (2048 - startY - padY * (rows + 1)) / rows;
 
     for (let r = 0; r < rows; r++) {
-      // Horizontal structural spandrel beam (Dark steel)
-      ctx.fillStyle = '#161922';
+      // Horizontal structural spandrel beam (Matte steel)
+      ctx.fillStyle = '#283042';
       ctx.fillRect(0, startY + r * (cellH + padY), 1024, padY);
 
       // Subtle illuminated spandrel hairline
@@ -315,7 +285,7 @@ export function getSkyscraperFacadeTexture(typeIndex = 0): THREE.CanvasTexture {
         const y = startY + padY + r * (cellH + padY);
 
         // Window frame
-        ctx.fillStyle = '#080a0f';
+        ctx.fillStyle = '#1e2434';
         ctx.fillRect(x - 1, y - 1, cellW + 2, cellH + 2);
 
         // Deterministic room lighting pattern (~65% lit windows for realistic night skyline)
@@ -337,13 +307,13 @@ export function getSkyscraperFacadeTexture(typeIndex = 0): THREE.CanvasTexture {
           ctx.fillRect(x, y, cellW, cellH);
 
           // Horizontal window blinds / louvers
-          ctx.fillStyle = 'rgba(8, 10, 16, 0.42)';
+          ctx.fillStyle = 'rgba(26, 32, 48, 0.45)';
           for (let b = 4; b < cellH; b += 4) {
             ctx.fillRect(x, y + b, cellW, 1.2);
           }
         } else {
-          // Unlit dark window with faint ambient sky reflection
-          ctx.fillStyle = '#0f121a';
+          // Unlit dark window with faint ambient slate reflection
+          ctx.fillStyle = '#202636';
           ctx.fillRect(x, y, cellW, cellH);
         }
       }
@@ -362,7 +332,7 @@ export function getSkyscraperFacadeTexture(typeIndex = 0): THREE.CanvasTexture {
  * Features rusted ribbed iron, oxidized patina, and industrial stencils
  */
 export function getCorrugatedMetalTexture(): THREE.CanvasTexture {
-  const key = 'corrugated_metal_rusted';
+  const key = 'corrugated_metal_matte';
   if (textureCache.has(key)) return textureCache.get(key)!;
 
   const canvas = document.createElement('canvas');
@@ -371,23 +341,23 @@ export function getCorrugatedMetalTexture(): THREE.CanvasTexture {
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    // 1. Weathered rusted iron base
-    ctx.fillStyle = '#2c221a';
+    // 1. Weathered rusted iron base (Matte warm iron)
+    ctx.fillStyle = '#4a3d34';
     ctx.fillRect(0, 0, 512, 512);
 
     // 2. Corrugated horizontal ribs
     for (let y = 0; y < 512; y += 24) {
       const grad = ctx.createLinearGradient(0, y, 0, y + 24);
-      grad.addColorStop(0, '#1c1510');
-      grad.addColorStop(0.3, '#3e2e22');
-      grad.addColorStop(0.6, '#564232');
-      grad.addColorStop(1, '#1c1510');
+      grad.addColorStop(0, '#3d322a');
+      grad.addColorStop(0.3, '#5c4c3e');
+      grad.addColorStop(0.6, '#6b5949');
+      grad.addColorStop(1, '#3d322a');
       ctx.fillStyle = grad;
       ctx.fillRect(0, y, 512, 24);
     }
 
     // 3. Rust spots & oxidized patina patches
-    ctx.fillStyle = 'rgba(160, 68, 24, 0.38)';
+    ctx.fillStyle = 'rgba(180, 80, 30, 0.35)';
     for (let i = 0; i < 40; i++) {
       const rx = Math.random() * 512;
       const ry = Math.random() * 512;
@@ -397,7 +367,7 @@ export function getCorrugatedMetalTexture(): THREE.CanvasTexture {
     }
 
     // 4. Stenciled industrial warning markings on shutter
-    ctx.fillStyle = 'rgba(234, 179, 8, 0.45)';
+    ctx.fillStyle = 'rgba(234, 179, 8, 0.55)';
     ctx.font = '900 24px monospace';
     ctx.fillText('SECTOR 07 // RESTRICTED ACCESS', 30, 260);
     ctx.fillText('WARNING: AUTOMATED DEFENSES ACTIVE', 30, 300);
@@ -415,7 +385,7 @@ export function getCorrugatedMetalTexture(): THREE.CanvasTexture {
  * Green/Amber Phosphor CRT Terminal Scanline Screen (Authentic terminal graphics)
  */
 export function getCrtTerminalTexture(type: 'green' | 'amber' = 'green'): THREE.CanvasTexture {
-  const key = `crt_terminal_noir_${type}`;
+  const key = `crt_terminal_matte_${type}`;
   if (textureCache.has(key)) return textureCache.get(key)!;
 
   const canvas = document.createElement('canvas');
@@ -424,8 +394,8 @@ export function getCrtTerminalTexture(type: 'green' | 'amber' = 'green'): THREE.
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    // Deep dark CRT glass interior
-    ctx.fillStyle = type === 'green' ? '#041008' : '#140c04';
+    // CRT glass interior (Lighter phosphor tint instead of black void)
+    ctx.fillStyle = type === 'green' ? '#102618' : '#24180c';
     ctx.fillRect(0, 0, 512, 512);
 
     ctx.fillStyle = type === 'green' ? '#05ffa1' : '#ffaa00';
@@ -462,8 +432,8 @@ export function getCrtTerminalTexture(type: 'green' | 'amber' = 'green'): THREE.
       ctx.fillText(line, 24, 48 + idx * 42);
     });
 
-    // CRT Scanlines
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
+    // Subtle CRT Scanlines (Softened contrast, no dark black lines)
+    ctx.fillStyle = 'rgba(18, 28, 22, 0.40)';
     for (let y = 0; y < 512; y += 4) {
       ctx.fillRect(0, y, 512, 2);
     }
@@ -476,7 +446,7 @@ export function getCrtTerminalTexture(type: 'green' | 'amber' = 'green'): THREE.
 
 /**
  * Perpendicular Street Neon Blade Sign Texture with English Headline + Asian Subtitle
- * Dark chassis with vibrant glowing neon typography
+ * Matte chassis with vibrant glowing neon typography
  */
 export function getNeonBladeSignTexture(
   englishText: string,
@@ -484,7 +454,7 @@ export function getNeonBladeSignTexture(
   neonColor: string,
   accentColor = '#ffffff'
 ): THREE.CanvasTexture {
-  const key = `blade_sign_noir_${englishText}`;
+  const key = `blade_sign_matte_${englishText}`;
   if (textureCache.has(key)) return textureCache.get(key)!;
 
   const canvas = document.createElement('canvas');
@@ -493,8 +463,8 @@ export function getNeonBladeSignTexture(
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    // Dark weathered chassis
-    ctx.fillStyle = '#10121a';
+    // Matte dark slate chassis (Clearly visible against buildings)
+    ctx.fillStyle = '#222738';
     ctx.fillRect(0, 0, 256, 512);
 
     // Glowing outer neon border
@@ -554,7 +524,7 @@ export function getHorizontalMarqueeTexture(
   primaryColor: string,
   accentColor = '#ffffff'
 ): THREE.CanvasTexture {
-  const key = `marquee_noir_${englishTitle}`;
+  const key = `marquee_matte_${englishTitle}`;
   if (textureCache.has(key)) return textureCache.get(key)!;
 
   const canvas = document.createElement('canvas');
@@ -563,8 +533,8 @@ export function getHorizontalMarqueeTexture(
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    // Dark metallic chassis
-    ctx.fillStyle = '#12141c';
+    // Matte slate metallic chassis
+    ctx.fillStyle = '#252c3e';
     ctx.fillRect(0, 0, 1024, 256);
 
     // Outer glowing neon border
@@ -614,7 +584,7 @@ export function getVerticalSignTexture(
   primaryColor: string,
   accentColor = '#ffffff'
 ): THREE.CanvasTexture {
-  const key = `vert_sign_noir_${englishWords.join('_')}`;
+  const key = `vert_sign_matte_${englishWords.join('_')}`;
   if (textureCache.has(key)) return textureCache.get(key)!;
 
   const canvas = document.createElement('canvas');
@@ -623,8 +593,8 @@ export function getVerticalSignTexture(
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    // Dark structural steel backplate
-    ctx.fillStyle = '#0f1118';
+    // Matte structural steel backplate
+    ctx.fillStyle = '#222738';
     ctx.fillRect(0, 0, 256, 1024);
 
     // Glowing neon border

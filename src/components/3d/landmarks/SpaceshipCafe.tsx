@@ -73,10 +73,10 @@ export function SpaceshipCafe() {
 
   return (
     <group position={[LANDMARKS.CAFE.x, 0, LANDMARKS.CAFE.z]}>
-      {/* 1. Cafe Main Two-Story Building Structure (Dark Charcoal Architectural Concrete) */}
+      {/* 1. Cafe Main Two-Story Building Structure (Matte Architectural Slate) */}
       <mesh position={[0, 3.2, 0]} receiveShadow>
         <boxGeometry args={[5.2, 6.4, 13.5]} />
-        <meshStandardMaterial color="#13151d" roughness={0.7} metalness={0.4} />
+        <meshStandardMaterial color="#252938" roughness={0.85} metalness={0.2} />
       </mesh>
 
       {/* Roofline Glowing Neon Amber Ribbon */}
@@ -85,10 +85,10 @@ export function SpaceshipCafe() {
         <meshBasicMaterial color="#FFAA00" />
       </mesh>
 
-      {/* Recessed Ground Floor Cafe Bistro Interior (Warm Mahogany & Dark Concrete) */}
+      {/* Recessed Ground Floor Cafe Bistro Interior (Matte Slate Interior) */}
       <mesh position={[-0.4, 1.8, 0]}>
         <boxGeometry args={[4.2, 3.4, 12.2]} />
-        <meshStandardMaterial color="#1a1c24" roughness={0.8} metalness={0.2} />
+        <meshStandardMaterial color="#282d3e" roughness={0.85} metalness={0.15} />
       </mesh>
 
       {/* Ground Floor Panoramic Anti-Reflective Storefront Glass */}
@@ -96,8 +96,8 @@ export function SpaceshipCafe() {
         <planeGeometry args={[12.2, 3.4]} />
         <meshStandardMaterial
           color="#ffb347"
-          roughness={0.05}
-          metalness={0.9}
+          roughness={0.4}
+          metalness={0.3}
           transparent
           opacity={0.18}
         />
@@ -107,7 +107,7 @@ export function SpaceshipCafe() {
       {[-5.4, -2.7, 0, 2.7, 5.4].map((zPos, idx) => (
         <mesh key={idx} position={[-2.44, 1.8, zPos]}>
           <boxGeometry args={[0.08, 3.5, 0.08]} />
-          <meshStandardMaterial color="#252834" metalness={0.95} roughness={0.25} />
+          <meshStandardMaterial color="#343c50" metalness={0.4} roughness={0.7} />
         </mesh>
       ))}
 
@@ -116,7 +116,7 @@ export function SpaceshipCafe() {
         {/* Main Bar Top */}
         <mesh position={[0, 0, 0]}>
           <boxGeometry args={[0.8, 0.1, 7.5]} />
-          <meshStandardMaterial color="#1a1c22" roughness={0.2} metalness={0.85} />
+          <meshStandardMaterial color="#2a2f3f" roughness={0.7} metalness={0.3} />
         </mesh>
         {/* Glowing Under-Counter Accent Slat */}
         <mesh position={[-0.41, -0.06, 0]} rotation={[0, -Math.PI / 2, 0]}>
@@ -128,7 +128,7 @@ export function SpaceshipCafe() {
         <group position={[0, 0.28, -2.2]}>
           <mesh>
             <boxGeometry args={[0.45, 0.42, 0.65]} />
-            <meshStandardMaterial color="#8899aa" metalness={0.95} roughness={0.1} />
+            <meshStandardMaterial color="#8899aa" metalness={0.7} roughness={0.4} />
           </mesh>
           {/* Pressure Gauge */}
           <mesh position={[-0.23, 0.1, 0.1]} rotation={[0, -Math.PI / 2, 0]}>
@@ -138,11 +138,11 @@ export function SpaceshipCafe() {
           {/* Chrome Portafilter Handles */}
           <mesh position={[-0.26, -0.05, -0.12]} rotation={[0, 0, Math.PI / 2]}>
             <cylinderGeometry args={[0.02, 0.02, 0.14, 8]} />
-            <meshStandardMaterial color="#d4d4d8" metalness={0.95} />
+            <meshStandardMaterial color="#d4d4d8" metalness={0.7} roughness={0.35} />
           </mesh>
           <mesh position={[-0.26, -0.05, 0.12]} rotation={[0, 0, Math.PI / 2]}>
             <cylinderGeometry args={[0.02, 0.02, 0.14, 8]} />
-            <meshStandardMaterial color="#d4d4d8" metalness={0.95} />
+            <meshStandardMaterial color="#d4d4d8" metalness={0.7} roughness={0.35} />
           </mesh>
         </group>
 
@@ -157,12 +157,12 @@ export function SpaceshipCafe() {
         ))}
       </group>
 
-      {/* 2. Docked Retro-Futuristic Spaceship Fuselage on Upper Deck (Z = -32m) */}
+      {/* 2. Docked Retro-Futuristic Spaceship Fuselage on Upper Deck (Z = -32m, Matte alloy) */}
       <group position={[-0.6, 6.5, 0]}>
-        {/* Main Aerodynamic Titanium Hull Plating (Weathered Aerospace Alloy) */}
+        {/* Main Aerodynamic Titanium Hull Plating (Matte Aerospace Slate Alloy) */}
         <mesh position={[0, 0, 0]} rotation={[0, 0, -0.04]}>
           <cylinderGeometry args={[1.5, 1.7, 9.8, 20]} />
-          <meshStandardMaterial color="#363c4a" roughness={0.35} metalness={0.85} />
+          <meshStandardMaterial color="#42495a" roughness={0.70} metalness={0.45} />
         </mesh>
 
         {/* Hull Seam Division Ring Strips (Glowing Plasma Amber) */}
@@ -176,18 +176,18 @@ export function SpaceshipCafe() {
         {/* Cantilever Landing Gear Hydraulic Struts Supporting Hull */}
         <mesh position={[-1.2, -1.1, -2.5]} rotation={[0, 0, 0.3]}>
           <cylinderGeometry args={[0.06, 0.08, 1.5, 8]} />
-          <meshStandardMaterial color="#252834" metalness={0.95} />
+          <meshStandardMaterial color="#343c50" metalness={0.3} roughness={0.75} />
         </mesh>
         <mesh position={[-1.2, -1.1, 2.5]} rotation={[0, 0, 0.3]}>
           <cylinderGeometry args={[0.06, 0.08, 1.5, 8]} />
-          <meshStandardMaterial color="#252834" metalness={0.95} />
+          <meshStandardMaterial color="#343c50" metalness={0.3} roughness={0.75} />
         </mesh>
 
         {/* Maintenance Fuel Intake Port with Amber Hazard Ring */}
         <group position={[-1.6, 0.2, 1.5]} rotation={[0, -Math.PI / 2, 0]}>
           <mesh>
             <cylinderGeometry args={[0.2, 0.2, 0.04, 16]} />
-            <meshStandardMaterial color="#1a1c24" metalness={0.9} />
+            <meshStandardMaterial color="#2a3040" metalness={0.3} roughness={0.75} />
           </mesh>
           <mesh position={[0, 0.025, 0]}>
             <ringGeometry args={[0.12, 0.18, 16]} />
@@ -198,7 +198,7 @@ export function SpaceshipCafe() {
         {/* Cockpit Tapered Nose Cone */}
         <mesh position={[0, 0, 5.4]} rotation={[Math.PI / 2, 0, 0]}>
           <coneGeometry args={[1.5, 2.0, 20]} />
-          <meshStandardMaterial color="#2a2f3a" roughness={0.3} metalness={0.85} />
+          <meshStandardMaterial color="#3a4050" roughness={0.70} metalness={0.45} />
         </mesh>
 
         {/* Tinted Cockpit Observation Dome */}
@@ -206,8 +206,8 @@ export function SpaceshipCafe() {
           <sphereGeometry args={[1.1, 16, 16, 0, Math.PI * 2, 0, Math.PI / 2]} />
           <meshStandardMaterial
             color="#00F3FF"
-            roughness={0.05}
-            metalness={0.95}
+            roughness={0.4}
+            metalness={0.5}
             transparent
             opacity={0.4}
           />
@@ -222,7 +222,7 @@ export function SpaceshipCafe() {
         {/* Aerodynamic Delta Winglets with Nav Lights & Rivets */}
         <mesh position={[-2.2, -0.3, 0]} rotation={[0, 0, 0.15]}>
           <boxGeometry args={[2.0, 0.08, 3.5]} />
-          <meshStandardMaterial color="#303542" metalness={0.8} />
+          <meshStandardMaterial color="#3c4354" metalness={0.35} roughness={0.75} />
         </mesh>
         <mesh position={[-3.2, -0.15, -1.2]}>
           <sphereGeometry args={[0.06, 8, 8]} />
@@ -231,7 +231,7 @@ export function SpaceshipCafe() {
 
         <mesh position={[2.2, -0.3, 0]} rotation={[0, 0, -0.15]}>
           <boxGeometry args={[2.0, 0.08, 3.5]} />
-          <meshStandardMaterial color="#303542" metalness={0.8} />
+          <meshStandardMaterial color="#3c4354" metalness={0.35} roughness={0.75} />
         </mesh>
         <mesh position={[3.2, -0.15, -1.2]}>
           <sphereGeometry args={[0.06, 8, 8]} />
@@ -241,7 +241,7 @@ export function SpaceshipCafe() {
         {/* Tail Fin with Beacon */}
         <mesh position={[0, 2.0, -4.0]} rotation={[-0.2, 0, 0]}>
           <boxGeometry args={[0.08, 1.4, 1.2]} />
-          <meshStandardMaterial color="#363c4a" metalness={0.85} />
+          <meshStandardMaterial color="#42495a" metalness={0.35} roughness={0.75} />
         </mesh>
         <mesh ref={beaconRef} position={[0, 2.7, -4.2]}>
           <sphereGeometry args={[0.08, 8, 8]} />
@@ -252,7 +252,7 @@ export function SpaceshipCafe() {
         <group position={[1.4, -0.85, -2.2]} rotation={[0, 0, 0.2]}>
           <mesh>
             <cylinderGeometry args={[0.44, 0.54, 1.6, 18]} />
-            <meshStandardMaterial color="#1e212b" metalness={0.95} roughness={0.2} />
+            <meshStandardMaterial color="#2e3344" metalness={0.35} roughness={0.75} />
           </mesh>
           <mesh position={[0, -0.78, 0]}>
             <cylinderGeometry args={[0.36, 0.36, 0.12, 18]} />
@@ -263,7 +263,7 @@ export function SpaceshipCafe() {
         <group position={[1.4, -0.85, 2.2]} rotation={[0, 0, 0.2]}>
           <mesh>
             <cylinderGeometry args={[0.44, 0.54, 1.6, 18]} />
-            <meshStandardMaterial color="#1e212b" metalness={0.95} roughness={0.2} />
+            <meshStandardMaterial color="#2e3344" metalness={0.35} roughness={0.75} />
           </mesh>
           <mesh position={[0, -0.78, 0]}>
             <cylinderGeometry args={[0.36, 0.36, 0.12, 18]} />
@@ -321,13 +321,13 @@ export function SpaceshipCafe() {
         {/* Metal Backplate Frame with Standoff Bolts */}
         <mesh rotation={[0, -Math.PI / 2, 0]}>
           <planeGeometry args={[7.2, 1.3]} />
-          <meshStandardMaterial color="#12141c" metalness={0.9} roughness={0.3} />
+          <meshStandardMaterial color="#252c3e" metalness={0.25} roughness={0.75} />
         </mesh>
         {/* Mounting Standoff Brackets */}
         {[-3.4, -1.7, 1.7, 3.4].map((zB, idx) => (
           <mesh key={`bolt-${idx}`} position={[0.02, 0.55, zB]} rotation={[0, 0, Math.PI / 2]}>
             <cylinderGeometry args={[0.02, 0.02, 0.06, 8]} />
-            <meshStandardMaterial color="#555" metalness={0.9} />
+            <meshStandardMaterial color="#343c50" metalness={0.5} roughness={0.6} />
           </mesh>
         ))}
         {/* Outer Neon Wireframe Border */}
@@ -343,7 +343,7 @@ export function SpaceshipCafe() {
             emissive="#FFAA00"
             emissiveMap={marqueeTex || undefined}
             emissiveIntensity={0.95}
-            roughness={0.2}
+            roughness={0.6}
           />
         </mesh>
       </group>
@@ -363,28 +363,28 @@ export function SpaceshipCafe() {
       {/* 6. Street-level Dining Patio: Tables, Stools & Espresso Cups */}
       {[-3.5, 0, 3.5].map((zPos, sIdx) => (
         <group key={`patio-${sIdx}`} position={[-2.9, 0.14, zPos]}>
-          {/* Gunmetal Bistro Table */}
+          {/* Bistro Table (Matte finish) */}
           <mesh position={[0, 0.45, 0]}>
             <cylinderGeometry args={[0.42, 0.42, 0.04, 16]} />
-            <meshStandardMaterial color="#222530" metalness={0.9} roughness={0.2} />
+            <meshStandardMaterial color="#2e3446" metalness={0.3} roughness={0.75} />
           </mesh>
           <mesh position={[0, 0.22, 0]}>
             <cylinderGeometry args={[0.04, 0.04, 0.44, 8]} />
-            <meshStandardMaterial color="#FFAA00" metalness={0.9} />
+            <meshStandardMaterial color="#FFAA00" metalness={0.5} roughness={0.5} />
           </mesh>
           <mesh position={[0, 0.02, 0]}>
             <cylinderGeometry args={[0.25, 0.25, 0.04, 16]} />
-            <meshStandardMaterial color="#181a24" metalness={0.8} />
+            <meshStandardMaterial color="#262c3e" metalness={0.3} roughness={0.75} />
           </mesh>
           {/* Miniature Espresso Cup & Saucer on Table */}
           <group position={[0.08, 0.49, 0.05]}>
             <mesh position={[0, 0.01, 0]}>
               <cylinderGeometry args={[0.08, 0.06, 0.02, 12]} />
-              <meshStandardMaterial color="#f4f4f5" />
+              <meshStandardMaterial color="#f4f4f5" roughness={0.6} />
             </mesh>
             <mesh position={[0, 0.045, 0]}>
               <cylinderGeometry args={[0.05, 0.04, 0.06, 12]} />
-              <meshStandardMaterial color="#FFAA00" metalness={0.8} />
+              <meshStandardMaterial color="#FFAA00" metalness={0.4} roughness={0.6} />
             </mesh>
           </group>
         </group>

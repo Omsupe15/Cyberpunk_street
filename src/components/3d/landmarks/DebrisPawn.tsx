@@ -77,16 +77,16 @@ export function DebrisPawn() {
 
   return (
     <group position={[LANDMARKS.PAWN.x, 0, LANDMARKS.PAWN.z]}>
-      {/* 1. Grungy Salvage Den Facade (Weathered Industrial Concrete with Water Stains) */}
+      {/* 1. Grungy Salvage Den Facade (Matte Industrial Slate) */}
       <mesh position={[0, 2.7, 0]} receiveShadow>
         <boxGeometry args={[4.8, 5.4, 11.5]} />
-        <meshStandardMaterial color="#14161c" roughness={0.8} metalness={0.3} />
+        <meshStandardMaterial color="#252938" roughness={0.85} metalness={0.2} />
       </mesh>
 
-      {/* Industrial Roof Parapet (Dark Rusted Steel) */}
+      {/* Industrial Roof Parapet (Matte Industrial Steel) */}
       <mesh position={[2.3, 5.3, 0]}>
         <boxGeometry args={[0.35, 0.45, 11.6]} />
-        <meshStandardMaterial color="#222530" roughness={0.7} metalness={0.8} />
+        <meshStandardMaterial color="#343c50" roughness={0.75} metalness={0.35} />
       </mesh>
 
       {/* Weathered Corrugated Security Shutter with Procedural Rusted Texture */}
@@ -94,33 +94,33 @@ export function DebrisPawn() {
         <planeGeometry args={[8.0, 2.4]} />
         <meshStandardMaterial
           map={metalTex || undefined}
-          color="#3a2c22"
+          color="#4a3d34"
           roughness={0.85}
-          metalness={0.65}
+          metalness={0.35}
         />
       </mesh>
 
       {/* Heavy Steel Shutter Roller Drum & Manual Chain Hoist */}
       <mesh position={[2.25, 4.35, 0]} rotation={[0, 0, Math.PI / 2]}>
         <cylinderGeometry args={[0.26, 0.26, 8.2, 16]} />
-        <meshStandardMaterial color="#1a1c24" metalness={0.9} roughness={0.4} />
+        <meshStandardMaterial color="#2e3446" metalness={0.35} roughness={0.75} />
       </mesh>
       {/* Heavy Master Padlock on Shutter Base */}
       <group position={[2.34, 1.95, -1.5]}>
         <mesh>
           <boxGeometry args={[0.04, 0.1, 0.08]} />
-          <meshStandardMaterial color="#d4af37" metalness={0.9} roughness={0.3} />
+          <meshStandardMaterial color="#d4af37" metalness={0.6} roughness={0.4} />
         </mesh>
         <mesh position={[0, 0.06, 0]}>
           <torusGeometry args={[0.035, 0.008, 6, 12, Math.PI]} />
-          <meshStandardMaterial color="#94a3b8" metalness={0.95} />
+          <meshStandardMaterial color="#94a3b8" metalness={0.7} roughness={0.4} />
         </mesh>
       </group>
 
-      {/* Deep Subterranean Salvage Interior Void */}
+      {/* Subterranean Salvage Interior (Rich Slate Shadow, Not Void Black) */}
       <mesh position={[2.28, 1.1, 0]}>
         <planeGeometry args={[7.8, 2.1]} />
-        <meshBasicMaterial color="#080a0f" />
+        <meshBasicMaterial color="#1c2232" />
       </mesh>
 
       {/* Interior Clutter Ambient Point Lights */}
@@ -132,7 +132,7 @@ export function DebrisPawn() {
         <group key={`cables-${idx}`} position={[2.4 + idx * 0.1, 0.04, zPos]} rotation={[0, (idx - 1.5) * 0.3, 0]}>
           <mesh>
             <cylinderGeometry args={[0.032, 0.032, 2.2, 8]} />
-            <meshStandardMaterial color="#181a22" roughness={0.8} />
+            <meshStandardMaterial color="#2a3042" roughness={0.8} />
           </mesh>
           <mesh position={[0.05, 0, 0]}>
             <cylinderGeometry args={[0.02, 0.02, 2.0, 8]} />
@@ -157,18 +157,18 @@ export function DebrisPawn() {
         </mesh>
         <mesh position={[0, -0.7, 0]}>
           <boxGeometry args={[1.45, 0.1, 1.45]} />
-          <meshStandardMaterial color="#1a1c24" metalness={0.85} />
+          <meshStandardMaterial color="#282e40" metalness={0.3} roughness={0.8} />
         </mesh>
         {/* Robot Torso */}
         <mesh position={[0, 0.15, 0]} rotation={[0.2, 0.4, 0]}>
           <boxGeometry args={[0.55, 0.7, 0.35]} />
-          <meshStandardMaterial color="#272b38" metalness={0.85} roughness={0.3} />
+          <meshStandardMaterial color="#363c4e" metalness={0.4} roughness={0.7} />
         </mesh>
-        {/* Chrome Robot Skull Endoskeleton */}
+        {/* Robot Skull Endoskeleton */}
         <group position={[-0.2, 0.6, 0.1]} rotation={[0.1, 0.5, 0]}>
           <mesh>
             <sphereGeometry args={[0.12, 12, 12]} />
-            <meshStandardMaterial color="#94a3b8" metalness={0.95} roughness={0.15} />
+            <meshStandardMaterial color="#94a3b8" metalness={0.7} roughness={0.35} />
           </mesh>
           {/* Glowing Red Optical Socket */}
           <mesh position={[0.05, 0.02, 0.1]}>
@@ -176,10 +176,10 @@ export function DebrisPawn() {
             <meshBasicMaterial color="#FF0055" />
           </mesh>
         </group>
-        {/* Prosthetic Chrome Arm Hanging Out */}
+        {/* Prosthetic Arm Hanging Out */}
         <mesh position={[0.45, 0.0, 0.2]} rotation={[0, 0, -0.6]}>
           <cylinderGeometry args={[0.055, 0.045, 0.7, 8]} />
-          <meshStandardMaterial color="#cbd5e1" metalness={0.95} roughness={0.15} />
+          <meshStandardMaterial color="#cbd5e1" metalness={0.7} roughness={0.35} />
         </mesh>
       </group>
 
@@ -191,12 +191,12 @@ export function DebrisPawn() {
         </mesh>
         <mesh position={[0, -0.7, 0]}>
           <boxGeometry args={[1.45, 0.1, 1.45]} />
-          <meshStandardMaterial color="#1a1c24" metalness={0.85} />
+          <meshStandardMaterial color="#282e40" metalness={0.3} roughness={0.8} />
         </mesh>
         {/* Fusion Power Canister */}
         <mesh position={[-0.2, 0.05, 0]} rotation={[0, 0, 0.35]}>
           <cylinderGeometry args={[0.22, 0.22, 0.85, 14]} />
-          <meshStandardMaterial color="#222634" metalness={0.8} roughness={0.35} />
+          <meshStandardMaterial color="#343c50" metalness={0.35} roughness={0.7} />
         </mesh>
         <mesh position={[-0.2, 0.25, 0]}>
           <cylinderGeometry args={[0.24, 0.24, 0.07, 14]} />
@@ -208,14 +208,14 @@ export function DebrisPawn() {
       <group position={[1.65, 0, 0]}>
         <mesh position={[0, 0.07, 0]}>
           <boxGeometry args={[1.3, 0.14, 2.6]} />
-          <meshStandardMaterial color="#252834" roughness={0.8} metalness={0.4} />
+          <meshStandardMaterial color="#2a3040" roughness={0.8} metalness={0.25} />
         </mesh>
 
         {/* Monitor 1: Bottom Left (Green Phosphor Terminal Text) */}
         <group position={[0, 0.58, -0.7]}>
           <mesh>
             <boxGeometry args={[0.68, 0.58, 0.68]} />
-            <meshStandardMaterial color="#161822" roughness={0.7} />
+            <meshStandardMaterial color="#2d3346" roughness={0.8} />
           </mesh>
           {/* Screen with Bezel */}
           <mesh position={[0.35, 0, 0]}>
@@ -226,7 +226,7 @@ export function DebrisPawn() {
               emissive="#ffffff"
               emissiveMap={crtGreenTex || undefined}
               emissiveIntensity={0.95}
-              roughness={0.2}
+              roughness={0.5}
             />
           </mesh>
           {/* Power Switch & Contrast Dial */}
@@ -240,7 +240,7 @@ export function DebrisPawn() {
         <group position={[0, 0.58, 0.7]}>
           <mesh>
             <boxGeometry args={[0.68, 0.58, 0.68]} />
-            <meshStandardMaterial color="#161822" roughness={0.7} />
+            <meshStandardMaterial color="#2d3346" roughness={0.8} />
           </mesh>
           <mesh position={[0.35, 0, 0]}>
             <planeGeometry args={[0.48, 0.38]} />
@@ -250,7 +250,7 @@ export function DebrisPawn() {
               emissive="#ffffff"
               emissiveMap={crtAmberTex || undefined}
               emissiveIntensity={0.95}
-              roughness={0.2}
+              roughness={0.5}
             />
           </mesh>
         </group>
@@ -259,7 +259,7 @@ export function DebrisPawn() {
         <group position={[0, 1.12, -0.15]} rotation={[0, 0.08, -0.04]}>
           <mesh>
             <boxGeometry args={[0.64, 0.54, 0.64]} />
-            <meshStandardMaterial color="#161822" roughness={0.7} />
+            <meshStandardMaterial color="#2d3346" roughness={0.8} />
           </mesh>
           <mesh position={[0.33, 0, 0]}>
             <planeGeometry args={[0.44, 0.34]} />
@@ -269,7 +269,7 @@ export function DebrisPawn() {
               emissive="#ffffff"
               emissiveMap={crtGreenTex || undefined}
               emissiveIntensity={0.95}
-              roughness={0.2}
+              roughness={0.5}
             />
           </mesh>
         </group>
@@ -279,7 +279,7 @@ export function DebrisPawn() {
       <group position={[2.35, 5.2, -4.6]}>
         <mesh>
           <cylinderGeometry args={[0.12, 0.16, 0.28, 12]} />
-          <meshStandardMaterial color="#222530" metalness={0.9} />
+          <meshStandardMaterial color="#32384a" metalness={0.3} roughness={0.75} />
         </mesh>
         <mesh ref={beaconMeshRef} position={[0, 0.2, 0]}>
           <sphereGeometry args={[0.16, 12, 12]} />
@@ -291,7 +291,7 @@ export function DebrisPawn() {
       <group position={[2.35, 5.2, 4.6]}>
         <mesh>
           <cylinderGeometry args={[0.12, 0.16, 0.28, 12]} />
-          <meshStandardMaterial color="#222530" metalness={0.9} />
+          <meshStandardMaterial color="#32384a" metalness={0.3} roughness={0.75} />
         </mesh>
         <mesh ref={beaconMesh2Ref} position={[0, 0.2, 0]}>
           <sphereGeometry args={[0.16, 12, 12]} />
@@ -304,7 +304,7 @@ export function DebrisPawn() {
       <group position={[2.38, 4.4, 0]}>
         <mesh position={[-0.04, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
           <planeGeometry args={[6.8, 1.3]} />
-          <meshStandardMaterial color="#10121a" roughness={0.7} metalness={0.6} />
+          <meshStandardMaterial color="#252c3e" roughness={0.75} metalness={0.25} />
         </mesh>
         <mesh position={[-0.02, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
           <planeGeometry args={[6.95, 1.45]} />
@@ -317,7 +317,7 @@ export function DebrisPawn() {
             emissive="#05FFA1"
             emissiveMap={marqueeTex || undefined}
             emissiveIntensity={0.95}
-            roughness={0.2}
+            roughness={0.6}
           />
         </mesh>
         <pointLight ref={sparkFlashRef} position={[0.2, 0, 0]} color="#00F3FF" intensity={0} distance={5} decay={2} />

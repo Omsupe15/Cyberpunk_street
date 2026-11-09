@@ -13,9 +13,9 @@ const CyberpunkLensShader = {
   name: 'CyberpunkLensShader',
   uniforms: {
     tDiffuse: { value: null },
-    offset: { value: 0.0008 },
-    darkness: { value: 0.22 },
-    vignetteOffset: { value: 0.42 },
+    offset: { value: 0.0006 },
+    darkness: { value: 0.16 },
+    vignetteOffset: { value: 0.50 },
   },
   vertexShader: `
     varying vec2 vUv;
@@ -36,8 +36,8 @@ const CyberpunkLensShader = {
       
       // Chromatic Aberration at perimeter
       float dist = length(distFromCenter);
-      vec2 redUv = vUv + distFromCenter * offset * dist * 1.8;
-      vec2 blueUv = vUv - distFromCenter * offset * dist * 1.8;
+      vec2 redUv = vUv + distFromCenter * offset * dist * 1.5;
+      vec2 blueUv = vUv - distFromCenter * offset * dist * 1.5;
 
       float r = texture2D(tDiffuse, redUv).r;
       float g = texture2D(tDiffuse, vUv).g;
@@ -46,8 +46,8 @@ const CyberpunkLensShader = {
 
       vec4 color = vec4(r, g, b, a);
 
-      // Controlled Cinematic Vignette
-      float vignette = smoothstep(0.82, vignetteOffset, dist);
+      // Controlled Cinematic Vignette (Soft edges, no dark black corners)
+      float vignette = smoothstep(0.85, vignetteOffset, dist);
       color.rgb = mix(color.rgb * (1.0 - darkness), color.rgb, vignette);
 
       gl_FragColor = color;
@@ -68,12 +68,12 @@ export function PostEffects() {
     composer.addPass(renderPass);
 
     // 3. Selective Clean Unreal Bloom Pass:
-    // Threshold 0.86 ensures ONLY true emissive neon and lit windows bloom with warm halation, never diffuse road or walls
+    // Threshold 0.88, strength 0.65, radius 0.40 prevents light from flooding camera while keeping neon signs vibrant
     const bloomPass = new UnrealBloomPass(
       new THREE.Vector2(size.width, size.height),
-      1.15, // strength (rich, vibrant neon glow)
-      0.55, // radius
-      0.86  // threshold (isolates true neon emitters, eliminating blowout)
+      0.65, // strength (controlled, prevents light flooding the camera)
+      0.40, // radius (focused, crisp halation)
+      0.88  // threshold (isolates true neon emitters, eliminating blowout)
     );
     composer.addPass(bloomPass);
 

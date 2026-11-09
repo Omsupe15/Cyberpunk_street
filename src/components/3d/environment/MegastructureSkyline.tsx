@@ -155,13 +155,13 @@ export function MegastructureSkyline() {
 
         return (
           <group key={`bldg-${idx}`} position={[b.x, 0, b.z]}>
-            {/* Main Skyscraper Structural Mass (Deep Midnight Slate & Structural Steel) */}
+            {/* Main Skyscraper Structural Mass (Matte Slate & Structural Steel) */}
             <mesh position={[0, b.height / 2, 0]} receiveShadow>
               <boxGeometry args={[b.width, b.height, b.depth]} />
               <meshStandardMaterial
-                color="#161a26"
-                roughness={0.65}
-                metalness={0.45}
+                color="#202538"
+                roughness={0.85}
+                metalness={0.2}
               />
             </mesh>
 
@@ -174,8 +174,8 @@ export function MegastructureSkyline() {
               <meshStandardMaterial
                 map={tex}
                 color="#ffffff"
-                roughness={0.2}
-                metalness={0.8}
+                roughness={0.6}
+                metalness={0.2}
                 emissive="#ffffff"
                 emissiveMap={tex}
                 emissiveIntensity={0.95}
@@ -192,7 +192,7 @@ export function MegastructureSkyline() {
                     <group key={`step-${sIdx}`} position={[0, yStep + 1.2, 0]}>
                       <mesh>
                         <boxGeometry args={[b.width * scale, 2.2, b.depth * scale]} />
-                        <meshStandardMaterial color="#1a1c26" metalness={0.85} />
+                        <meshStandardMaterial color="#282f44" roughness={0.8} metalness={0.25} />
                       </mesh>
                       {/* Illuminated Golden Eaves Slat */}
                       <mesh position={[0, 1.15, 0]}>
@@ -210,7 +210,7 @@ export function MegastructureSkyline() {
               <group position={[0, b.height + 4, 0]}>
                 <mesh>
                   <cylinderGeometry args={[b.width * 0.25, b.width * 0.45, 8, 20]} />
-                  <meshStandardMaterial color="#00F3FF" transparent opacity={0.6} metalness={0.9} />
+                  <meshStandardMaterial color="#00F3FF" transparent opacity={0.6} metalness={0.4} roughness={0.5} />
                 </mesh>
                 <mesh position={[0, 4.2, 0]}>
                   <torusGeometry args={[b.width * 0.26, 0.08, 8, 24]} />
@@ -224,7 +224,7 @@ export function MegastructureSkyline() {
               <group position={[0, b.height + 4.5, 0]}>
                 <mesh rotation={[0, Math.PI / 4, 0]}>
                   <coneGeometry args={[b.width * 0.55, 9, 4]} />
-                  <meshStandardMaterial color="#161822" metalness={0.85} roughness={0.25} />
+                  <meshStandardMaterial color="#282f44" metalness={0.25} roughness={0.8} />
                 </mesh>
                 {/* Glowing Diamond Tip */}
                 <mesh position={[0, 4.8, 0]}>
@@ -251,7 +251,7 @@ export function MegastructureSkyline() {
             {/* Rooftop Telecommunications Antenna Spire */}
             <mesh position={[0, b.height + 15.5, 0]}>
               <cylinderGeometry args={[0.06, 0.2, 14, 8]} />
-              <meshStandardMaterial color="#555" metalness={0.9} />
+              <meshStandardMaterial color="#3a4258" metalness={0.6} roughness={0.4} />
             </mesh>
           </group>
         );
@@ -274,7 +274,7 @@ export function MegastructureSkyline() {
                 {/* Structural Steel Truss Mounting Frame */}
                 <mesh position={[0, 0, -0.1]}>
                   <boxGeometry args={[11.2, 5.2, 0.2]} />
-                  <meshStandardMaterial color="#12141c" metalness={0.9} roughness={0.3} />
+                  <meshStandardMaterial color="#252c3e" metalness={0.25} roughness={0.75} />
                 </mesh>
                 {/* Outer Hologram Support Cage */}
                 <mesh position={[0, 0, -0.04]}>
@@ -285,10 +285,10 @@ export function MegastructureSkyline() {
                 <mesh>
                   <planeGeometry args={[10.5, 4.5]} />
                   <meshStandardMaterial
-                    color="#080a12"
+                    color="#1e2436"
                     emissive={b.billboard!.color}
                     emissiveIntensity={0.8}
-                    roughness={0.2}
+                    roughness={0.6}
                   />
                 </mesh>
                 {/* Controlled Point Light casting soft billboard color */}
@@ -309,7 +309,7 @@ export function MegastructureSkyline() {
         <group key={`skybridge-${sbIdx}`} position={[0, sb.y, sb.z]}>
           <mesh>
             <boxGeometry args={[56, 3.8, 4.6]} />
-            <meshStandardMaterial color="#151722" roughness={0.5} metalness={0.85} />
+            <meshStandardMaterial color="#252c40" roughness={0.8} metalness={0.2} />
           </mesh>
           <mesh position={[0, 0, 2.32]}>
             <planeGeometry args={[54, 1.6]} />
