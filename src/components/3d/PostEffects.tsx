@@ -68,12 +68,12 @@ export function PostEffects() {
     composer.addPass(renderPass);
 
     // 3. Selective Clean Unreal Bloom Pass:
-    // Threshold 0.90 ensures ONLY true emissive neon and lit windows bloom, never diffuse road or walls
+    // Threshold 0.86 ensures ONLY true emissive neon and lit windows bloom with warm halation, never diffuse road or walls
     const bloomPass = new UnrealBloomPass(
       new THREE.Vector2(size.width, size.height),
-      0.55, // strength (clean, refined glow matching reference photo)
-      0.35, // radius
-      0.90  // threshold (isolates true neon emitters, eliminating blinding blowout)
+      1.15, // strength (rich, vibrant neon glow)
+      0.55, // radius
+      0.86  // threshold (isolates true neon emitters, eliminating blowout)
     );
     composer.addPass(bloomPass);
 

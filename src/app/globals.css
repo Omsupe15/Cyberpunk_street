@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #05050a;
+  --background: #0a0e1a; /* Soft midnight navy instead of #05050a */
   --foreground: #f3f4f6;
 }
 
@@ -19,7 +19,7 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #05050a;
+  background: #0a0e1a;
 }
 ::-webkit-scrollbar-thumb {
   background: #00f3ff;

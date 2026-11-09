@@ -26,18 +26,18 @@ export function SceneCanvas() {
           toneMappingExposure: 1.05,
         }}
       >
-        {/* Luminous Neon Cyber-Blue Night Sky (No Black in Background) */}
-        <color attach="background" args={['#0c2c62']} />
+        {/* 1. Sky background: Deep Midnight Slate (Atmospheric City Twilight) */}
+        <color attach="background" args={['#0e1422']} />
         
-        {/* Atmospheric Luminous Cyber-Blue Night Fog */}
-        <fog attach="fog" args={['#0f356e', 90, 320]} />
+        {/* 2. Atmospheric City Fog: Soft glowing smog that catches neon */}
+        <fog attach="fog" args={['#12192a', 30, 190]} />
 
-        {/* Rich Ambient Skylight - Vibrant Cobalt Blue & Electric Cyan Tone */}
-        <ambientLight intensity={1.05} color="#2b6cb0" />
-        <hemisphereLight args={['#4299e1', '#1a4e8a', 0.85]} />
+        {/* 3. Balanced Ambient Light: Lifts shadows so textures and grain are visible */}
+        <ambientLight intensity={0.80} color="#2a334a" />
+        <hemisphereLight args={['#64748b', '#181e2e', 0.70]} />
         
-        {/* Downward moonlight wash for clear blue surface visibility */}
-        <directionalLight position={[20, 80, 10]} intensity={0.70} color="#a0d8ff" />
+        {/* 4. Directional Moonlight / Sky Rim: */}
+        <directionalLight position={[20, 80, 10]} intensity={0.75} color="#93c5fd" />
 
         <Suspense fallback={null}>
           <CameraRig />

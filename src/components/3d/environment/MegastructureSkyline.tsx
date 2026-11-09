@@ -35,12 +35,12 @@ export function MegastructureSkyline() {
     setFacadeTextures(list);
   }, []);
 
-  // Distinct Skyscraper Archetypes pushed back into the midground (X = -28 to -34 and +28 to +34)
+  // Distinct Skyscraper Archetypes pushed back into the midground (X = -29 to -34 and +29 to +34)
   const buildings: Skyscraper[] = useMemo(() => {
     const list: Skyscraper[] = [];
     const zStops = [14, -12, -36, -60, -84, -108, -132, -156, -180];
 
-    // Left Flank Supertowers (X: -28m to -33m)
+    // Left Flank Supertowers (X: -29m to -33m)
     zStops.forEach((z, idx) => {
       const height = 58 + (idx * 9) % 40;
       const archetypes: ('pagoda' | 'curved' | 'pyramid' | 'truss')[] = [
@@ -75,7 +75,7 @@ export function MegastructureSkyline() {
       });
     });
 
-    // Right Flank Supertowers (X: +28m to +33m)
+    // Right Flank Supertowers (X: +29m to +33m)
     zStops.forEach((z, idx) => {
       const height = 56 + ((idx + 2) * 8) % 42;
       const archetypes: ('pagoda' | 'curved' | 'pyramid' | 'truss')[] = [
@@ -113,12 +113,12 @@ export function MegastructureSkyline() {
     return list;
   }, []);
 
-  // Skybridges connecting skyscrapers high above the street
+  // Skybridges connecting skyscrapers high above the street (Elevated to Y: 38m - 46m)
   const skybridges = useMemo(() => {
     return [
       { z: -20, y: 38 },
       { z: -86, y: 44 },
-      { z: -148, y: 36 },
+      { z: -148, y: 40 },
     ];
   }, []);
 
@@ -155,13 +155,13 @@ export function MegastructureSkyline() {
 
         return (
           <group key={`bldg-${idx}`} position={[b.x, 0, b.z]}>
-            {/* Main Skyscraper Structural Mass (Vibrant Cyber Blue / Neon Sapphire Architecture) */}
+            {/* Main Skyscraper Structural Mass (Deep Midnight Slate & Structural Steel) */}
             <mesh position={[0, b.height / 2, 0]} receiveShadow>
               <boxGeometry args={[b.width, b.height, b.depth]} />
               <meshStandardMaterial
-                color="#1a528e"
-                roughness={0.4}
-                metalness={0.5}
+                color="#161a26"
+                roughness={0.65}
+                metalness={0.45}
               />
             </mesh>
 
@@ -192,7 +192,7 @@ export function MegastructureSkyline() {
                     <group key={`step-${sIdx}`} position={[0, yStep + 1.2, 0]}>
                       <mesh>
                         <boxGeometry args={[b.width * scale, 2.2, b.depth * scale]} />
-                        <meshStandardMaterial color="#2064aa" metalness={0.8} />
+                        <meshStandardMaterial color="#1a1c26" metalness={0.85} />
                       </mesh>
                       {/* Illuminated Golden Eaves Slat */}
                       <mesh position={[0, 1.15, 0]}>
@@ -206,7 +206,7 @@ export function MegastructureSkyline() {
             )}
 
             {b.archetype === 'curved' && (
-              // Shanghai Tower Curved Aerodynamic Crown
+              // Curved Aerodynamic Crown
               <group position={[0, b.height + 4, 0]}>
                 <mesh>
                   <cylinderGeometry args={[b.width * 0.25, b.width * 0.45, 8, 20]} />
@@ -224,7 +224,7 @@ export function MegastructureSkyline() {
               <group position={[0, b.height + 4.5, 0]}>
                 <mesh rotation={[0, Math.PI / 4, 0]}>
                   <coneGeometry args={[b.width * 0.55, 9, 4]} />
-                  <meshStandardMaterial color="#1e60a4" metalness={0.85} roughness={0.2} />
+                  <meshStandardMaterial color="#161822" metalness={0.85} roughness={0.25} />
                 </mesh>
                 {/* Glowing Diamond Tip */}
                 <mesh position={[0, 4.8, 0]}>
@@ -251,7 +251,7 @@ export function MegastructureSkyline() {
             {/* Rooftop Telecommunications Antenna Spire */}
             <mesh position={[0, b.height + 15.5, 0]}>
               <cylinderGeometry args={[0.06, 0.2, 14, 8]} />
-              <meshStandardMaterial color="#777" metalness={0.9} />
+              <meshStandardMaterial color="#555" metalness={0.9} />
             </mesh>
           </group>
         );
@@ -274,7 +274,7 @@ export function MegastructureSkyline() {
                 {/* Structural Steel Truss Mounting Frame */}
                 <mesh position={[0, 0, -0.1]}>
                   <boxGeometry args={[11.2, 5.2, 0.2]} />
-                  <meshStandardMaterial color="#0a2948" metalness={0.9} roughness={0.3} />
+                  <meshStandardMaterial color="#12141c" metalness={0.9} roughness={0.3} />
                 </mesh>
                 {/* Outer Hologram Support Cage */}
                 <mesh position={[0, 0, -0.04]}>
@@ -287,7 +287,7 @@ export function MegastructureSkyline() {
                   <meshStandardMaterial
                     color="#080a12"
                     emissive={b.billboard!.color}
-                    emissiveIntensity={0.7}
+                    emissiveIntensity={0.8}
                     roughness={0.2}
                   />
                 </mesh>
@@ -295,8 +295,8 @@ export function MegastructureSkyline() {
                 <pointLight
                   position={[0, 0, 1.0]}
                   color={b.billboard!.color}
-                  intensity={0.6}
-                  distance={8}
+                  intensity={0.65}
+                  distance={9}
                   decay={2}
                 />
               </group>
@@ -304,12 +304,12 @@ export function MegastructureSkyline() {
           })}
       </group>
 
-      {/* 3. Illuminated Skybridges with Structural Trusses */}
+      {/* 3. Illuminated Skybridges with Structural Trusses (Elevated high above) */}
       {skybridges.map((sb, sbIdx) => (
         <group key={`skybridge-${sbIdx}`} position={[0, sb.y, sb.z]}>
           <mesh>
             <boxGeometry args={[56, 3.8, 4.6]} />
-            <meshStandardMaterial color="#185292" roughness={0.5} metalness={0.8} />
+            <meshStandardMaterial color="#151722" roughness={0.5} metalness={0.85} />
           </mesh>
           <mesh position={[0, 0, 2.32]}>
             <planeGeometry args={[54, 1.6]} />
