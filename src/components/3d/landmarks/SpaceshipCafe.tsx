@@ -20,8 +20,8 @@ export function SpaceshipCafe() {
       getHorizontalMarqueeTexture(
         'SPACESHIP CAFE & RECHARGE',
         '宇宙船 カフェ // FREIGHTER DOCK',
-        '#FFAA00',
-        '#ffffff'
+        '#fbbf24',
+        '#f8fafc'
       )
     );
   }, []);
@@ -76,30 +76,30 @@ export function SpaceshipCafe() {
       {/* 1. Cafe Main Two-Story Building Structure (Matte Architectural Slate) */}
       <mesh position={[0, 3.2, 0]} receiveShadow>
         <boxGeometry args={[5.2, 6.4, 13.5]} />
-        <meshStandardMaterial color="#252938" roughness={0.85} metalness={0.2} />
+        <meshStandardMaterial color="#1f2638" roughness={0.85} metalness={0.2} />
       </mesh>
 
       {/* Roofline Glowing Neon Amber Ribbon */}
       <mesh position={[-2.62, 6.42, 0]} rotation={[0, -Math.PI / 2, 0]}>
         <planeGeometry args={[13.5, 0.08]} />
-        <meshBasicMaterial color="#FFAA00" />
+        <meshBasicMaterial color="#fbbf24" />
       </mesh>
 
-      {/* Recessed Ground Floor Cafe Bistro Interior (Matte Slate Interior) */}
+      {/* Recessed Ground Floor Cafe Bistro Interior (Warm Izakaya Bistro Slate) */}
       <mesh position={[-0.4, 1.8, 0]}>
         <boxGeometry args={[4.2, 3.4, 12.2]} />
-        <meshStandardMaterial color="#282d3e" roughness={0.85} metalness={0.15} />
+        <meshStandardMaterial color="#252028" roughness={0.85} metalness={0.15} />
       </mesh>
 
       {/* Ground Floor Panoramic Anti-Reflective Storefront Glass */}
       <mesh position={[-2.42, 1.8, 0]} rotation={[0, -Math.PI / 2, 0]}>
         <planeGeometry args={[12.2, 3.4]} />
         <meshStandardMaterial
-          color="#ffb347"
+          color="#fbbf24"
           roughness={0.4}
           metalness={0.3}
           transparent
-          opacity={0.18}
+          opacity={0.16}
         />
       </mesh>
 
@@ -107,7 +107,7 @@ export function SpaceshipCafe() {
       {[-5.4, -2.7, 0, 2.7, 5.4].map((zPos, idx) => (
         <mesh key={idx} position={[-2.44, 1.8, zPos]}>
           <boxGeometry args={[0.08, 3.5, 0.08]} />
-          <meshStandardMaterial color="#343c50" metalness={0.4} roughness={0.7} />
+          <meshStandardMaterial color="#343c50" metalness={0.4} roughness={0.75} />
         </mesh>
       ))}
 
@@ -116,12 +116,12 @@ export function SpaceshipCafe() {
         {/* Main Bar Top */}
         <mesh position={[0, 0, 0]}>
           <boxGeometry args={[0.8, 0.1, 7.5]} />
-          <meshStandardMaterial color="#2a2f3f" roughness={0.7} metalness={0.3} />
+          <meshStandardMaterial color="#2c221e" roughness={0.75} metalness={0.2} />
         </mesh>
         {/* Glowing Under-Counter Accent Slat */}
         <mesh position={[-0.41, -0.06, 0]} rotation={[0, -Math.PI / 2, 0]}>
           <planeGeometry args={[7.5, 0.05]} />
-          <meshBasicMaterial color="#FFAA00" />
+          <meshBasicMaterial color="#fbbf24" />
         </mesh>
 
         {/* Detailed Chrome Espresso Machine with Dual Steam Wands & Gauges */}
@@ -133,7 +133,7 @@ export function SpaceshipCafe() {
           {/* Pressure Gauge */}
           <mesh position={[-0.23, 0.1, 0.1]} rotation={[0, -Math.PI / 2, 0]}>
             <circleGeometry args={[0.045, 12]} />
-            <meshBasicMaterial color="#00F3FF" />
+            <meshBasicMaterial color="#00e5ff" />
           </mesh>
           {/* Chrome Portafilter Handles */}
           <mesh position={[-0.26, -0.05, -0.12]} rotation={[0, 0, Math.PI / 2]}>
@@ -151,7 +151,7 @@ export function SpaceshipCafe() {
           <group key={`bottle-${bIdx}`} position={[0.8, 0.6, zVal]}>
             <mesh>
               <cylinderGeometry args={[0.045, 0.045, 0.26, 8]} />
-              <meshBasicMaterial color={bIdx % 3 === 0 ? '#FFAA00' : bIdx % 2 === 0 ? '#00F3FF' : '#FF0055'} />
+              <meshBasicMaterial color={bIdx % 3 === 0 ? '#fbbf24' : bIdx % 2 === 0 ? '#00e5ff' : '#ff2a6d'} />
             </mesh>
           </group>
         ))}
@@ -162,112 +162,112 @@ export function SpaceshipCafe() {
         {/* Main Aerodynamic Titanium Hull Plating (Matte Aerospace Slate Alloy) */}
         <mesh position={[0, 0, 0]} rotation={[0, 0, -0.04]}>
           <cylinderGeometry args={[1.5, 1.7, 9.8, 20]} />
-          <meshStandardMaterial color="#42495a" roughness={0.70} metalness={0.45} />
+          <meshStandardMaterial color="#3c4356" roughness={0.75} metalness={0.4} />
         </mesh>
 
         {/* Hull Seam Division Ring Strips (Glowing Plasma Amber) */}
         {[-3.0, -1.0, 1.0, 3.0].map((zRing, rIdx) => (
           <mesh key={`seam-${rIdx}`} position={[0, 0, zRing]}>
             <torusGeometry args={[1.62, 0.02, 8, 24]} />
-            <meshBasicMaterial color="#FFAA00" />
+            <meshBasicMaterial color="#fbbf24" />
           </mesh>
         ))}
 
         {/* Cantilever Landing Gear Hydraulic Struts Supporting Hull */}
         <mesh position={[-1.2, -1.1, -2.5]} rotation={[0, 0, 0.3]}>
           <cylinderGeometry args={[0.06, 0.08, 1.5, 8]} />
-          <meshStandardMaterial color="#343c50" metalness={0.3} roughness={0.75} />
+          <meshStandardMaterial color="#2a3348" metalness={0.3} roughness={0.75} />
         </mesh>
         <mesh position={[-1.2, -1.1, 2.5]} rotation={[0, 0, 0.3]}>
           <cylinderGeometry args={[0.06, 0.08, 1.5, 8]} />
-          <meshStandardMaterial color="#343c50" metalness={0.3} roughness={0.75} />
+          <meshStandardMaterial color="#2a3348" metalness={0.3} roughness={0.75} />
         </mesh>
 
         {/* Maintenance Fuel Intake Port with Amber Hazard Ring */}
         <group position={[-1.6, 0.2, 1.5]} rotation={[0, -Math.PI / 2, 0]}>
           <mesh>
             <cylinderGeometry args={[0.2, 0.2, 0.04, 16]} />
-            <meshStandardMaterial color="#2a3040" metalness={0.3} roughness={0.75} />
+            <meshStandardMaterial color="#22293c" metalness={0.3} roughness={0.75} />
           </mesh>
           <mesh position={[0, 0.025, 0]}>
             <ringGeometry args={[0.12, 0.18, 16]} />
-            <meshBasicMaterial color="#FFAA00" />
+            <meshBasicMaterial color="#fbbf24" />
           </mesh>
         </group>
 
         {/* Cockpit Tapered Nose Cone */}
         <mesh position={[0, 0, 5.4]} rotation={[Math.PI / 2, 0, 0]}>
           <coneGeometry args={[1.5, 2.0, 20]} />
-          <meshStandardMaterial color="#3a4050" roughness={0.70} metalness={0.45} />
+          <meshStandardMaterial color="#343c4e" roughness={0.75} metalness={0.4} />
         </mesh>
 
         {/* Tinted Cockpit Observation Dome */}
         <mesh position={[0, 0.75, 4.2]} rotation={[0.4, 0, 0]}>
           <sphereGeometry args={[1.1, 16, 16, 0, Math.PI * 2, 0, Math.PI / 2]} />
           <meshStandardMaterial
-            color="#00F3FF"
+            color="#00e5ff"
             roughness={0.4}
             metalness={0.5}
             transparent
-            opacity={0.4}
+            opacity={0.35}
           />
         </mesh>
 
         {/* Interior Cockpit Flight Instrument Dial Display */}
         <mesh position={[0, 0.65, 4.1]}>
           <boxGeometry args={[0.55, 0.06, 0.28]} />
-          <meshBasicMaterial color="#00F3FF" />
+          <meshBasicMaterial color="#00e5ff" />
         </mesh>
 
         {/* Aerodynamic Delta Winglets with Nav Lights & Rivets */}
         <mesh position={[-2.2, -0.3, 0]} rotation={[0, 0, 0.15]}>
           <boxGeometry args={[2.0, 0.08, 3.5]} />
-          <meshStandardMaterial color="#3c4354" metalness={0.35} roughness={0.75} />
+          <meshStandardMaterial color="#363d50" metalness={0.35} roughness={0.75} />
         </mesh>
         <mesh position={[-3.2, -0.15, -1.2]}>
           <sphereGeometry args={[0.06, 8, 8]} />
-          <meshBasicMaterial color="#FFAA00" />
+          <meshBasicMaterial color="#fbbf24" />
         </mesh>
 
         <mesh position={[2.2, -0.3, 0]} rotation={[0, 0, -0.15]}>
           <boxGeometry args={[2.0, 0.08, 3.5]} />
-          <meshStandardMaterial color="#3c4354" metalness={0.35} roughness={0.75} />
+          <meshStandardMaterial color="#363d50" metalness={0.35} roughness={0.75} />
         </mesh>
         <mesh position={[3.2, -0.15, -1.2]}>
           <sphereGeometry args={[0.06, 8, 8]} />
-          <meshBasicMaterial color="#FFAA00" />
+          <meshBasicMaterial color="#fbbf24" />
         </mesh>
 
         {/* Tail Fin with Beacon */}
         <mesh position={[0, 2.0, -4.0]} rotation={[-0.2, 0, 0]}>
           <boxGeometry args={[0.08, 1.4, 1.2]} />
-          <meshStandardMaterial color="#42495a" metalness={0.35} roughness={0.75} />
+          <meshStandardMaterial color="#3c4356" metalness={0.35} roughness={0.75} />
         </mesh>
         <mesh ref={beaconRef} position={[0, 2.7, -4.2]}>
           <sphereGeometry args={[0.08, 8, 8]} />
-          <meshBasicMaterial color="#FFAA00" transparent opacity={1} />
+          <meshBasicMaterial color="#fbbf24" transparent opacity={1} />
         </mesh>
 
         {/* Dual High-Bypass Ion Thruster Nacelles with Intake Blades */}
         <group position={[1.4, -0.85, -2.2]} rotation={[0, 0, 0.2]}>
           <mesh>
             <cylinderGeometry args={[0.44, 0.54, 1.6, 18]} />
-            <meshStandardMaterial color="#2e3344" metalness={0.35} roughness={0.75} />
+            <meshStandardMaterial color="#262d3e" metalness={0.35} roughness={0.75} />
           </mesh>
           <mesh position={[0, -0.78, 0]}>
             <cylinderGeometry args={[0.36, 0.36, 0.12, 18]} />
-            <meshBasicMaterial color="#FFAA00" />
+            <meshBasicMaterial color="#fbbf24" />
           </mesh>
         </group>
 
         <group position={[1.4, -0.85, 2.2]} rotation={[0, 0, 0.2]}>
           <mesh>
             <cylinderGeometry args={[0.44, 0.54, 1.6, 18]} />
-            <meshStandardMaterial color="#2e3344" metalness={0.35} roughness={0.75} />
+            <meshStandardMaterial color="#262d3e" metalness={0.35} roughness={0.75} />
           </mesh>
           <mesh position={[0, -0.78, 0]}>
             <cylinderGeometry args={[0.36, 0.36, 0.12, 18]} />
-            <meshBasicMaterial color="#FFAA00" />
+            <meshBasicMaterial color="#fbbf24" />
           </mesh>
         </group>
 
@@ -285,11 +285,11 @@ export function SpaceshipCafe() {
           {/* Outer Plasma Amber Flare */}
           <mesh position={[1.4, -1.8, -2.2]} rotation={[Math.PI, 0, 0]}>
             <coneGeometry args={[0.38, 1.3, 12]} />
-            <meshBasicMaterial color="#FFAA00" transparent opacity={0.7} />
+            <meshBasicMaterial color="#fbbf24" transparent opacity={0.7} />
           </mesh>
           <mesh position={[1.4, -1.8, 2.2]} rotation={[Math.PI, 0, 0]}>
             <coneGeometry args={[0.38, 1.3, 12]} />
-            <meshBasicMaterial color="#FFAA00" transparent opacity={0.7} />
+            <meshBasicMaterial color="#fbbf24" transparent opacity={0.7} />
           </mesh>
         </group>
       </group>
@@ -298,11 +298,11 @@ export function SpaceshipCafe() {
       <group ref={holoMugRef} position={[-2.8, 5.8, 0]}>
         <mesh>
           <cylinderGeometry args={[0.48, 0.4, 0.95, 18]} />
-          <meshBasicMaterial color="#00F3FF" wireframe />
+          <meshBasicMaterial color="#00e5ff" wireframe />
         </mesh>
         <mesh position={[0.5, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
           <torusGeometry args={[0.25, 0.05, 8, 16]} />
-          <meshBasicMaterial color="#00F3FF" />
+          <meshBasicMaterial color="#00e5ff" />
         </mesh>
 
         {/* Rising Holographic Steam Rings */}
@@ -310,7 +310,7 @@ export function SpaceshipCafe() {
           {[0, 1, 2].map((i) => (
             <mesh key={i} rotation={[-Math.PI / 2, 0, 0]}>
               <ringGeometry args={[0.18, 0.26, 16]} />
-              <meshBasicMaterial color="#00F3FF" transparent opacity={0.7} />
+              <meshBasicMaterial color="#00e5ff" transparent opacity={0.7} />
             </mesh>
           ))}
         </group>
@@ -321,7 +321,7 @@ export function SpaceshipCafe() {
         {/* Metal Backplate Frame with Standoff Bolts */}
         <mesh rotation={[0, -Math.PI / 2, 0]}>
           <planeGeometry args={[7.2, 1.3]} />
-          <meshStandardMaterial color="#252c3e" metalness={0.25} roughness={0.75} />
+          <meshStandardMaterial color="#1f263a" metalness={0.25} roughness={0.75} />
         </mesh>
         {/* Mounting Standoff Brackets */}
         {[-3.4, -1.7, 1.7, 3.4].map((zB, idx) => (
@@ -333,14 +333,14 @@ export function SpaceshipCafe() {
         {/* Outer Neon Wireframe Border */}
         <mesh position={[-0.02, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
           <planeGeometry args={[7.35, 1.45]} />
-          <meshBasicMaterial color="#FFAA00" wireframe />
+          <meshBasicMaterial color="#fbbf24" wireframe />
         </mesh>
         {/* Main Neon Faceplate with English-First Bilingual Canvas Texture */}
         <mesh position={[-0.04, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
           <planeGeometry args={[7.0, 1.15]} />
           <meshStandardMaterial
             map={marqueeTex || undefined}
-            emissive="#FFAA00"
+            emissive="#fbbf24"
             emissiveMap={marqueeTex || undefined}
             emissiveIntensity={0.95}
             roughness={0.6}
@@ -352,11 +352,11 @@ export function SpaceshipCafe() {
       <group ref={holoMenuRef} position={[-2.6, 1.9, -1.8]}>
         <mesh rotation={[0, -Math.PI / 2, 0]}>
           <planeGeometry args={[1.4, 2.0]} />
-          <meshBasicMaterial color="#00F3FF" transparent opacity={0.65} wireframe />
+          <meshBasicMaterial color="#00e5ff" transparent opacity={0.65} wireframe />
         </mesh>
         <mesh position={[-0.02, 0.8, 0]} rotation={[0, -Math.PI / 2, 0]}>
           <planeGeometry args={[1.2, 0.15]} />
-          <meshBasicMaterial color="#FFAA00" />
+          <meshBasicMaterial color="#fbbf24" />
         </mesh>
       </group>
 
@@ -366,35 +366,35 @@ export function SpaceshipCafe() {
           {/* Bistro Table (Matte finish) */}
           <mesh position={[0, 0.45, 0]}>
             <cylinderGeometry args={[0.42, 0.42, 0.04, 16]} />
-            <meshStandardMaterial color="#2e3446" metalness={0.3} roughness={0.75} />
+            <meshStandardMaterial color="#262e3e" metalness={0.3} roughness={0.75} />
           </mesh>
           <mesh position={[0, 0.22, 0]}>
             <cylinderGeometry args={[0.04, 0.04, 0.44, 8]} />
-            <meshStandardMaterial color="#FFAA00" metalness={0.5} roughness={0.5} />
+            <meshStandardMaterial color="#fbbf24" metalness={0.4} roughness={0.6} />
           </mesh>
           <mesh position={[0, 0.02, 0]}>
             <cylinderGeometry args={[0.25, 0.25, 0.04, 16]} />
-            <meshStandardMaterial color="#262c3e" metalness={0.3} roughness={0.75} />
+            <meshStandardMaterial color="#22293a" metalness={0.3} roughness={0.75} />
           </mesh>
           {/* Miniature Espresso Cup & Saucer on Table */}
           <group position={[0.08, 0.49, 0.05]}>
             <mesh position={[0, 0.01, 0]}>
               <cylinderGeometry args={[0.08, 0.06, 0.02, 12]} />
-              <meshStandardMaterial color="#f4f4f5" roughness={0.6} />
+              <meshStandardMaterial color="#f1f5f9" roughness={0.6} />
             </mesh>
             <mesh position={[0, 0.045, 0]}>
               <cylinderGeometry args={[0.05, 0.04, 0.06, 12]} />
-              <meshStandardMaterial color="#FFAA00" metalness={0.4} roughness={0.6} />
+              <meshStandardMaterial color="#fbbf24" metalness={0.4} roughness={0.6} />
             </mesh>
           </group>
         </group>
       ))}
 
       {/* 7. Localized Architectural Accent Lights (Warm Golden Bistro Spill) */}
-      <pointLight position={[-2.6, 4.8, 0]} color="#FFAA00" intensity={1.1} distance={7} decay={2} />
-      <pointLight position={[-0.8, 7.2, 0]} color="#FFE082" intensity={0.9} distance={7} decay={2} />
-      <pointLight position={[-2.8, 1.8, 0]} color="#FFAA00" intensity={0.9} distance={6} decay={2} />
-      <pointLight ref={thrustersLightRef} position={[0.8, 5.0, 0]} color="#FFAA00" intensity={1.2} distance={7} decay={2} />
+      <pointLight position={[-2.6, 4.8, 0]} color="#fbbf24" intensity={1.0} distance={7} decay={2} />
+      <pointLight position={[-0.8, 7.2, 0]} color="#ffe4b5" intensity={0.85} distance={7} decay={2} />
+      <pointLight position={[-2.8, 1.8, 0]} color="#fbbf24" intensity={0.9} distance={6} decay={2} />
+      <pointLight ref={thrustersLightRef} position={[0.8, 5.0, 0]} color="#fbbf24" intensity={1.1} distance={7} decay={2} />
     </group>
   );
 }

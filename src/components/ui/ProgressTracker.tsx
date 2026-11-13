@@ -33,7 +33,7 @@ export function ProgressTracker() {
       {/* 1. Neon Progress Bar Track */}
       <div className="relative w-full h-1.5 bg-gray-900 rounded-full overflow-hidden border border-gray-800">
         <div
-          className="h-full bg-gradient-to-r from-cyber-cyan via-cyber-violet to-cyber-magenta transition-all duration-150"
+          className="h-full bg-gradient-to-r from-cyber-cyan via-cyber-gold to-cyber-rose transition-all duration-150"
           style={{ width: `${Math.min(100, Math.max(0, scrollProgress * 100))}%` }}
         />
       </div>
@@ -42,7 +42,7 @@ export function ProgressTracker() {
       <div className="flex justify-between items-center text-xs font-mono tracking-widest text-gray-400 bg-cyber-panel/60 backdrop-blur-md px-4 py-2 rounded-lg border border-gray-800">
         {/* District Geo-Coordinates */}
         <span className="hidden sm:inline text-gray-400 text-[10px]">
-          GPS: <span className="text-gray-200">34.0522° N, 118.2437° W</span>
+          GPS: <span className="text-gray-200">35.6595° N, 139.7004° E</span>
         </span>
 
         {/* 4 Clickable Landmark Milestone Buttons */}

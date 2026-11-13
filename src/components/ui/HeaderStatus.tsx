@@ -37,8 +37,8 @@ export function HeaderStatus() {
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyber-green opacity-75" />
           <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyber-green" />
         </span>
-        <span className="font-bold text-white tracking-wider">SECTOR 07</span>
-        <span className="text-gray-400 hidden sm:inline">// REPLICANT ALLEY</span>
+        <span className="font-bold text-white tracking-wider">NEO-TOKYO</span>
+        <span className="text-gray-400 hidden sm:inline">// CHUO-DORI SECTOR 07</span>
       </div>
 
       {/* Center: Real-time Telemetry & Clock */}

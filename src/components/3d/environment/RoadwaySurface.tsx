@@ -13,12 +13,12 @@ export function RoadwaySurface() {
     setAsphaltTex(getAsphaltTexture());
     setSidewalkTex(getSidewalkTexture());
     setBladeSigns({
-      noodle: getNeonBladeSignTexture('NOODLE BAR', 'ラーメン', '#FFAA00'),
-      clinic: getNeonBladeSignTexture('CYBER CLINIC', '診療所', '#00F3FF'),
-      lounge: getNeonBladeSignTexture('NEON LOUNGE', '酒場', '#FF0055'),
-      data: getNeonBladeSignTexture('DATA NET', '通信', '#05FFA1'),
-      casino: getNeonBladeSignTexture('CASINO ROYALE', '娯楽場', '#FFAA00'),
-      hotel: getNeonBladeSignTexture('HOTEL SUITES', '客室', '#8A2BE2'),
+      noodle: getNeonBladeSignTexture('RAMEN BAR', 'らーめん // 深夜営業', '#fbbf24'),
+      clinic: getNeonBladeSignTexture('CYBER CLINIC', 'サイバー診療所 // 24H', '#00e5ff'),
+      lounge: getNeonBladeSignTexture('TOKYO LOUNGE', '歌舞伎町 酒場 // 07', '#ff2a6d'),
+      data: getNeonBladeSignTexture('DATA TERMINAL', '通信端末 // 接続中', '#05ffa1'),
+      casino: getNeonBladeSignTexture('HORIZON CLUB', '銀座 ホライゾン // 娯楽', '#d4af37'),
+      hotel: getNeonBladeSignTexture('STASIS PODS', '新星カプセル // 受付', '#ff2a6d'),
     });
   }, []);
 
@@ -94,39 +94,39 @@ export function RoadwaySurface() {
 
   return (
     <group>
-      {/* 1. Main 14m 4-Lane Grand Avenue Dry Matte Asphalt Surface */}
+      {/* 1. Main 14m 4-Lane Grand Avenue Neo-Tokyo Dry Matte Asphalt Surface */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, -85]} receiveShadow>
         <planeGeometry args={[ROAD_WIDTH, 195]} />
         <meshStandardMaterial
           map={asphaltTex || undefined}
-          color="#242838"
+          color="#1a2030"
           roughness={0.88}
           metalness={0.08}
         />
       </mesh>
 
-      {/* 2. Recessed Cast-Iron Municipal Utility Manhole Covers (Matte Industrial Iron) */}
+      {/* 2. Recessed Cast-Iron Municipal Utility Manhole Covers (Tokyo Foundry Iron) */}
       {manholeLocations.map((mh, mIdx) => (
         <group key={`manhole-${mIdx}`} position={[mh.x, 0.009, mh.z]} rotation={[0, mh.rot, 0]}>
           {/* Manhole Rim */}
           <mesh rotation={[-Math.PI / 2, 0, 0]}>
             <ringGeometry args={[0.38, 0.44, 24]} />
-            <meshStandardMaterial color="#383e52" metalness={0.5} roughness={0.65} />
+            <meshStandardMaterial color="#343c50" metalness={0.45} roughness={0.7} />
           </mesh>
           {/* Manhole Main Plate */}
           <mesh rotation={[-Math.PI / 2, 0, 0]}>
             <circleGeometry args={[0.38, 24]} />
-            <meshStandardMaterial color="#2e3446" metalness={0.45} roughness={0.7} />
+            <meshStandardMaterial color="#2a3348" metalness={0.4} roughness={0.75} />
           </mesh>
           {/* Inner Geometric Grip Pattern */}
           <mesh rotation={[-Math.PI / 2, 0, 0]}>
             <ringGeometry args={[0.18, 0.28, 8]} />
-            <meshStandardMaterial color="#3a4258" metalness={0.4} roughness={0.7} />
+            <meshStandardMaterial color="#343c50" metalness={0.4} roughness={0.7} />
           </mesh>
           {/* Sector 07 Embossed Center Boss */}
           <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0.002]}>
             <circleGeometry args={[0.08, 12]} />
-            <meshStandardMaterial color="#424c64" metalness={0.5} roughness={0.65} />
+            <meshStandardMaterial color="#3e4860" metalness={0.45} roughness={0.65} />
           </mesh>
         </group>
       ))}
@@ -137,20 +137,20 @@ export function RoadwaySurface() {
           {/* Center Double Amber Studs */}
           <mesh position={[-0.12, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
             <circleGeometry args={[0.038, 8]} />
-            <meshBasicMaterial color="#FFAA00" />
+            <meshBasicMaterial color="#f59e0b" />
           </mesh>
           <mesh position={[0.12, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
             <circleGeometry args={[0.038, 8]} />
-            <meshBasicMaterial color="#FFAA00" />
+            <meshBasicMaterial color="#f59e0b" />
           </mesh>
           {/* Subtle Outer Lane Guide Pucks */}
           <mesh position={[-3.5, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
             <circleGeometry args={[0.028, 8]} />
-            <meshBasicMaterial color="#00F0FF" />
+            <meshBasicMaterial color="#00e5ff" />
           </mesh>
           <mesh position={[3.5, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
             <circleGeometry args={[0.028, 8]} />
-            <meshBasicMaterial color="#00F0FF" />
+            <meshBasicMaterial color="#00e5ff" />
           </mesh>
         </group>
       ))}
@@ -162,13 +162,13 @@ export function RoadwaySurface() {
           <group position={[-(halfRoad - 0.22), 0.008, zPos]}>
             <mesh rotation={[-Math.PI / 2, 0, 0]}>
               <planeGeometry args={[0.38, 0.95]} />
-              <meshStandardMaterial color="#2a3042" roughness={0.7} metalness={0.5} />
+              <meshStandardMaterial color="#283042" roughness={0.7} metalness={0.4} />
             </mesh>
-            {/* Recessed Slot Insets (Rich Slate Shadows, Not Pure Black) */}
+            {/* Recessed Slot Insets (Rich Slate Shadows) */}
             {[-0.32, -0.16, 0, 0.16, 0.32].map((slotZ, sIdx) => (
               <mesh key={`slot-l-${sIdx}`} position={[0, 0.002, slotZ]} rotation={[-Math.PI / 2, 0, 0]}>
                 <planeGeometry args={[0.26, 0.05]} />
-                <meshBasicMaterial color="#1c2234" />
+                <meshBasicMaterial color="#141a28" />
               </mesh>
             ))}
           </group>
@@ -177,24 +177,24 @@ export function RoadwaySurface() {
           <group position={[halfRoad - 0.22, 0.008, zPos]}>
             <mesh rotation={[-Math.PI / 2, 0, 0]}>
               <planeGeometry args={[0.38, 0.95]} />
-              <meshStandardMaterial color="#2a3042" roughness={0.7} metalness={0.5} />
+              <meshStandardMaterial color="#283042" roughness={0.7} metalness={0.4} />
             </mesh>
             {[-0.32, -0.16, 0, 0.16, 0.32].map((slotZ, sIdx) => (
               <mesh key={`slot-r-${sIdx}`} position={[0, 0.002, slotZ]} rotation={[-Math.PI / 2, 0, 0]}>
                 <planeGeometry args={[0.26, 0.05]} />
-                <meshBasicMaterial color="#1c2234" />
+                <meshBasicMaterial color="#141a28" />
               </mesh>
             ))}
           </group>
         </group>
       ))}
 
-      {/* 5. Left Pedestrian Sidewalk (Width: 4.5m, Elevation: 0.16m, Industrial Matte Slate Paving) */}
+      {/* 5. Left Pedestrian Sidewalk (Width: 4.5m, Elevation: 0.16m, Tokyo Charcoal Granite Paving) */}
       <mesh position={[sidewalkCenterLeft, 0.08, -85]} receiveShadow>
         <boxGeometry args={[SIDEWALK_WIDTH, 0.16, 195]} />
         <meshStandardMaterial
           map={sidewalkTex || undefined}
-          color="#2d3346"
+          color="#262f44"
           roughness={0.82}
           metalness={0.10}
         />
@@ -202,20 +202,20 @@ export function RoadwaySurface() {
       {/* Left Chamfered Granite Curb Stone */}
       <mesh position={[-halfRoad, 0.09, -85]}>
         <boxGeometry args={[0.16, 0.18, 195]} />
-        <meshStandardMaterial color="#262c3e" roughness={0.85} metalness={0.15} />
+        <meshStandardMaterial color="#22293a" roughness={0.85} metalness={0.15} />
       </mesh>
-      {/* Left Neon Curb Light Strip (Cyber Cyan) */}
+      {/* Left Neon Curb Light Strip (Shibuya Cyan) */}
       <mesh position={[-(halfRoad - 0.04), 0.162, -85]}>
         <boxGeometry args={[0.04, 0.015, 195]} />
-        <meshBasicMaterial color="#00F3FF" />
+        <meshBasicMaterial color="#00e5ff" />
       </mesh>
 
-      {/* 6. Right Pedestrian Sidewalk (Width: 4.5m, Elevation: 0.16m, Industrial Matte Slate Paving) */}
+      {/* 6. Right Pedestrian Sidewalk (Width: 4.5m, Elevation: 0.16m, Tokyo Charcoal Granite Paving) */}
       <mesh position={[sidewalkCenterRight, 0.08, -85]} receiveShadow>
         <boxGeometry args={[SIDEWALK_WIDTH, 0.16, 195]} />
         <meshStandardMaterial
           map={sidewalkTex || undefined}
-          color="#2d3346"
+          color="#262f44"
           roughness={0.82}
           metalness={0.10}
         />
@@ -223,12 +223,12 @@ export function RoadwaySurface() {
       {/* Right Chamfered Granite Curb Stone */}
       <mesh position={[halfRoad, 0.09, -85]}>
         <boxGeometry args={[0.16, 0.18, 195]} />
-        <meshStandardMaterial color="#262c3e" roughness={0.85} metalness={0.15} />
+        <meshStandardMaterial color="#22293a" roughness={0.85} metalness={0.15} />
       </mesh>
-      {/* Right Neon Curb Light Strip (Plasma Amber) */}
+      {/* Right Neon Curb Light Strip (Tokyo Lantern Amber) */}
       <mesh position={[halfRoad - 0.04, 0.162, -85]}>
         <boxGeometry args={[0.04, 0.015, 195]} />
-        <meshBasicMaterial color="#FFAA00" />
+        <meshBasicMaterial color="#f59e0b" />
       </mesh>
 
       {/* 7. Embedded Sidewalk Curb LED Puck Lights */}
@@ -236,11 +236,11 @@ export function RoadwaySurface() {
         <group key={`puck-${idx}`}>
           <mesh position={[-halfRoad, 0.165, zPos]} rotation={[-Math.PI / 2, 0, 0]}>
             <circleGeometry args={[0.045, 12]} />
-            <meshBasicMaterial color="#00F3FF" />
+            <meshBasicMaterial color="#00e5ff" />
           </mesh>
           <mesh position={[halfRoad, 0.165, zPos]} rotation={[-Math.PI / 2, 0, 0]}>
             <circleGeometry args={[0.045, 12]} />
-            <meshBasicMaterial color="#FFAA00" />
+            <meshBasicMaterial color="#f59e0b" />
           </mesh>
         </group>
       ))}
@@ -255,7 +255,7 @@ export function RoadwaySurface() {
             </mesh>
             <mesh position={[0, 0.62, 0]}>
               <cylinderGeometry args={[0.076, 0.076, 0.035, 12]} />
-              <meshBasicMaterial color="#00F3FF" />
+              <meshBasicMaterial color="#00e5ff" />
             </mesh>
             <mesh position={[0, 0.78, 0]}>
               <sphereGeometry args={[0.065, 8, 8]} />
@@ -270,7 +270,7 @@ export function RoadwaySurface() {
             </mesh>
             <mesh position={[0, 0.62, 0]}>
               <cylinderGeometry args={[0.076, 0.076, 0.035, 12]} />
-              <meshBasicMaterial color="#FFAA00" />
+              <meshBasicMaterial color="#f59e0b" />
             </mesh>
             <mesh position={[0, 0.78, 0]}>
               <sphereGeometry args={[0.065, 8, 8]} />
@@ -329,11 +329,11 @@ export function RoadwaySurface() {
               {/* Holographic Headline Screen */}
               <mesh position={[0, 1.1, 0.16]}>
                 <planeGeometry args={[0.4, 0.75]} />
-                <meshBasicMaterial color="#00F3FF" transparent opacity={0.85} />
+                <meshBasicMaterial color="#00e5ff" transparent opacity={0.85} />
               </mesh>
               <mesh position={[0, 1.72, 0.16]}>
                 <planeGeometry args={[0.38, 0.06]} />
-                <meshBasicMaterial color="#00F0FF" />
+                <meshBasicMaterial color="#00e5ff" />
               </mesh>
             </group>
           );
@@ -346,7 +346,7 @@ export function RoadwaySurface() {
               </mesh>
               <mesh position={[0, 1.2, 0.15]}>
                 <planeGeometry args={[0.22, 0.35]} />
-                <meshBasicMaterial color="#05FFA1" />
+                <meshBasicMaterial color="#05ffa1" />
               </mesh>
               <mesh position={[0, 0.6, 0.15]}>
                 <cylinderGeometry args={[0.04, 0.04, 0.2, 8]} />
@@ -367,11 +367,11 @@ export function RoadwaySurface() {
               </mesh>
               <mesh position={[0.15, 0.42, 0]} rotation={[0, 0, Math.PI / 2]}>
                 <cylinderGeometry args={[0.055, 0.055, 0.12, 8]} />
-                <meshStandardMaterial color="#FFAA00" metalness={0.4} roughness={0.6} />
+                <meshStandardMaterial color="#f59e0b" metalness={0.4} roughness={0.6} />
               </mesh>
               <mesh position={[-0.15, 0.42, 0]} rotation={[0, 0, Math.PI / 2]}>
                 <cylinderGeometry args={[0.055, 0.055, 0.12, 8]} />
-                <meshStandardMaterial color="#FFAA00" metalness={0.4} roughness={0.6} />
+                <meshStandardMaterial color="#f59e0b" metalness={0.4} roughness={0.6} />
               </mesh>
             </group>
           );
@@ -388,7 +388,7 @@ export function RoadwaySurface() {
               </mesh>
               <mesh position={[0, 0.35, 0.36]}>
                 <planeGeometry args={[0.25, 0.25]} />
-                <meshBasicMaterial color="#FFAA00" />
+                <meshBasicMaterial color="#f59e0b" />
               </mesh>
             </group>
           );
@@ -402,11 +402,11 @@ export function RoadwaySurface() {
               </mesh>
               <mesh position={[-0.14, 0.75, 0.2]}>
                 <planeGeometry args={[0.16, 0.08]} />
-                <meshBasicMaterial color="#00F0FF" />
+                <meshBasicMaterial color="#00e5ff" />
               </mesh>
               <mesh position={[0.14, 0.75, 0.2]}>
                 <planeGeometry args={[0.16, 0.08]} />
-                <meshBasicMaterial color="#05FFA1" />
+                <meshBasicMaterial color="#05ffa1" />
               </mesh>
             </group>
           );
@@ -435,11 +435,11 @@ export function RoadwaySurface() {
           {/* Road Embedded Sensor Light Bars at Crossing Thresholds */}
           <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.014, crossZ - 2.1]}>
             <planeGeometry args={[13.5, 0.06]} />
-            <meshBasicMaterial color="#00F3FF" />
+            <meshBasicMaterial color="#00e5ff" />
           </mesh>
           <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.014, crossZ + 2.1]}>
             <planeGeometry args={[13.5, 0.06]} />
-            <meshBasicMaterial color="#00F3FF" />
+            <meshBasicMaterial color="#00e5ff" />
           </mesh>
 
           {/* Traffic Signal Posts at Curb Edges */}
@@ -454,11 +454,11 @@ export function RoadwaySurface() {
             </mesh>
             <mesh position={[0.11, 2.5, 0]} rotation={[0, Math.PI / 2, 0]}>
               <circleGeometry args={[0.06, 12]} />
-              <meshBasicMaterial color="#00F3FF" />
+              <meshBasicMaterial color="#00e5ff" />
             </mesh>
             <mesh position={[0.11, 2.3, 0]} rotation={[0, Math.PI / 2, 0]}>
               <circleGeometry args={[0.06, 12]} />
-              <meshBasicMaterial color="#FF0055" />
+              <meshBasicMaterial color="#ff2a6d" />
             </mesh>
           </group>
         </group>

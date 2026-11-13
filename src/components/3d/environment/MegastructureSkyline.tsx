@@ -63,14 +63,14 @@ export function MegastructureSkyline() {
         archetype: archetypes[idx % archetypes.length],
         seed: idx % 5,
         hasBeacon: true,
-        beaconColor: idx % 2 === 0 ? '#FF0055' : '#00F3FF',
+        beaconColor: idx % 2 === 0 ? '#ff2a6d' : '#00e5ff',
         billboard:
           idx === 1
-            ? { text: 'NEO SHANGHAI FINANCIAL', sub: '新上海金融 // HQ 01', color: '#00F3FF', y: 32 }
+            ? { text: 'NEO SHANGHAI FINANCIAL', sub: '新上海金融 // HQ 01', color: '#00e5ff', y: 32 }
             : idx === 4
-            ? { text: 'VEGAS HORIZON RESORT', sub: 'CASINO & SUITES // 娯楽', color: '#FFAA00', y: 36 }
+            ? { text: 'GINZA LUXURY RESORT', sub: 'CASINO & SUITES // 銀座', color: '#f59e0b', y: 36 }
             : idx === 7
-            ? { text: 'QUANTUM DYNAMICS INC', sub: 'NEURAL LABS // 量子', color: '#FF0055', y: 30 }
+            ? { text: 'QUANTUM DYNAMICS INC', sub: 'NEURAL LABS // 量子', color: '#ff2a6d', y: 30 }
             : undefined,
       });
     });
@@ -92,20 +92,20 @@ export function MegastructureSkyline() {
       list.push({
         x: 29 + (idx % 2) * 4,
         z: z,
-        width: 18 + ((idx + 1) % 3) * 2,
+        width: 18 + ((idx + 1) * 3) % 2,
         height,
         depth: 20,
         archetype: archetypes[idx % archetypes.length],
         seed: (idx + 2) % 5,
         hasBeacon: true,
-        beaconColor: idx % 2 === 0 ? '#FFAA00' : '#FF0055',
+        beaconColor: idx % 2 === 0 ? '#f59e0b' : '#ff2a6d',
         billboard:
           idx === 2
-            ? { text: 'ORBITAL RECHARGE CORP', sub: 'STATION 07 // 軌道', color: '#05FFA1', y: 28 }
+            ? { text: 'ORBITAL RECHARGE CORP', sub: 'STATION 07 // 軌道', color: '#05ffa1', y: 28 }
             : idx === 5
-            ? { text: 'ASTRA LUXURY TOWER', sub: 'PENTHOUSE RESIDENCES', color: '#8A2BE2', y: 38 }
+            ? { text: 'ASTRA LUXURY TOWER', sub: 'PENTHOUSE RESIDENCES // 恒星', color: '#d4af37', y: 38 }
             : idx === 8
-            ? { text: 'CYBERNETIC LIFE CORP', sub: 'BIOMECH RESEARCH', color: '#00F3FF', y: 34 }
+            ? { text: 'CYBERNETIC LIFE CORP', sub: 'BIOMECH RESEARCH // 義体', color: '#00e5ff', y: 34 }
             : undefined,
       });
     });
@@ -159,7 +159,7 @@ export function MegastructureSkyline() {
             <mesh position={[0, b.height / 2, 0]} receiveShadow>
               <boxGeometry args={[b.width, b.height, b.depth]} />
               <meshStandardMaterial
-                color="#202538"
+                color="#1c2336"
                 roughness={0.85}
                 metalness={0.2}
               />
@@ -192,12 +192,12 @@ export function MegastructureSkyline() {
                     <group key={`step-${sIdx}`} position={[0, yStep + 1.2, 0]}>
                       <mesh>
                         <boxGeometry args={[b.width * scale, 2.2, b.depth * scale]} />
-                        <meshStandardMaterial color="#282f44" roughness={0.8} metalness={0.25} />
+                        <meshStandardMaterial color="#222b40" roughness={0.8} metalness={0.25} />
                       </mesh>
                       {/* Illuminated Golden Eaves Slat */}
                       <mesh position={[0, 1.15, 0]}>
                         <boxGeometry args={[b.width * (scale + 0.08), 0.1, b.depth * (scale + 0.08)]} />
-                        <meshBasicMaterial color="#FFAA00" />
+                        <meshBasicMaterial color="#f59e0b" />
                       </mesh>
                     </group>
                   );
@@ -210,11 +210,11 @@ export function MegastructureSkyline() {
               <group position={[0, b.height + 4, 0]}>
                 <mesh>
                   <cylinderGeometry args={[b.width * 0.25, b.width * 0.45, 8, 20]} />
-                  <meshStandardMaterial color="#00F3FF" transparent opacity={0.6} metalness={0.4} roughness={0.5} />
+                  <meshStandardMaterial color="#00e5ff" transparent opacity={0.6} metalness={0.4} roughness={0.5} />
                 </mesh>
                 <mesh position={[0, 4.2, 0]}>
                   <torusGeometry args={[b.width * 0.26, 0.08, 8, 24]} />
-                  <meshBasicMaterial color="#00F3FF" />
+                  <meshBasicMaterial color="#00e5ff" />
                 </mesh>
               </group>
             )}
@@ -224,12 +224,12 @@ export function MegastructureSkyline() {
               <group position={[0, b.height + 4.5, 0]}>
                 <mesh rotation={[0, Math.PI / 4, 0]}>
                   <coneGeometry args={[b.width * 0.55, 9, 4]} />
-                  <meshStandardMaterial color="#282f44" metalness={0.25} roughness={0.8} />
+                  <meshStandardMaterial color="#222b40" metalness={0.25} roughness={0.8} />
                 </mesh>
                 {/* Glowing Diamond Tip */}
                 <mesh position={[0, 4.8, 0]}>
                   <octahedronGeometry args={[0.9, 0]} />
-                  <meshBasicMaterial color="#FFAA00" />
+                  <meshBasicMaterial color="#f59e0b" />
                 </mesh>
               </group>
             )}
@@ -239,11 +239,11 @@ export function MegastructureSkyline() {
               <group position={[0, b.height + 4, 0]}>
                 <mesh>
                   <boxGeometry args={[b.width * 0.7, 7, b.depth * 0.7]} />
-                  <meshBasicMaterial color="#FF0055" wireframe />
+                  <meshBasicMaterial color="#ff2a6d" wireframe />
                 </mesh>
                 <mesh position={[0, 3.8, 0]}>
                   <boxGeometry args={[b.width * 0.72, 0.2, b.depth * 0.72]} />
-                  <meshBasicMaterial color="#FF0055" />
+                  <meshBasicMaterial color="#ff2a6d" />
                 </mesh>
               </group>
             )}
@@ -251,7 +251,7 @@ export function MegastructureSkyline() {
             {/* Rooftop Telecommunications Antenna Spire */}
             <mesh position={[0, b.height + 15.5, 0]}>
               <cylinderGeometry args={[0.06, 0.2, 14, 8]} />
-              <meshStandardMaterial color="#3a4258" metalness={0.6} roughness={0.4} />
+              <meshStandardMaterial color="#343c50" metalness={0.6} roughness={0.4} />
             </mesh>
           </group>
         );
@@ -274,7 +274,7 @@ export function MegastructureSkyline() {
                 {/* Structural Steel Truss Mounting Frame */}
                 <mesh position={[0, 0, -0.1]}>
                   <boxGeometry args={[11.2, 5.2, 0.2]} />
-                  <meshStandardMaterial color="#252c3e" metalness={0.25} roughness={0.75} />
+                  <meshStandardMaterial color="#1f2638" metalness={0.25} roughness={0.75} />
                 </mesh>
                 {/* Outer Hologram Support Cage */}
                 <mesh position={[0, 0, -0.04]}>
@@ -285,7 +285,7 @@ export function MegastructureSkyline() {
                 <mesh>
                   <planeGeometry args={[10.5, 4.5]} />
                   <meshStandardMaterial
-                    color="#1e2436"
+                    color="#1a2030"
                     emissive={b.billboard!.color}
                     emissiveIntensity={0.8}
                     roughness={0.6}
@@ -309,19 +309,19 @@ export function MegastructureSkyline() {
         <group key={`skybridge-${sbIdx}`} position={[0, sb.y, sb.z]}>
           <mesh>
             <boxGeometry args={[56, 3.8, 4.6]} />
-            <meshStandardMaterial color="#252c40" roughness={0.8} metalness={0.2} />
+            <meshStandardMaterial color="#222b40" roughness={0.8} metalness={0.2} />
           </mesh>
           <mesh position={[0, 0, 2.32]}>
             <planeGeometry args={[54, 1.6]} />
-            <meshBasicMaterial color="#00F3FF" transparent opacity={0.6} />
+            <meshBasicMaterial color="#00e5ff" transparent opacity={0.6} />
           </mesh>
           <mesh position={[0, 0, -2.32]} rotation={[0, Math.PI, 0]}>
             <planeGeometry args={[54, 1.6]} />
-            <meshBasicMaterial color="#00F3FF" transparent opacity={0.6} />
+            <meshBasicMaterial color="#00e5ff" transparent opacity={0.6} />
           </mesh>
           <mesh position={[0, -1.92, 0]}>
             <boxGeometry args={[54, 0.08, 4.6]} />
-            <meshBasicMaterial color="#FF0055" />
+            <meshBasicMaterial color="#ff2a6d" />
           </mesh>
         </group>
       ))}
@@ -331,7 +331,7 @@ export function MegastructureSkyline() {
         {buildings.map((b, idx) => (
           <mesh key={`beacon-${idx}`} position={[b.x, b.height + 22.5, b.z]}>
             <sphereGeometry args={[0.4, 8, 8]} />
-            <meshBasicMaterial color={b.beaconColor || '#FF0055'} transparent opacity={1} />
+            <meshBasicMaterial color={b.beaconColor || '#ff2a6d'} transparent opacity={1} />
           </mesh>
         ))}
       </group>

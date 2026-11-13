@@ -154,45 +154,45 @@ export function CharacterBoy() {
         {/* Sculpted Cyber Techwear Storm Jacket (Matte Technical Slate) */}
         <mesh position={[0, 0.15, 0]} receiveShadow>
           <boxGeometry args={[0.54, 0.65, 0.36]} />
-          <meshStandardMaterial color="#242838" roughness={0.88} metalness={0.1} />
+          <meshStandardMaterial color="#202536" roughness={0.88} metalness={0.1} />
         </mesh>
 
         {/* High Stand-up Wind Collar */}
         <mesh position={[0, 0.5, 0.02]}>
           <cylinderGeometry args={[0.18, 0.22, 0.14, 16]} />
-          <meshStandardMaterial color="#1c202e" roughness={0.85} metalness={0.1} />
+          <meshStandardMaterial color="#1a1e2a" roughness={0.85} metalness={0.1} />
         </mesh>
 
         {/* Tactical Cross-Straps & Chest Rig */}
         <mesh position={[0, 0.2, 0.184]}>
           <boxGeometry args={[0.42, 0.08, 0.02]} />
-          <meshStandardMaterial color="#2a3042" metalness={0.2} roughness={0.8} />
+          <meshStandardMaterial color="#262d3e" metalness={0.2} roughness={0.8} />
         </mesh>
         <mesh position={[0, 0.12, 0.184]}>
           <boxGeometry args={[0.44, 0.04, 0.02]} />
-          <meshStandardMaterial color="#2a3042" metalness={0.2} roughness={0.8} />
+          <meshStandardMaterial color="#262d3e" metalness={0.2} roughness={0.8} />
         </mesh>
 
         {/* Compact Glowing Cyan Arc Reactor Badge */}
         <mesh position={[0.12, 0.26, 0.188]}>
           <circleGeometry args={[0.038, 16]} />
-          <meshBasicMaterial color="#00F3FF" />
+          <meshBasicMaterial color="#00e5ff" />
         </mesh>
 
-        {/* Thin Neon Magenta Reflective Piping along Asymmetrical Jacket Zip */}
+        {/* Thin Neon Rose Reflective Piping along Asymmetrical Jacket Zip */}
         <mesh position={[-0.04, 0.15, 0.185]}>
           <planeGeometry args={[0.022, 0.62]} />
-          <meshBasicMaterial color="#FF0055" />
+          <meshBasicMaterial color="#ff2a6d" />
         </mesh>
 
         {/* Tactical Shoulder Epaulet Guards */}
         <mesh position={[-0.25, 0.44, 0]}>
           <boxGeometry args={[0.11, 0.035, 0.26]} />
-          <meshStandardMaterial color="#2e354a" metalness={0.25} roughness={0.75} />
+          <meshStandardMaterial color="#2a3246" metalness={0.25} roughness={0.75} />
         </mesh>
         <mesh position={[0.25, 0.44, 0]}>
           <boxGeometry args={[0.11, 0.035, 0.26]} />
-          <meshStandardMaterial color="#2e354a" metalness={0.25} roughness={0.75} />
+          <meshStandardMaterial color="#2a3246" metalness={0.25} roughness={0.75} />
         </mesh>
 
         {/* Ergonomic Molded Tech Backpack (Matte Slate / Charcoal) */}
@@ -200,7 +200,7 @@ export function CharacterBoy() {
           {/* Main Chassis */}
           <mesh>
             <boxGeometry args={[0.36, 0.46, 0.13]} />
-            <meshStandardMaterial color="#282e40" metalness={0.25} roughness={0.75} />
+            <meshStandardMaterial color="#22283a" metalness={0.25} roughness={0.75} />
           </mesh>
           {/* Top Grab Handle */}
           <mesh position={[0, 0.25, 0]}>
@@ -212,7 +212,7 @@ export function CharacterBoy() {
             {[-0.08, 0, 0.08].map((yOff, i) => (
               <mesh key={i} position={[0, yOff, 0]}>
                 <planeGeometry args={[0.22, 0.032]} />
-                <meshBasicMaterial color="#FFAA00" transparent opacity={0.7} />
+                <meshBasicMaterial color="#f59e0b" transparent opacity={0.7} />
               </mesh>
             ))}
           </group>
@@ -229,28 +229,28 @@ export function CharacterBoy() {
           {/* Cyberpunk Undercut & Spiky Matte Dark Hair */}
           <mesh position={[0, 0.12, -0.04]} rotation={[-0.2, 0, 0]}>
             <coneGeometry args={[0.21, 0.26, 8]} />
-            <meshStandardMaterial color="#222736" roughness={0.85} />
+            <meshStandardMaterial color="#1e2332" roughness={0.85} />
           </mesh>
           {/* Front Fringe Bangs */}
           <mesh position={[-0.05, 0.14, 0.11]} rotation={[0.4, 0, -0.2]}>
             <coneGeometry args={[0.09, 0.15, 6]} />
-            <meshStandardMaterial color="#222736" roughness={0.85} />
+            <meshStandardMaterial color="#1e2332" roughness={0.85} />
           </mesh>
           <mesh position={[0.06, 0.13, 0.11]} rotation={[0.35, 0, 0.15]}>
             <coneGeometry args={[0.08, 0.14, 6]} />
-            <meshStandardMaterial color="#222736" roughness={0.85} />
+            <meshStandardMaterial color="#1e2332" roughness={0.85} />
           </mesh>
 
           {/* Temple Neural Interface Port */}
           <mesh position={[0.165, 0.02, 0.02]} rotation={[0, 0, Math.PI / 2]}>
             <cylinderGeometry args={[0.022, 0.022, 0.02, 8]} />
-            <meshStandardMaterial color="#00F3FF" metalness={0.7} />
+            <meshStandardMaterial color="#00e5ff" metalness={0.7} />
           </mesh>
 
           {/* AR Visor Glasses Frame */}
           <mesh position={[0, 0.02, 0.13]}>
             <boxGeometry args={[0.32, 0.09, 0.12]} />
-            <meshStandardMaterial color="#2a3042" metalness={0.3} roughness={0.7} />
+            <meshStandardMaterial color="#262d3e" metalness={0.3} roughness={0.7} />
           </mesh>
 
           {/* Glowing Translucent HUD Visor Lens */}
@@ -258,7 +258,7 @@ export function CharacterBoy() {
             <planeGeometry args={[0.29, 0.07]} />
             <meshBasicMaterial
               ref={visorMatRef}
-              color="#00F3FF"
+              color="#00e5ff"
               transparent
               opacity={0.85}
             />
@@ -267,29 +267,29 @@ export function CharacterBoy() {
           {/* Optical Targeting Reticle Stripe */}
           <mesh position={[0.04, 0.02, 0.194]}>
             <planeGeometry args={[0.18, 0.012]} />
-            <meshBasicMaterial color="#FFFFFF" />
+            <meshBasicMaterial color="#f8fafc" />
           </mesh>
         </group>
 
-        {/* Left Arm Assembly (Fabric Storm Sleeve with Magenta Piping) */}
+        {/* Left Arm Assembly (Fabric Storm Sleeve with Rose Piping) */}
         <group ref={leftArmRef} position={[-0.32, 0.42, 0]}>
           <mesh position={[0, -0.05, 0]}>
             <sphereGeometry args={[0.1, 12, 12]} />
-            <meshStandardMaterial color="#242838" roughness={0.85} />
+            <meshStandardMaterial color="#202536" roughness={0.85} />
           </mesh>
           <mesh position={[0, -0.26, 0]}>
             <cylinderGeometry args={[0.085, 0.075, 0.36, 12]} />
-            <meshStandardMaterial color="#242838" roughness={0.85} />
+            <meshStandardMaterial color="#202536" roughness={0.85} />
           </mesh>
-          {/* Neon Magenta Sleeve Piping */}
+          {/* Neon Rose Sleeve Piping */}
           <mesh position={[-0.078, -0.26, 0]}>
             <boxGeometry args={[0.015, 0.34, 0.025]} />
-            <meshBasicMaterial color="#FF0055" />
+            <meshBasicMaterial color="#ff2a6d" />
           </mesh>
           {/* Tactical Fingerless Glove */}
           <mesh position={[0, -0.48, 0]}>
             <boxGeometry args={[0.09, 0.11, 0.09]} />
-            <meshStandardMaterial color="#282e40" metalness={0.2} roughness={0.75} />
+            <meshStandardMaterial color="#262c3e" metalness={0.2} roughness={0.75} />
           </mesh>
         </group>
 
@@ -298,12 +298,12 @@ export function CharacterBoy() {
           {/* Titanium Ball-and-Socket Shoulder Joint */}
           <mesh position={[0, -0.05, 0]}>
             <sphereGeometry args={[0.1, 14, 14]} />
-            <meshStandardMaterial color="#00F0FF" metalness={0.7} roughness={0.3} />
+            <meshStandardMaterial color="#00e5ff" metalness={0.7} roughness={0.3} />
           </mesh>
           {/* Upper Arm Titanium Chassis */}
           <mesh position={[0, -0.26, 0]}>
             <cylinderGeometry args={[0.08, 0.07, 0.36, 12]} />
-            <meshStandardMaterial color="#3a4258" metalness={0.6} roughness={0.35} />
+            <meshStandardMaterial color="#323a4e" metalness={0.6} roughness={0.35} />
           </mesh>
           {/* Exposed Hydraulic Piston Cylinder */}
           <mesh position={[0.03, -0.26, 0.05]}>
@@ -313,7 +313,7 @@ export function CharacterBoy() {
           {/* Cyan Circuit Trace along Cyber-Arm */}
           <mesh position={[0.075, -0.26, 0]}>
             <boxGeometry args={[0.012, 0.32, 0.02]} />
-            <meshBasicMaterial color="#00F3FF" />
+            <meshBasicMaterial color="#00e5ff" />
           </mesh>
           {/* Articulated Hand & Knuckles */}
           <mesh position={[0, -0.48, 0]}>
@@ -329,16 +329,16 @@ export function CharacterBoy() {
         {/* Cargo Utility Pants Thigh with Pocket */}
         <mesh position={[0, -0.2, 0]}>
           <cylinderGeometry args={[0.105, 0.09, 0.4, 12]} />
-          <meshStandardMaterial color="#222736" roughness={0.9} />
+          <meshStandardMaterial color="#1e2330" roughness={0.9} />
         </mesh>
         <mesh position={[-0.1, -0.2, 0]}>
           <boxGeometry args={[0.045, 0.15, 0.13]} />
-          <meshStandardMaterial color="#222736" roughness={0.9} />
+          <meshStandardMaterial color="#1e2330" roughness={0.9} />
         </mesh>
-        {/* Magenta Flap Pull Tab */}
+        {/* Rose Flap Pull Tab */}
         <mesh position={[-0.125, -0.2, 0]}>
           <planeGeometry args={[0.018, 0.1]} />
-          <meshBasicMaterial color="#FF0055" />
+          <meshBasicMaterial color="#ff2a6d" />
         </mesh>
 
         {/* Knee Armor Guard (Gunmetal Steel) */}
@@ -352,26 +352,26 @@ export function CharacterBoy() {
           {/* Shin & Ankle Cuff */}
           <mesh position={[0, -0.14, 0]}>
             <cylinderGeometry args={[0.08, 0.075, 0.34, 12]} />
-            <meshStandardMaterial color="#222736" roughness={0.9} />
+            <meshStandardMaterial color="#1e2330" roughness={0.9} />
           </mesh>
 
           {/* High-Top Futuristic Cyber Sneaker */}
           <group position={[0, -0.36, 0.05]}>
             <mesh position={[0, 0.05, 0]}>
               <boxGeometry args={[0.15, 0.12, 0.32]} />
-              <meshStandardMaterial color="#282d40" roughness={0.75} />
+              <meshStandardMaterial color="#242a3a" roughness={0.75} />
             </mesh>
             <mesh position={[0, 0.09, 0.04]}>
               <boxGeometry args={[0.08, 0.02, 0.12]} />
-              <meshBasicMaterial color="#FF0055" />
+              <meshBasicMaterial color="#ff2a6d" />
             </mesh>
             <mesh position={[0, -0.028, 0]}>
               <boxGeometry args={[0.16, 0.035, 0.34]} />
-              <meshBasicMaterial color="#00F3FF" />
+              <meshBasicMaterial color="#00e5ff" />
             </mesh>
             <mesh position={[0, 0.045, -0.14]}>
               <boxGeometry args={[0.13, 0.05, 0.045]} />
-              <meshBasicMaterial color="#00F0FF" />
+              <meshBasicMaterial color="#00e5ff" />
             </mesh>
           </group>
         </group>
@@ -382,16 +382,16 @@ export function CharacterBoy() {
         {/* Cargo Utility Pants Thigh with Pocket */}
         <mesh position={[0, -0.2, 0]}>
           <cylinderGeometry args={[0.105, 0.09, 0.4, 12]} />
-          <meshStandardMaterial color="#222736" roughness={0.9} />
+          <meshStandardMaterial color="#1e2330" roughness={0.9} />
         </mesh>
         <mesh position={[0.1, -0.2, 0]}>
           <boxGeometry args={[0.045, 0.15, 0.13]} />
-          <meshStandardMaterial color="#222736" roughness={0.9} />
+          <meshStandardMaterial color="#1e2330" roughness={0.9} />
         </mesh>
-        {/* Magenta Flap Pull Tab */}
+        {/* Rose Flap Pull Tab */}
         <mesh position={[0.125, -0.2, 0]}>
           <planeGeometry args={[0.018, 0.1]} />
-          <meshBasicMaterial color="#FF0055" />
+          <meshBasicMaterial color="#ff2a6d" />
         </mesh>
 
         {/* Knee Armor Guard (Gunmetal Steel) */}
@@ -405,26 +405,26 @@ export function CharacterBoy() {
           {/* Shin & Ankle Cuff */}
           <mesh position={[0, -0.14, 0]}>
             <cylinderGeometry args={[0.08, 0.075, 0.34, 12]} />
-            <meshStandardMaterial color="#222736" roughness={0.9} />
+            <meshStandardMaterial color="#1e2330" roughness={0.9} />
           </mesh>
 
           {/* High-Top Futuristic Cyber Sneaker */}
           <group position={[0, -0.36, 0.05]}>
             <mesh position={[0, 0.05, 0]}>
               <boxGeometry args={[0.15, 0.12, 0.32]} />
-              <meshStandardMaterial color="#282d40" roughness={0.75} />
+              <meshStandardMaterial color="#242a3a" roughness={0.75} />
             </mesh>
             <mesh position={[0, 0.09, 0.04]}>
               <boxGeometry args={[0.08, 0.02, 0.12]} />
-              <meshBasicMaterial color="#FF0055" />
+              <meshBasicMaterial color="#ff2a6d" />
             </mesh>
             <mesh position={[0, -0.028, 0]}>
               <boxGeometry args={[0.16, 0.035, 0.34]} />
-              <meshBasicMaterial color="#00F3FF" />
+              <meshBasicMaterial color="#00e5ff" />
             </mesh>
             <mesh position={[0, 0.045, -0.14]}>
               <boxGeometry args={[0.13, 0.05, 0.045]} />
-              <meshBasicMaterial color="#00F0FF" />
+              <meshBasicMaterial color="#00e5ff" />
             </mesh>
           </group>
         </group>

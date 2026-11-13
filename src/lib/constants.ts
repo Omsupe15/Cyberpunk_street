@@ -11,7 +11,7 @@ export const LANDMARKS = {
     x: 10.5,
     z: -32.0,
     range: [0.18, 0.32] as [number, number],
-    accentColor: '#FFAA00',
+    accentColor: '#fbbf24', // Tokyo Lantern Gold
     description: 'Docked light freighter converted to cantilevered rooftop street cafe. Famous for pressurized plasma brew and thruster patio warmth.',
   },
   STAR: {
@@ -22,7 +22,7 @@ export const LANDMARKS = {
     x: -10.5,
     z: -70.0,
     range: [0.48, 0.62] as [number, number],
-    accentColor: '#8A2BE2',
+    accentColor: '#d4af37', // Ginza Champagne Gold
     description: 'Boutique showroom featuring fiber-optic constellation light canopies and chromatic phase-shifting holographic streetwear.',
   },
   PAWN: {
@@ -33,7 +33,7 @@ export const LANDMARKS = {
     x: -10.5,
     z: -110.0,
     range: [0.77, 0.88] as [number, number],
-    accentColor: '#05FFA1',
+    accentColor: '#05ffa1', // Tokyo Transit Jade
     description: 'Subterranean cyberware depot trading salvaged droid chassis, refurbished optical arrays, and vintage phosphor CRT terminals.',
   },
   MOTEL: {
@@ -44,7 +44,7 @@ export const LANDMARKS = {
     x: 10.5,
     z: -152.0,
     range: [0.92, 1.00] as [number, number],
-    accentColor: '#FF0055',
+    accentColor: '#ff2a6d', // Tokyo Rose / Kabukicho Crimson
     description: 'High-density vertical sleep pod tower towering into the neon smog. Hourly cryogenic stasis pods with exterior glass elevator.',
   },
 };

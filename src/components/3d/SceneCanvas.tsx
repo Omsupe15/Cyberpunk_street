@@ -26,18 +26,18 @@ export function SceneCanvas() {
           toneMappingExposure: 1.05,
         }}
       >
-        {/* 1. Sky background: Deep Midnight Slate (Atmospheric City Twilight) */}
-        <color attach="background" args={['#162034']} />
+        {/* 1. Sky background: Deep Prussian Indigo (Neo-Tokyo Twilight Canvas) */}
+        <color attach="background" args={['#0e1424']} />
         
-        {/* 2. Atmospheric City Fog: Soft glowing smog that catches neon */}
-        <fog attach="fog" args={['#182236', 35, 200]} />
+        {/* 2. Atmospheric City Fog: Luminous twilight teal smog that grounds distant towers */}
+        <fog attach="fog" args={['#121a2c', 35, 220]} />
 
-        {/* 3. Balanced Ambient Light: Lifts shadows so textures and matte materials are visible */}
-        <ambientLight intensity={0.85} color="#323d56" />
-        <hemisphereLight args={['#718096', '#222a3d', 0.75]} />
+        {/* 3. Dual-Tone Ambient & Hemisphere Lighting: Cool Twilight Sky vs. Warm Tokyo Ground Bounce */}
+        <ambientLight intensity={0.75} color="#222d42" />
+        <hemisphereLight args={['#64748b', '#382a1a', 0.85]} />
         
-        {/* 4. Directional Moonlight / Sky Rim: */}
-        <directionalLight position={[20, 80, 10]} intensity={0.75} color="#93c5fd" />
+        {/* 4. Directional Moonlight / Upper Tower Rim: */}
+        <directionalLight position={[25, 85, 15]} intensity={0.65} color="#93c5fd" />
 
         <Suspense fallback={null}>
           <CameraRig />
